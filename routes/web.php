@@ -85,6 +85,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
     Route::get('/ekspor', [ExportController::class, 'index'])->name('export.index');
     Route::get('/ekspor/{dataset}', [ExportController::class, 'download'])
-        ->whereIn('dataset', ['users', 'quiz', 'lila', 'activity'])
+        ->whereIn('dataset', ['users', 'quiz', 'lila', 'activity', 'target'])
         ->name('export.download');
 });

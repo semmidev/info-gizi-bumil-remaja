@@ -229,15 +229,56 @@ class AdminTest extends TestCase
             ->assertSee($option->label);
     }
 
-    public function test_admin_can_export_csv(): void
+    public function test_admin_can_export_complete_users_csv_without_admins(): void
     {
         $admin = $this->admin();
-        User::create(['username' => 'sari_18', 'password' => 'rahasia123', 'role' => 'user']);
+        User::create([
+            'username' => 'sari_18',
+            'password' => 'rahasia123',
+            'role' => 'user',
+            'full_name' => 'Sari Dewi',
+            'age' => 17,
+            'pregnancy_month' => 5,
+        ]);
 
         $response = $this->actingAs($admin)->get(route('admin.export.download', 'users'));
 
         $response->assertOk();
+        $csv = $response->streamedContent();
         $this->assertStringContainsString('text/csv', $response->headers->get('Content-Type'));
-        $this->assertStringContainsString('sari_18', $response->streamedContent());
+        $this->assertStringContainsString('Nama Lengkap', $csv);
+        $this->assertStringContainsString('Usia Kehamilan (bulan)', $csv);
+        $this->assertStringContainsString('sari_18', $csv);
+        $this->assertStringContainsString('Sari Dewi', $csv);
+        $this->assertStringContainsString('Remaja akhir (15-19)', $csv);
+        $this->assertStringContainsString('Trimester II', $csv);
+        $this->assertStringNotContainsString('admin', $csv);
+    }
+
+    public function test_admin_can_export_target_and_derived_columns(): void
+    {
+        $admin = $this->admin();
+        $user = $this->regular();
+        $item = ChecklistItem::orderBy('position')->firstOrFail();
+
+        DailyTargetLog::create(['user_id' => $user->id, 'log_date' => now()->toDateString(), 'checklist_item_id' => $item->id, 'is_done' => true]);
+        LilaMeasurement::create(['user_id' => $user->id, 'value_cm' => 22.0, 'measured_at' => now()->toDateString()]);
+        QuizAttempt::create(['user_id' => $user->id, 'type' => 'pengetahuan', 'raw_score' => 13, 'max_score' => 13, 'percentage' => 100, 'taken_at' => now()->toDateString()]);
+
+        $target = $this->actingAs($admin)->get(route('admin.export.download', 'target'))->streamedContent();
+        $this->assertStringContainsString('Target', $target);
+        $this->assertStringContainsString($item->label, $target);
+        $this->assertStringContainsString('Selesai', $target);
+
+        $lila = $this->actingAs($admin)->get(route('admin.export.download', 'lila'))->streamedContent();
+        $this->assertStringContainsString('Status', $lila);
+        $this->assertStringContainsString('Berisiko KEK', $lila);
+
+        $quiz = $this->actingAs($admin)->get(route('admin.export.download', 'quiz'))->streamedContent();
+        $this->assertStringContainsString('Kategori', $quiz);
+        $this->assertStringContainsString('Baik', $quiz);
+
+        $activity = $this->actingAs($admin)->get(route('admin.export.download', 'activity'))->streamedContent();
+        $this->assertStringContainsString('Durasi (menit)', $activity);
     }
 }
