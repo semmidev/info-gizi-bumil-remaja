@@ -29,10 +29,13 @@
               <td>{{ $row->percentage }}%</td>
               <td>{{ $row->taken_at->translatedFormat('d M Y') }}</td>
               <td>
-                <form method="POST" action="{{ route('admin.data.quiz.destroy', $row) }}" data-confirm="Hapus hasil kuis ini?">
-                  @csrf @method('DELETE')
-                  <button class="btn danger small" type="submit">Hapus</button>
-                </form>
+                <div style="display:flex; gap:6px; justify-content:flex-end">
+                  <a class="btn ghost small" href="{{ route('admin.data.quiz.show', $row) }}">Detail</a>
+                  <form method="POST" action="{{ route('admin.data.quiz.destroy', $row) }}" data-confirm="Hapus hasil kuis ini?">
+                    @csrf @method('DELETE')
+                    <button class="btn danger small" type="submit">Hapus</button>
+                  </form>
+                </div>
               </td>
             </tr>
           @empty

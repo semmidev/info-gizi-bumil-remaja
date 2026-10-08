@@ -15,9 +15,10 @@
   <header class="top">
     <div class="brand">
       <div class="brand-menu">
-        <button type="button" class="brand-btn" id="brand-btn" aria-haspopup="true" aria-expanded="false" aria-label="Menu akun">
+        <button type="button" class="brand-btn" id="brand-btn" aria-haspopup="true" aria-expanded="false" aria-label="Menu akun" title="Menu akun">
           <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="rgba(255,255,255,.18)"/><circle cx="24" cy="14" r="6" fill="#fff"/><path d="M15 40c0-9 3-17 9-17 4 0 6 3 6 6 4 1 6 4 6 7 0 2-1 4-3 4z" fill="#fff"/><circle cx="29" cy="33" r="4.5" fill="none" stroke="#B8336A" stroke-width="2" stroke-dasharray="2 2"/></svg>
         </button>
+        <span class="brand-cap">Akun</span>
         <div class="dropdown" id="brand-dropdown" hidden>
           <div class="dropdown-head">
             <b>{{ auth()->user()->username ?? 'Pengguna' }}</b>

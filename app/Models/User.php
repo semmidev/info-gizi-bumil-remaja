@@ -21,9 +21,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
+        'full_name',
+        'age',
+        'address',
+        'pregnancy_month',
         'password',
         'role',
         'bidan_phone',
+        'last_login_at',
     ];
 
     /**
@@ -45,6 +50,7 @@ class User extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'last_login_at' => 'datetime',
         ];
     }
 

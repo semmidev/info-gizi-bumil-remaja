@@ -3,6 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\ChecklistItem;
+use App\Models\DailyTargetLog;
+use App\Models\LilaMeasurement;
+use App\Models\QuizAttempt;
 use App\Models\QuizOption;
 use App\Models\QuizQuestion;
 use App\Models\User;
@@ -69,11 +72,20 @@ class DataPersistenceTest extends TestCase
     public function test_quiz_attempt_computes_max_and_percentage(): void
     {
         $user = $this->user();
+        $q1 = QuizQuestion::where('type', 'pengetahuan')->orderBy('position')->firstOrFail();
+        $q2 = QuizQuestion::where('type', 'pengetahuan')->orderBy('position')->skip(1)->firstOrFail();
 
         $this->actingAs($user)->postJson(route('api.quiz-attempt.store'), [
             'type' => 'pengetahuan',
             'raw_score' => 13,
+            'answers' => [
+                ['question_id' => $q1->id, 'option_position' => 1],
+                ['question_id' => $q2->id, 'option_position' => 0],
+            ],
         ])->assertOk()->assertJson(['max_score' => 13, 'percentage' => 100]);
+
+        $this->assertDatabaseHas('quiz_answers', ['quiz_question_id' => $q1->id, 'is_correct' => true]);
+        $this->assertDatabaseHas('quiz_answers', ['quiz_question_id' => $q2->id, 'is_correct' => false]);
 
         $this->actingAs($user)->postJson(route('api.quiz-attempt.store'), [
             'type' => 'sikap',
@@ -81,6 +93,59 @@ class DataPersistenceTest extends TestCase
         ])->assertOk()->assertJson(['max_score' => 24, 'percentage' => 50]);
 
         $this->assertDatabaseCount('quiz_attempts', 2);
+
+        $this->actingAs($user)->get(route('kuis'))
+            ->assertOk()
+            ->assertSee('Riwayat kuis')
+            ->assertSee($q1->text)
+            ->assertSee('Jawabanmu');
+    }
+
+    public function test_target_quiz_and_lila_histories_are_paginated(): void
+    {
+        $user = $this->user();
+        $item = ChecklistItem::orderBy('position')->firstOrFail();
+
+        for ($i = 1; $i <= 9; $i++) {
+            DailyTargetLog::create([
+                'user_id' => $user->id,
+                'log_date' => now()->subDays($i)->toDateString(),
+                'checklist_item_id' => $item->id,
+                'is_done' => true,
+            ]);
+        }
+
+        $this->actingAs($user)->get(route('informasi'))
+            ->assertOk()
+            ->assertSee('Riwayat target')
+            ->assertSee('Hal 1 / 2');
+
+        for ($i = 1; $i <= 11; $i++) {
+            LilaMeasurement::create([
+                'user_id' => $user->id,
+                'value_cm' => 22 + $i / 10,
+                'measured_at' => now()->subDays($i)->toDateString(),
+            ]);
+        }
+
+        $this->actingAs($user)->get(route('lila'))
+            ->assertOk()
+            ->assertSee('Hal 1 / 2');
+
+        for ($i = 0; $i < 6; $i++) {
+            QuizAttempt::create([
+                'user_id' => $user->id,
+                'type' => 'pengetahuan',
+                'raw_score' => 1,
+                'max_score' => 13,
+                'percentage' => 8,
+                'taken_at' => now()->subDays($i)->toDateString(),
+            ]);
+        }
+
+        $this->actingAs($user)->get(route('kuis'))
+            ->assertOk()
+            ->assertSee('Hal 1 / 2');
     }
 
     public function test_lila_measurements_are_saved_and_cleared(): void

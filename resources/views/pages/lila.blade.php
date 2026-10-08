@@ -45,7 +45,17 @@
         <button class="btn" id="lila-save">Simpan hasil</button>
         <button class="btn ghost" id="lila-clear">Hapus riwayat</button>
       </div>
-      <ul class="hist" id="lila-hist"></ul>
+      <ul class="hist" id="lila-hist">
+        @forelse ($lilaHistory as $m)
+          <li>
+            <span>{{ $m->measured_at->translatedFormat('j M Y') }}</span>
+            <span class="{{ $m->value_cm < 23.5 ? 'r' : 'g' }}">{{ number_format((float) $m->value_cm, 1, ',', '.') }} cm</span>
+          </li>
+        @empty
+          <li><span>Belum ada hasil tersimpan. Simpan hasil pertamamu untuk memantau perubahan.</span></li>
+        @endforelse
+      </ul>
+      @include('admin.partials.pagination', ['paginator' => $lilaHistory])
     </div>
   </section>
 <script>window.__DATA = @json($data);</script>

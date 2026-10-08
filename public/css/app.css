@@ -306,8 +306,11 @@ nav.tabs a.active{color:var(--sabbe); background:var(--sabbe-soft)}
 
 /* Brand dropdown */
 .brand-menu{position:relative; flex:none}
-.brand-btn{background:none; border:0; padding:0; margin:0; cursor:pointer; line-height:0; display:block; border-radius:50%}
+.brand-btn{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.45); padding:2px; margin:0; cursor:pointer; line-height:0; display:block; border-radius:50%; box-shadow:0 2px 8px rgba(36,49,59,.18); transition:background .15s, transform .15s}
+.brand-btn:hover{background:rgba(255,255,255,.28)}
+.brand-btn:active{transform:scale(.96)}
 .brand-btn:focus-visible{outline:3px solid var(--kunyit); outline-offset:2px}
+.brand-cap{display:block; text-align:center; font-size:.66rem; font-weight:800; letter-spacing:.02em; margin-top:3px; opacity:.92; pointer-events:none}
 .dropdown{position:absolute; top:calc(100% + 10px); left:0; min-width:210px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 34px rgba(36,49,59,.22); padding:6px; z-index:40}
 .dropdown[hidden]{display:none}
 .dropdown-head{padding:10px 12px 12px; border-bottom:1px solid var(--line); margin-bottom:6px}

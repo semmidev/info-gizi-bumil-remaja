@@ -50,6 +50,13 @@ class DataController extends Controller
         return back()->with('sukses', 'Hasil kuis dihapus.');
     }
 
+    public function quizShow(QuizAttempt $attempt): View
+    {
+        $attempt->load(['user', 'answers.question.options', 'answers.option']);
+
+        return view('admin.data.quiz-show', compact('attempt'));
+    }
+
     public function activity(Request $request): View
     {
         $rows = ActivityLog::with('user')

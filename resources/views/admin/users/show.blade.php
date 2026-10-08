@@ -23,13 +23,21 @@
   <div class="panel">
     <h3>Informasi</h3>
     <div class="akun-row"><span>Nama pengguna</span><b>{{ $user->username }}</b></div>
+    <div class="akun-row"><span>Nama lengkap</span><b>{{ $user->full_name ?: '–' }}</b></div>
+    <div class="akun-row"><span>Umur</span><b>{{ $user->age ? $user->age . ' tahun' : '–' }}</b></div>
+    <div class="akun-row"><span>Alamat</span><b>{{ $user->address ?: '–' }}</b></div>
+    <div class="akun-row"><span>Usia kehamilan</span><b>{{ $user->pregnancy_month ? $user->pregnancy_month . ' bulan' : '–' }}</b></div>
     <div class="akun-row"><span>Peran</span><b>{{ $user->role === 'admin' ? 'Admin' : 'Pengguna' }}</b></div>
     <div class="akun-row"><span>Nomor bidan</span><b>{{ $user->bidan_phone ?: '–' }}</b></div>
+    <div class="akun-row"><span>Terakhir masuk</span><b>{{ $user->last_login_at ? $user->last_login_at->translatedFormat('d F Y, H:i') : '–' }}</b></div>
     <div class="akun-row"><span>Bergabung</span><b>{{ $user->created_at->translatedFormat('d F Y') }}</b></div>
   </div>
 
   <div class="panel">
-    <h3>LILA terakhir</h3>
+    <div class="section-head">
+      <h3>LILA</h3>
+      <a class="pill user" href="{{ route('admin.data.lila', ['q' => $user->username]) }}">Lihat semua</a>
+    </div>
     @if ($latestLila)
       <div class="list-item">
         <div class="li-main"><b>{{ number_format((float) $latestLila->value_cm, 1, ',', '.') }} cm</b><small>{{ $latestLila->measured_at->translatedFormat('d M Y') }}</small></div>
@@ -43,7 +51,10 @@
   </div>
 
   <div class="panel">
-    <h3>Hasil kuis terakhir</h3>
+    <div class="section-head">
+      <h3>Hasil kuis terakhir</h3>
+      <a class="pill user" href="{{ route('admin.data.quiz', ['q' => $user->username]) }}">Lihat semua</a>
+    </div>
     <div class="table-scroll">
       <table class="atable">
         <thead><tr><th>Jenis</th><th>Skor</th><th>Tanggal</th></tr></thead>
@@ -62,7 +73,10 @@
   </div>
 
   <div class="panel">
-    <h3>Target harian</h3>
+    <div class="section-head">
+      <h3>Target harian</h3>
+      <a class="pill user" href="{{ route('admin.data.target', ['q' => $user->username]) }}">Lihat semua</a>
+    </div>
     @forelse ($targetsByDate as $date => $logs)
       @php $doneCount = $logs->where('is_done', true)->count(); @endphp
       <div class="list-item" style="align-items:flex-start">
@@ -100,29 +114,20 @@
 
   <div class="panel">
     <div class="section-head">
-      <h3>Riwayat LILA</h3>
-      <a class="pill user" href="{{ route('admin.data.lila', ['q' => $user->username]) }}">Lihat semua</a>
-    </div>
-    @forelse ($lilaHistory as $m)
-      <div class="list-item">
-        <div class="li-main"><b>{{ number_format((float) $m->value_cm, 1, ',', '.') }} cm</b><small>{{ $m->measured_at->translatedFormat('d M Y') }}</small></div>
-        <div class="li-side"><span class="pill {{ $m->value_cm < 23.5 ? 'risk' : 'ok' }}">{{ $m->value_cm < 23.5 ? 'Berisiko' : 'Normal' }}</span></div>
-      </div>
-    @empty
-      <p class="empty">Belum ada pengukuran.</p>
-    @endforelse
-  </div>
-
-  <div class="panel">
-    <div class="section-head">
       <h3>Riwayat kuis</h3>
       <a class="pill user" href="{{ route('admin.data.quiz', ['q' => $user->username]) }}">Lihat semua</a>
     </div>
     @forelse ($quizHistory as $attempt)
-      <div class="list-item">
-        <div class="li-main"><b>{{ ucfirst($attempt->type) }}</b><small>{{ $attempt->raw_score }}/{{ $attempt->max_score }} · {{ $attempt->taken_at->translatedFormat('d M Y') }}</small></div>
-        <div class="li-side"><span class="pill {{ $attempt->percentage >= 76 ? 'ok' : ($attempt->percentage >= 56 ? 'user' : 'risk') }}">{{ $attempt->percentage }}%</span></div>
-      </div>
+      <details class="acc">
+        <summary>
+          <span>{{ ucfirst($attempt->type) }}</span>
+          <span class="pill {{ $attempt->percentage >= 76 ? 'ok' : ($attempt->percentage >= 56 ? 'user' : 'risk') }}">{{ $attempt->percentage }}%</span>
+          <small style="color:var(--muted); font-weight:700; margin-left:auto">{{ $attempt->raw_score }}/{{ $attempt->max_score }} · {{ $attempt->taken_at->translatedFormat('d M Y') }}</small>
+        </summary>
+        <div class="acc-b">
+          @include('partials.quiz-answer-list', ['attempt' => $attempt])
+        </div>
+      </details>
     @empty
       <p class="empty">Belum ada pengerjaan kuis.</p>
     @endforelse

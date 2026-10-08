@@ -6,6 +6,7 @@ use App\Models\ActivityLog;
 use App\Models\ChecklistItem;
 use App\Models\DailyTargetLog;
 use App\Models\LilaMeasurement;
+use App\Models\QuizAnswer;
 use App\Models\QuizAttempt;
 use App\Models\QuizOption;
 use App\Models\QuizQuestion;
@@ -175,7 +176,7 @@ class AdminTest extends TestCase
         $this->assertDatabaseMissing('quiz_options', ['quiz_question_id' => $question->id]);
     }
 
-    public function test_user_detail_shows_target_and_history_logs(): void
+    public function test_user_detail_shows_latest_data_and_lihat_semua_links(): void
     {
         $admin = $this->admin();
         $user = $this->regular();
@@ -184,17 +185,48 @@ class AdminTest extends TestCase
         DailyTargetLog::create(['user_id' => $user->id, 'log_date' => now()->toDateString(), 'checklist_item_id' => $item->id, 'is_done' => true]);
         LilaMeasurement::create(['user_id' => $user->id, 'value_cm' => 22.0, 'measured_at' => now()->toDateString()]);
         QuizAttempt::create(['user_id' => $user->id, 'type' => 'pengetahuan', 'raw_score' => 13, 'max_score' => 13, 'percentage' => 100, 'taken_at' => now()->toDateString()]);
-        ActivityLog::create(['user_id' => $user->id, 'event' => 'kunjungan', 'description' => 'Membuka Informasi']);
+
+        $old = new ActivityLog(['user_id' => $user->id, 'event' => 'kunjungan', 'description' => 'Aktivitas lama']);
+        $old->created_at = now()->subDay();
+        $old->save();
+        ActivityLog::create(['user_id' => $user->id, 'event' => 'kunjungan', 'description' => 'Aktivitas terbaru']);
 
         $this->actingAs($admin)->get(route('admin.users.show', $user))
             ->assertOk()
             ->assertSee('Target harian')
             ->assertSee($item->label)
             ->assertSee('Log aktivitas')
-            ->assertSee('Riwayat LILA')
             ->assertSee('Riwayat kuis')
             ->assertSee('22,0 cm')
-            ->assertSee('100%');
+            ->assertSee('100%')
+            ->assertSee('Aktivitas terbaru')
+            ->assertDontSee('Aktivitas lama')
+            ->assertSee(route('admin.data.lila', ['q' => $user->username]), false)
+            ->assertSee(route('admin.data.target', ['q' => $user->username]), false)
+            ->assertSee(route('admin.data.activity', ['q' => $user->username]), false)
+            ->assertSee(route('admin.data.quiz', ['q' => $user->username]), false);
+    }
+
+    public function test_admin_can_view_quiz_answers_detail(): void
+    {
+        $admin = $this->admin();
+        $user = $this->regular();
+        $question = QuizQuestion::where('type', 'pengetahuan')->orderBy('position')->firstOrFail();
+        $option = $question->options()->where('position', 1)->firstOrFail();
+
+        $attempt = QuizAttempt::create(['user_id' => $user->id, 'type' => 'pengetahuan', 'raw_score' => 1, 'max_score' => 13, 'percentage' => 8, 'taken_at' => now()->toDateString()]);
+        QuizAnswer::create([
+            'quiz_attempt_id' => $attempt->id,
+            'quiz_question_id' => $question->id,
+            'quiz_option_id' => $option->id,
+            'is_correct' => true,
+        ]);
+
+        $this->actingAs($admin)->get(route('admin.data.quiz.show', $attempt))
+            ->assertOk()
+            ->assertSee('Detail Hasil Kuis')
+            ->assertSee($question->text)
+            ->assertSee($option->label);
     }
 
     public function test_admin_can_export_csv(): void

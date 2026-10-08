@@ -259,6 +259,30 @@
         <ul class="check" id="checklist"></ul>
         <p class="tip" id="chk-msg"></p>
       </div>
+
+      <div class="panel">
+        <h3>Riwayat target</h3>
+        @forelse ($targetHistory as $day)
+          @php
+            $dateKey = $day->log_date->toDateString();
+            $logs = $targetLogsByDate->get($dateKey, collect());
+            $doneCount = $logs->where('is_done', true)->count();
+          @endphp
+          <div class="list-item" style="align-items:flex-start">
+            <div class="li-main" style="width:100%">
+              <b>{{ $day->log_date->translatedFormat('d M Y') }} · {{ $doneCount }}/{{ $targetTotal }}</b>
+              <div style="margin-top:6px; display:grid; gap:4px">
+                @foreach ($logs as $log)
+                  <small style="white-space:normal">{{ $log->is_done ? '✓' : '○' }} {{ $log->checklistItem?->label ?? '–' }}</small>
+                @endforeach
+              </div>
+            </div>
+          </div>
+        @empty
+          <p class="empty">Belum ada riwayat target.</p>
+        @endforelse
+        @include('admin.partials.pagination', ['paginator' => $targetHistory])
+      </div>
     </div>
   </section>
 <script>window.__DATA = @json($data);</script>

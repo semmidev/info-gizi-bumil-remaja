@@ -35,6 +35,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = $request->user();
+        $user->update(['last_login_at' => now()]);
         $home = $user->role === 'admin' ? route('admin.dashboard') : route('informasi');
 
         // Hanya hormati URL "intended" bila sesuai area peran pengguna.

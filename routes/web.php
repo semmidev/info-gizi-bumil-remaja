@@ -27,6 +27,7 @@ Route::middleware(['auth', 'role:user,admin'])->group(function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::get('/akun', [AccountController::class, 'edit'])->name('akun');
+    Route::put('/akun/profil', [AccountController::class, 'updateProfile'])->name('akun.profile');
     Route::put('/akun/password', [AccountController::class, 'updatePassword'])->name('akun.password');
 
     Route::get('/informasi', [PageController::class, 'informasi'])->name('informasi');
@@ -75,6 +76,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/data/lila', [DataController::class, 'lila'])->name('data.lila');
     Route::delete('/data/lila/{lila}', [DataController::class, 'destroyLila'])->name('data.lila.destroy');
     Route::get('/data/kuis', [DataController::class, 'quiz'])->name('data.quiz');
+    Route::get('/data/kuis/{attempt}', [DataController::class, 'quizShow'])->name('data.quiz.show');
     Route::delete('/data/kuis/{attempt}', [DataController::class, 'destroyQuiz'])->name('data.quiz.destroy');
     Route::get('/data/aktivitas', [DataController::class, 'activity'])->name('data.activity');
     Route::delete('/data/aktivitas/{log}', [DataController::class, 'destroyActivity'])->name('data.activity.destroy');

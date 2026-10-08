@@ -11,9 +11,10 @@ class PageController extends Controller
 {
     public function informasi(Request $request): View
     {
+        $user = $request->user();
         $today = now()->toDateString();
 
-        $done = $request->user()->dailyTargetLogs()
+        $done = $user->dailyTargetLogs()
             ->whereDate('log_date', $today)
             ->where('is_done', true)
             ->pluck('checklist_item_id')
@@ -25,7 +26,24 @@ class PageController extends Controller
             'done' => in_array($item->id, $done, true),
         ])->values();
 
-        return view('pages.informasi', ['data' => ['targets' => $targets]]);
+        $targetHistory = $user->dailyTargetLogs()
+            ->select('log_date')
+            ->whereDate('log_date', '<', $today)
+            ->groupBy('log_date')
+            ->orderByDesc('log_date')
+            ->paginate(7);
+
+        $targetLogsByDate = $user->dailyTargetLogs()->with('checklistItem')
+            ->whereIn('log_date', collect($targetHistory->items())->pluck('log_date'))
+            ->get()
+            ->groupBy(fn ($log) => $log->log_date->toDateString());
+
+        return view('pages.informasi', [
+            'data' => ['targets' => $targets],
+            'targetHistory' => $targetHistory,
+            'targetLogsByDate' => $targetLogsByDate,
+            'targetTotal' => ChecklistItem::count(),
+        ]);
     }
 
     public function kuis(Request $request): View
@@ -40,7 +58,7 @@ class PageController extends Controller
                 'indicator' => $q->indicator,
                 'text' => $q->text,
                 'explanation' => $q->explanation,
-                'options' => $q->options->map(fn ($o) => ['label' => $o->label, 'correct' => $o->is_correct])->values(),
+                'options' => $q->options->map(fn ($o) => ['label' => $o->label, 'position' => $o->position, 'correct' => $o->is_correct])->values(),
             ])->values(),
             'sikap' => $questions->where('type', 'sikap')->map(fn (QuizQuestion $q) => [
                 'id' => $q->id,
@@ -49,14 +67,14 @@ class PageController extends Controller
                 'favorable' => $q->is_favorable,
                 'good' => $q->good_feedback,
                 'bad' => $q->bad_feedback,
-                'options' => $q->options->map(fn ($o) => ['label' => $o->label])->values(),
+                'options' => $q->options->map(fn ($o) => ['label' => $o->label, 'position' => $o->position])->values(),
             ])->values(),
             'tindakan' => $questions->where('type', 'tindakan')->map(fn (QuizQuestion $q) => [
                 'id' => $q->id,
                 'indicator' => $q->indicator,
                 'text' => $q->text,
                 'tip' => $q->tip,
-                'options' => $q->options->map(fn ($o) => ['label' => $o->label])->values(),
+                'options' => $q->options->map(fn ($o) => ['label' => $o->label, 'position' => $o->position])->values(),
             ])->values(),
         ];
 
@@ -81,21 +99,22 @@ class PageController extends Controller
                 'date' => $a->taken_at->translatedFormat('j M'),
             ])->values();
 
-        return view('pages.kuis', ['data' => ['quiz' => $quiz, 'eval' => $eval, 'perilaku' => $perilaku]]);
+        $history = $user->quizAttempts()
+            ->with(['answers.question.options', 'answers.option'])
+            ->latest('taken_at')->latest('id')
+            ->paginate(5);
+
+        return view('pages.kuis', ['data' => ['quiz' => $quiz, 'eval' => $eval, 'perilaku' => $perilaku], 'history' => $history]);
     }
 
     public function lila(Request $request): View
     {
-        $history = $request->user()->lilaMeasurements()
-            ->orderBy('measured_at')
-            ->orderBy('id')
-            ->get()
-            ->map(fn ($m) => [
-                'value' => (float) $m->value_cm,
-                'date' => $m->measured_at->translatedFormat('j M Y'),
-            ])->values();
+        $lilaHistory = $request->user()->lilaMeasurements()
+            ->orderByDesc('measured_at')
+            ->orderByDesc('id')
+            ->paginate(10);
 
-        return view('pages.lila', ['data' => ['lila' => $history]]);
+        return view('pages.lila', ['data' => [], 'lilaHistory' => $lilaHistory]);
     }
 
     public function layanan(Request $request): View

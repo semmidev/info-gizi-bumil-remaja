@@ -36,6 +36,7 @@ class RegisteredUserController extends Controller
             'username' => $data['username'],
             'password' => $data['password'],
             'role' => 'user',
+            'last_login_at' => now(),
         ]);
 
         Auth::login($user);

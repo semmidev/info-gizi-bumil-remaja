@@ -255,6 +255,7 @@
   const evalBox = document.getElementById('evalbox');
   const qbox = document.getElementById('quiz');
   if (evalBox && qbox){
+    let answers = [];
     const cat = p => p >= 76 ? ['Baik','g'] : p >= 56 ? ['Cukup','c'] : ['Perlu ditingkatkan','r'];
     function drawEval(){
       const row = (k,l) => { const v = EVAL[k]; if (!v) return `<div class="ev"><b>${l}</b><span class="ev-n">–</span><small>Belum dikerjakan</small></div>`;
@@ -264,7 +265,7 @@
     async function saveEval(k, raw){
       logEv('kuis_selesai', ({p:'Pengetahuan', s:'Sikap', t:'Tindakan'})[k] + ': ' + raw);
       try {
-        const res = await api('POST', '/api/quiz-attempt', {type: TYPE_OF[k], raw_score: raw});
+        const res = await api('POST', '/api/quiz-attempt', {type: TYPE_OF[k], raw_score: raw, answers: answers});
         EVAL[k] = {percentage: res.percentage, date: res.date};
         if (k === 't') { PERILAKU.push({percentage: res.percentage, date: res.date}); if (PERILAKU.length > 8) PERILAKU.shift(); }
         drawEval();
@@ -276,7 +277,7 @@
     const meta = (l,i,n,r) => `<div class="q-meta"><span>${l} ${i+1} dari ${n}</span><span>${r||''}</span></div>`;
     function endBox(big, msg, extra){
       qbox.innerHTML = `<div style="text-align:center"><div class="score">${big}</div><p style="margin:10px 0 12px;font-weight:700">${msg}</p></div>${extra||''}<div style="text-align:center;margin-top:12px"><button class="btn" id="q-again">Ulangi</button></div>`;
-      document.getElementById('q-again').onclick = () => { qi = 0; score = 0; drawQ(); };
+      document.getElementById('q-again').onclick = () => { qi = 0; score = 0; answers = []; drawQ(); };
     }
     function answerUI(opts, onPick){
       qbox.querySelectorAll('.opt').forEach(b => b.onclick = () => onPick(+b.dataset.i, b));
@@ -299,6 +300,7 @@
         const ai = x.options.findIndex(o => o.correct);
         qbox.innerHTML = meta('Soal',qi,KQ.length,'Skor '+score)+bar(qi,KQ.length)+`<span class="qtag">${x.indicator}</span><h3>${x.text}</h3><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
         answerUI(opts, pick => {
+          answers.push({question_id: x.id, option_position: pick});
           const ok = pick === ai; if (ok) score++;
           qbox.querySelectorAll('.opt').forEach((o,i) => { o.disabled = true; if (i === ai) o.classList.add('right'); else if (i === pick) o.classList.add('wrong'); });
           const ex = document.getElementById('ex'); ex.innerHTML = `<b>${ok?'Benar.':'Belum tepat.'}</b> ${x.explanation}`;
@@ -314,6 +316,7 @@
         const opts = x.options.map(o => o.label);
         qbox.innerHTML = meta('Pernyataan',qi,SQ.length)+bar(qi,SQ.length)+`<span class="qtag">Sikap ${String(x.aspect).toLowerCase()}</span><p class="qhint">Seberapa setuju Ibu dengan pernyataan ini?</p><h3>“${x.text}”</h3><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
         answerUI(opts, (pick, btn) => {
+          answers.push({question_id: x.id, option_position: pick});
           const favorable = x.favorable;
           const positive = favorable ? pick <= 1 : pick >= 2;
           score += favorable ? 4 - pick : pick + 1;
@@ -334,6 +337,7 @@
         const opts = x.options.map(o => o.label);
         qbox.innerHTML = meta('Pertanyaan',qi,PQ.length)+bar(qi,PQ.length)+`<span class="qtag">${x.indicator}</span><p class="qhint">Dalam 7 hari terakhir, berapa hari Ibu…</p><h3>${x.text}</h3><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
         answerUI(opts, (pick, btn) => {
+          answers.push({question_id: x.id, option_position: pick});
           score += 3 - pick;
           qbox.querySelectorAll('.opt').forEach(o => o.disabled = true);
           btn.classList.add(pick === 0 ? 'right' : 'wrong');
@@ -346,7 +350,7 @@
     const qsBtns = document.querySelectorAll('[data-qs]');
     qsBtns.forEach(b => b.addEventListener('click', () => {
       qsBtns.forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
-      qmode = b.dataset.qs; qi = 0; score = 0; drawQ();
+      qmode = b.dataset.qs; qi = 0; score = 0; answers = []; drawQ();
     }));
     drawQ();
   }
@@ -383,26 +387,24 @@
     num.oninput = () => { const v = parseFloat(num.value); if (!isNaN(v)) { range.value = Math.min(MAX, Math.max(MIN, v)); show(v); } };
     show(23.5);
 
-    let hist = DATA.lila || [];
     const hul = document.getElementById('lila-hist');
-    function drawHist(){
-      hul.innerHTML = hist.length ? hist.slice(-12).slice().reverse().map(h => `<li><span>${h.date}</span><span class="${h.value < CUT ? 'r' : 'g'}">${fmt(h.value)} cm</span></li>`).join('') : '<li><span>Belum ada hasil tersimpan. Simpan hasil pertamamu untuk memantau perubahan.</span></li>';
-    }
     document.getElementById('lila-save').onclick = async () => {
       const v = parseFloat(num.value);
       if (isNaN(v) || v < 15 || v > 45){ res.className='result risk'; res.innerHTML = '<h3>Angka belum sesuai</h3>Masukkan hasil LILA antara 15 dan 45 cm.'; return; }
       try {
         const saved = await api('POST', '/api/lila', {value_cm: v});
-        hist.push(saved);
-        drawHist();
+        const first = hul.querySelector('li');
+        if (first && first.children.length === 1) first.remove();
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${saved.date}</span><span class="${saved.value < CUT ? 'r' : 'g'}">${fmt(saved.value)} cm</span>`;
+        hul.prepend(li);
         logEv('simpan_lila', v.toFixed(1).replace('.', ',') + ' cm');
       } catch(e) {}
     };
     document.getElementById('lila-clear').onclick = async () => {
       try { await api('DELETE', '/api/lila'); } catch(e) {}
-      hist = []; drawHist();
+      location.reload();
     };
-    drawHist();
   }
 
   /* Bidan contact */

@@ -36,6 +36,10 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:6'],
             'role' => ['required', 'in:admin,user'],
             'bidan_phone' => ['nullable', 'string', 'max:30'],
+            'full_name' => ['nullable', 'string', 'max:100'],
+            'age' => ['nullable', 'integer', 'between:10,60'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'pregnancy_month' => ['nullable', 'integer', 'between:1,9'],
         ]);
 
         User::create($data);
@@ -50,17 +54,22 @@ class UserController extends Controller
         $latestLila = $user->lilaMeasurements()->latest('measured_at')->latest('id')->first();
         $latestQuiz = $user->quizAttempts()->latest('taken_at')->latest('id')->get()->keyBy('type');
 
-        $targetsByDate = $user->dailyTargetLogs()->with('checklistItem')
-            ->latest('log_date')->latest('id')->get()
-            ->groupBy(fn ($log) => $log->log_date->toDateString());
+        $latestTargetLog = $user->dailyTargetLogs()->latest('log_date')->latest('id')->first();
+        $targetsByDate = $latestTargetLog
+            ? $user->dailyTargetLogs()->with('checklistItem')
+                ->whereDate('log_date', $latestTargetLog->log_date->toDateString())
+                ->latest('id')->get()
+                ->groupBy(fn ($log) => $log->log_date->toDateString())
+            : collect();
 
-        $activity = $user->activityLogs()->latest()->take(20)->get();
-        $lilaHistory = $user->lilaMeasurements()->latest('measured_at')->latest('id')->take(10)->get();
-        $quizHistory = $user->quizAttempts()->latest('taken_at')->latest('id')->take(10)->get();
+        $activity = $user->activityLogs()->latest()->take(1)->get();
+        $quizHistory = $user->quizAttempts()
+            ->with(['answers.question.options', 'answers.option'])
+            ->latest('taken_at')->latest('id')->take(1)->get();
         $targetTotal = ChecklistItem::count();
 
         return view('admin.users.show', compact(
-            'user', 'latestLila', 'latestQuiz', 'targetsByDate', 'activity', 'lilaHistory', 'quizHistory', 'targetTotal'
+            'user', 'latestLila', 'latestQuiz', 'targetsByDate', 'activity', 'quizHistory', 'targetTotal'
         ));
     }
 
@@ -76,6 +85,10 @@ class UserController extends Controller
             'password' => ['nullable', 'string', 'min:6'],
             'role' => ['required', 'in:admin,user'],
             'bidan_phone' => ['nullable', 'string', 'max:30'],
+            'full_name' => ['nullable', 'string', 'max:100'],
+            'age' => ['nullable', 'integer', 'between:10,60'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'pregnancy_month' => ['nullable', 'integer', 'between:1,9'],
         ]);
 
         if ($user->is($request->user()) && $data['role'] !== 'admin') {

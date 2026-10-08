@@ -42,6 +42,9 @@ class UserDataController extends Controller
         $data = $request->validate([
             'type' => ['required', 'in:pengetahuan,sikap,tindakan'],
             'raw_score' => ['required', 'integer', 'min:0'],
+            'answers' => ['nullable', 'array'],
+            'answers.*.question_id' => ['required', 'integer'],
+            'answers.*.option_position' => ['required', 'integer', 'min:0'],
         ]);
 
         $type = $data['type'];
@@ -56,6 +59,27 @@ class UserDataController extends Controller
             'percentage' => $percentage,
             'taken_at' => now()->toDateString(),
         ]);
+
+        foreach ($data['answers'] ?? [] as $row) {
+            $question = QuizQuestion::where('id', $row['question_id'])->where('type', $type)->first();
+            if (! $question) {
+                continue;
+            }
+
+            $option = $question->options()->where('position', $row['option_position'])->first();
+
+            $isCorrect = match ($type) {
+                'pengetahuan' => (bool) $option?->is_correct,
+                'sikap' => (bool) $question->is_favorable ? $row['option_position'] <= 1 : $row['option_position'] >= 2,
+                'tindakan' => $row['option_position'] === 0,
+            };
+
+            $attempt->answers()->create([
+                'quiz_question_id' => $question->id,
+                'quiz_option_id' => $option?->id,
+                'is_correct' => $isCorrect,
+            ]);
+        }
 
         return response()->json([
             'raw_score' => $attempt->raw_score,
