@@ -13,7 +13,7 @@ ENV APP_ENV=production \
     APP_DEBUG=false \
     LOG_CHANNEL=stderr \
     AUTORUN_ENABLED=true \
-    SSL_MODE=on \
+    SSL_MODE=off \
     PHP_OPCACHE_ENABLE=1
 
 COPY --chown=www-data:www-data --from=vendor /app /var/www/html
