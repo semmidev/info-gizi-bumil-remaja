@@ -1,17 +1,18 @@
-FROM richarvey/nginx-php-fpm:3.1.6
+# Stage 1: install dependencies
+FROM composer:2 AS vendor
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
+COPY . .
+RUN composer dump-autoload --optimize --no-dev
 
-COPY . /var/www/html
+# Stage 2: runtime
+FROM serversideup/php:8.3-fpm-nginx
 
-ENV SKIP_COMPOSER=1
-ENV WEBROOT=/var/www/html/public
-ENV PHP_ERRORS_STDERR=1
-ENV RUN_SCRIPTS=1
-ENV REAL_IP_HEADER=1
+ENV APP_ENV=production \
+    APP_DEBUG=false \
+    LOG_CHANNEL=stderr \
+    AUTORUN_ENABLED=true \
+    SSL_MODE=off
 
-ENV APP_ENV=production
-ENV APP_DEBUG=false
-ENV LOG_CHANNEL=stderr
-
-ENV COMPOSER_ALLOW_SUPERUSER=1
-
-CMD ["/start.sh"]
+COPY --chown=www-data:www-data --from=vendor /app /var/www/html
