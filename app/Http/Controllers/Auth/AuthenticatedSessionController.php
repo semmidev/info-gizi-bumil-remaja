@@ -34,11 +34,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $home = $request->user()->role === 'admin'
-            ? route('admin.dashboard')
-            : route('informasi');
+        $user = $request->user();
+        $home = $user->role === 'admin' ? route('admin.dashboard') : route('informasi');
 
-        return redirect()->intended($home);
+        // Hanya hormati URL "intended" bila sesuai area peran pengguna.
+        $intended = $request->session()->pull('url.intended');
+        $intendedPath = $intended ? parse_url($intended, PHP_URL_PATH) : null;
+        $intendedIsAdmin = is_string($intendedPath) && str_starts_with($intendedPath, '/admin');
+
+        $useIntended = $intended && ($user->role === 'admin' ? $intendedIsAdmin : ! $intendedIsAdmin);
+
+        return redirect()->to($useIntended ? $intended : $home);
     }
 
     public function destroy(Request $request): RedirectResponse

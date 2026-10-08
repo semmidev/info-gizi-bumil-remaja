@@ -60,6 +60,44 @@ class AuthTest extends TestCase
         $this->assertGuest();
     }
 
+    public function test_admin_login_ignores_a_user_area_intended_url(): void
+    {
+        User::create(['username' => 'admin', 'password' => 'admin123', 'role' => 'admin']);
+
+        // Tamu membuka root yang mengarah ke /informasi, sehingga url.intended tersimpan.
+        $this->get('/informasi')->assertRedirect('/login');
+
+        $this->post('/login', ['username' => 'admin', 'password' => 'admin123'])
+            ->assertRedirect(route('admin.dashboard'));
+    }
+
+    public function test_admin_login_respects_an_admin_intended_url(): void
+    {
+        User::create(['username' => 'admin', 'password' => 'admin123', 'role' => 'admin']);
+
+        $this->get('/admin/kuis')->assertRedirect('/login');
+
+        $this->post('/login', ['username' => 'admin', 'password' => 'admin123'])
+            ->assertRedirect(route('admin.quiz.index'));
+    }
+
+    public function test_user_login_respects_a_user_intended_url(): void
+    {
+        User::create(['username' => 'rina_17', 'password' => 'rahasia123', 'role' => 'user']);
+
+        $this->get('/lila')->assertRedirect('/login');
+
+        $this->post('/login', ['username' => 'rina_17', 'password' => 'rahasia123'])
+            ->assertRedirect(route('lila'));
+    }
+
+    public function test_authenticated_admin_visiting_login_goes_to_dashboard(): void
+    {
+        $admin = User::create(['username' => 'admin', 'password' => 'admin123', 'role' => 'admin']);
+
+        $this->actingAs($admin)->get('/login')->assertRedirect(route('admin.dashboard'));
+    }
+
     public function test_all_pages_render_for_a_logged_in_user(): void
     {
         $user = User::create(['username' => 'lia_21', 'password' => 'rahasia123', 'role' => 'admin']);
