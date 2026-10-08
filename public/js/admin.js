@@ -64,16 +64,16 @@
     reindex();
   }
 
-  /* Modal konfirmasi hapus */
-  function confirmDialog(message, onYes) {
+  /* Modal konfirmasi */
+  function confirmDialog(message, onYes, title, okLabel) {
     var ovl = document.createElement('div');
     ovl.className = 'ovl';
     ovl.innerHTML =
       '<div class="dlg" role="dialog" aria-modal="true">' +
-        '<h3>Yakin hapus?</h3>' +
+        '<h3>' + (title || 'Yakin hapus?') + '</h3>' +
         '<p style="margin:8px 0 14px;font-weight:600">' + message + '</p>' +
         '<div class="dlg-b">' +
-          '<button type="button" class="btn danger" data-yes>Hapus</button>' +
+          '<button type="button" class="btn danger" data-yes>' + (okLabel || 'Hapus') + '</button>' +
           '<button type="button" class="btn ghost" data-no>Batal</button>' +
         '</div>' +
       '</div>';
@@ -87,6 +87,6 @@
     var form = e.target.closest('form[data-confirm]');
     if (!form || form.dataset.confirmed) return;
     e.preventDefault();
-    confirmDialog(form.dataset.confirm, function () { form.dataset.confirmed = '1'; form.submit(); });
+    confirmDialog(form.dataset.confirm, function () { form.dataset.confirmed = '1'; form.submit(); }, form.dataset.confirmTitle, form.dataset.confirmOk);
   });
 })();

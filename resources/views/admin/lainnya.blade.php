@@ -16,7 +16,7 @@
   <div class="panel">
     <h3>Keluar</h3>
     <p class="tip" style="margin-top:0">Akhiri sesi admin di perangkat ini.</p>
-    <form method="POST" action="{{ route('logout') }}" data-confirm="Keluar dari akun admin?">
+    <form method="POST" action="{{ route('logout') }}" data-confirm="Keluar dari akun admin?" data-confirm-title="Yakin keluar?" data-confirm-ok="Keluar">
       @csrf
       <button type="submit" class="btn danger">Keluar</button>
     </form>
