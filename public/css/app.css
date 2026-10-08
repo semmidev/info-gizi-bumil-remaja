@@ -324,3 +324,54 @@ nav.tabs a.active{color:var(--sabbe); background:var(--sabbe-soft)}
 .akun-row:last-child{border-bottom:0}
 .akun-row span{color:var(--muted); font-weight:700}
 .akun-row b{text-align:right}
+
+/* ===== Admin ===== */
+nav.tabs.nav-4{grid-template-columns:repeat(4,1fr)}
+.section-head{display:flex; justify-content:space-between; align-items:center; gap:10px; margin:2px 0 12px; flex-wrap:wrap}
+.section-head h2{font-size:1.4rem; color:var(--sabbe)}
+.stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
+.stat{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:12px 14px}
+.stat b{font-family:"Baloo 2",sans-serif; font-size:1.9rem; line-height:1; display:block; color:var(--sabbe)}
+.stat small{color:var(--muted); font-weight:700; font-size:.78rem}
+.stat.g b{color:var(--kelor)}.stat.c b{color:var(--kunyit)}.stat.r b{color:var(--bahaya)}.stat.d b{color:var(--danau)}
+.list-item{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 0; border-bottom:1px dashed var(--line)}
+.list-item:last-child{border-bottom:0}
+.list-item .li-main{min-width:0}
+.list-item b{font-family:"Baloo 2",sans-serif; font-size:1rem; display:block}
+.list-item small{color:var(--muted); font-weight:700; font-size:.8rem; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.list-item .li-side{text-align:right; flex:none}
+.pill{display:inline-block; font-size:.72rem; font-weight:800; border-radius:99px; padding:3px 10px}
+.pill.admin{background:var(--sabbe-soft); color:var(--sabbe)}
+.pill.user{background:var(--danau-soft); color:var(--danau)}
+.pill.ok{background:var(--kelor-soft); color:var(--kelor)}
+.pill.risk{background:var(--bahaya-soft); color:var(--bahaya)}
+.pill.muted{background:var(--line); color:var(--muted)}
+.filter-bar{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px}
+.filter-bar input,.filter-bar select{font:inherit; font-weight:700; padding:10px 12px; border-radius:12px; border:2px solid var(--line); background:var(--surface); color:var(--ink); min-width:0}
+.filter-bar input{flex:1}
+.filter-bar .btn{padding:10px 14px}
+.table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -4px 8px; padding:0 4px}
+.atable{width:100%; border-collapse:collapse; font-size:.82rem; min-width:440px}
+.atable th{background:var(--sabbe-soft); color:var(--sabbe); text-align:left; padding:8px 10px; font-weight:800; white-space:nowrap}
+.atable th:first-child{border-radius:10px 0 0 0}.atable th:last-child{border-radius:0 10px 0 0}
+.atable td{padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+.atable tr:nth-child(even) td{background:color-mix(in srgb,var(--sabbe-soft) 40%,transparent)}
+.form-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+.form-actions .btn{flex:1; min-width:120px; text-align:center}
+.btn.danger{background:var(--bahaya)}
+.btn.small{padding:8px 12px; font-size:.85rem}
+.field select,.field textarea{width:100%; font:inherit; font-weight:700; padding:13px 14px; border-radius:14px; border:2px solid var(--line); background:var(--bg); color:var(--ink)}
+.field textarea{min-height:88px; resize:vertical; font-weight:600}
+.field input[type=checkbox]{width:auto; accent-color:var(--sabbe); margin-right:8px}
+.field-row{display:flex; align-items:center; gap:8px; font-weight:700; margin-bottom:14px}
+.empty{text-align:center; color:var(--muted); padding:22px 8px; font-weight:700}
+.pager{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:12px; font-weight:700; color:var(--muted); font-size:.85rem}
+.opt-row{display:flex; gap:8px; align-items:center; margin-bottom:8px}
+.opt-row input[type=text]{flex:1; font:inherit; font-weight:700; padding:11px 12px; border-radius:12px; border:2px solid var(--line); background:var(--bg); color:var(--ink)}
+.opt-row input[type=radio]{width:22px; height:22px; accent-color:var(--kelor); flex:none}
+.cards{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
+.card-link{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:14px; text-decoration:none; color:var(--ink); display:block}
+.card-link b{font-family:"Baloo 2",sans-serif; font-size:1.02rem; display:block; color:var(--sabbe)}
+.card-link small{color:var(--muted); font-weight:700; font-size:.8rem}
+.card-link i{font-style:normal; font-size:1.6rem; display:block; margin-bottom:4px}
+@media (max-width:380px){.stat-grid,.cards{grid-template-columns:1fr}}
