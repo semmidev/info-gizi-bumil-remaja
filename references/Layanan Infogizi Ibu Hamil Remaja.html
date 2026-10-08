@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Layanan Infogizi Ibu Hamil Remaja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sabbe:#B8336A; --sabbe-soft:#F9E1EA; --danau:#1F5A6B; --danau-soft:#DCEEF1;
+  --kelor:#4F8A3A; --kelor-soft:#E3F1DC; --kunyit:#E39B2D; --kunyit-soft:#FCEFD8;
+  --bahaya:#C62E2E; --bahaya-soft:#FBE2E2;
+  --bg:#FFF7F9; --surface:#FFFFFF; --ink:#24313B; --muted:#5E6B74; --line:#EAD9DF;
+  --outer:#F3E4EA;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --sabbe:#E57AA2; --sabbe-soft:#3A2230; --danau:#7CC3D3; --danau-soft:#1B3238;
+    --kelor:#8CC774; --kelor-soft:#1F2E1A; --kunyit:#F0B860; --kunyit-soft:#3A2D18;
+    --bahaya:#F07A7A; --bahaya-soft:#3D1F1F;
+    --bg:#181C20; --surface:#22282D; --ink:#EEF1F3; --muted:#A8B3BA; --line:#36404A; --outer:#121518;
+  }
+}
+:root[data-theme="dark"]{
+  --sabbe:#E57AA2; --sabbe-soft:#3A2230; --danau:#7CC3D3; --danau-soft:#1B3238;
+  --kelor:#8CC774; --kelor-soft:#1F2E1A; --kunyit:#F0B860; --kunyit-soft:#3A2D18;
+  --bahaya:#F07A7A; --bahaya-soft:#3D1F1F;
+  --bg:#181C20; --surface:#22282D; --ink:#EEF1F3; --muted:#A8B3BA; --line:#36404A; --outer:#121518;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink);
+  background-color:var(--outer);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 22px, color-mix(in srgb,var(--sabbe) 10%,transparent) 22px 26px, transparent 26px 48px),
+    repeating-linear-gradient(90deg, transparent 0 22px, color-mix(in srgb,var(--danau) 8%,transparent) 22px 26px, transparent 26px 48px);
+  line-height:1.55; font-size:16px;
+}
+h1,h2,h3{font-family:"Baloo 2","Nunito",system-ui,sans-serif; line-height:1.15; margin:0}
+.app{max-width:460px; margin:0 auto; min-height:100vh; background:var(--bg); position:relative; padding-bottom:96px; box-shadow:0 0 0 1px var(--line)}
+header.top{padding:20px 20px 14px; background:var(--sabbe); color:#fff; border-radius:0 0 28px 28px}
+:root[data-theme="dark"] header.top{color:#1a1013}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top{color:#1a1013}}
+.brand{display:flex; gap:12px; align-items:center}
+.brand svg{flex:none}
+.brand h1{font-size:1.32rem; font-weight:800}
+.brand p{margin:0; font-size:.86rem; opacity:.9}
+main{padding:18px 16px 8px}
+.screen{display:none}
+.screen.on{display:block}
+.screen > h2{font-size:1.55rem; color:var(--sabbe); margin:4px 4px 4px}
+.lead{margin:0 4px 16px; color:var(--muted)}
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:18px; margin-bottom:16px}
+.panel h3{font-size:1.18rem; margin-bottom:8px}
+.panel p{margin:0 0 8px}
+.panel p:last-child{margin-bottom:0}
+.big-def{display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center}
+.ring{width:96px; height:96px; border-radius:50%; background:var(--bahaya-soft); border:6px dashed var(--bahaya); display:grid; place-items:center; text-align:center; font-family:"Baloo 2",sans-serif; color:var(--bahaya)}
+.ring b{font-size:1.5rem; line-height:1; display:block}
+.ring span{font-size:.72rem; font-weight:700}
+.duo{display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; text-align:center; margin:10px 0}
+.duo .c{background:var(--danau-soft); border-radius:18px; padding:12px 8px; font-weight:700; font-size:.9rem}
+.duo .c.k{background:var(--sabbe-soft)}
+.duo .plus{font-family:"Baloo 2"; font-size:1.8rem; color:var(--muted)}
+.icons{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.icons div{background:var(--kunyit-soft); border-radius:16px; padding:10px 6px; text-align:center; font-size:.84rem; font-weight:700}
+.icons div i{display:block; font-style:normal; font-size:1.7rem; line-height:1.2}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chips span{background:var(--danau-soft); color:var(--ink); padding:6px 12px; border-radius:999px; font-size:.86rem; font-weight:600}
+.split{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.split > div{border-radius:18px; padding:12px}
+.split h4{margin:0 0 6px; font-family:"Baloo 2"; font-size:1.05rem}
+.split ul{margin:0; padding-left:18px; font-size:.9rem}
+.mom{background:var(--sabbe-soft)} .baby{background:var(--danau-soft)}
+.plate{display:grid; grid-template-columns:repeat(5,1fr); gap:6px; text-align:center}
+.plate .p{border-radius:16px; padding:10px 2px; font-size:.75rem; font-weight:700}
+.plate .p b{display:block; font-family:"Baloo 2"; font-size:1.55rem; line-height:1}
+.tip{font-size:.85rem; color:var(--muted); margin-top:10px !important}
+.steps{list-style:none; margin:0; padding:0; counter-reset:s}
+.steps li{counter-increment:s; display:grid; grid-template-columns:34px 1fr; gap:10px; padding:8px 0; border-bottom:1px dashed var(--line)}
+.steps li:last-child{border-bottom:0}
+.steps li::before{content:counter(s); width:30px; height:30px; border-radius:50%; background:var(--kelor); color:#fff; display:grid; place-items:center; font-weight:800; font-family:"Baloo 2"}
+.steps b{display:block}
+.steps small{color:var(--muted); font-size:.86rem}
+.check{list-style:none; margin:0; padding:0}
+.check li{margin:0 0 8px}
+.check label{display:flex; gap:12px; align-items:center; background:var(--kelor-soft); border-radius:14px; padding:10px 12px; cursor:pointer; font-weight:600}
+.check input{width:22px; height:22px; accent-color:var(--kelor); flex:none}
+.progress{height:10px; background:var(--line); border-radius:99px; overflow:hidden; margin:6px 0 12px}
+.progress i{display:block; height:100%; width:0; background:var(--kelor); transition:width .3s}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:5px;margin-bottom:16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.seg button{font:inherit;font-weight:800;font-size:.9rem;border:0;border-radius:12px;padding:10px 6px;background:transparent;color:var(--muted);cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--sabbe);color:#fff}
+.part{display:none}.part.on{display:block}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--sabbe);color:#fff;font-size:.95rem;margin-right:8px;vertical-align:2px}
+h4.sub{font-family:"Baloo 2",sans-serif;font-size:1rem;color:var(--danau);margin:14px 0 8px}
+.age{margin:8px 0 12px}
+.age-bar{display:grid;grid-template-columns:5fr 5fr 4fr;border-radius:14px;overflow:hidden;text-align:center;font-size:.76rem;font-weight:700}
+.age-seg{padding:10px 4px}.age-seg b{display:block;font-family:"Baloo 2";font-size:1.3rem;line-height:1.1}
+.a1{background:var(--sabbe-soft)}.a2{background:color-mix(in srgb,var(--sabbe) 28%,var(--surface))}.a3{background:var(--line);color:var(--muted)}
+.age-brace{width:71.4%;border:2px solid var(--sabbe);border-top:0;height:12px;border-radius:0 0 10px 10px}
+.age-lbl{width:71.4%;text-align:center;font-size:.8rem;font-weight:800;color:var(--sabbe);margin:6px 0 4px!important}
+.age-brace span{position:absolute;top:14px;left:0;right:0;text-align:center;font-size:.8rem;font-weight:800;color:var(--sabbe)}
+.reasons,.intv{display:grid;gap:8px}
+.reasons div,.intv div{display:grid;grid-template-columns:36px 1fr;column-gap:10px;background:var(--danau-soft);border-radius:16px;padding:10px 12px}
+.intv div{background:var(--kelor-soft)}
+.reasons i,.intv i{font-style:normal;font-size:1.5rem;grid-row:span 2;align-self:center}
+.reasons small,.intv small{color:var(--muted);font-size:.85rem}
+.tbl-wrap{overflow-x:auto;margin:8px 0}
+table.nut{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem;min-width:320px}
+.nut th{background:var(--sabbe);color:#fff;padding:8px 6px;text-align:left;font-weight:800}
+.nut th:first-child{border-radius:10px 0 0 0}.nut th:last-child{border-radius:0 10px 0 0}
+.nut td{padding:8px 6px;border-bottom:1px solid var(--line)}
+.nut td:first-child{font-weight:700}
+.nut tr:nth-child(even) td{background:var(--sabbe-soft)}
+.probs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pb{border-radius:16px;padding:12px}.pb.wide{grid-column:span 2}
+.pb b{display:block;font-family:"Baloo 2";font-size:1.02rem}.pb small{font-size:.84rem}
+.flow{list-style:none;margin:0;padding:0;counter-reset:f}
+.flow li{counter-increment:f;position:relative;background:var(--kunyit-soft);border-radius:14px;padding:10px 12px 10px 46px;font-weight:700;font-size:.92rem;margin-bottom:22px}
+.flow li:last-child{margin-bottom:0;background:var(--bahaya-soft);color:var(--bahaya)}
+.flow li::before{content:counter(f);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--kunyit);color:#fff;display:grid;place-items:center;font-family:"Baloo 2"}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-18px;border:8px solid transparent;border-top:10px solid var(--kunyit)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.seg button[aria-selected="true"],.badge,.nut th,.num,.steps li::before,.flow li::before){color:#1a1013}}
+:root[data-theme="dark"] :is(.seg button[aria-selected="true"],.badge,.nut th,.num,.steps li::before,.flow li::before){color:#1a1013}
+.piring{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}
+.piring svg{width:100%;height:auto}
+.piring-key{list-style:none;margin:0;padding:0;font-size:.86rem}
+.piring-key li{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:start;margin-bottom:8px}
+.piring-key i{width:14px;height:14px;border-radius:4px;margin-top:4px}
+@media (max-width:380px){.piring{grid-template-columns:1fr}.piring svg{max-width:220px;margin:0 auto}}
+.seg-sm{position:static;margin-bottom:12px}
+.porsi{display:grid;gap:10px}
+.pr{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:12px 14px}
+.pr.lim{background:var(--kunyit-soft);border-style:dashed}
+.pr-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pr-top b{font-family:"Baloo 2",sans-serif;font-size:1.05rem}
+.pr-n{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.5rem;color:var(--sabbe);white-space:nowrap}
+.pr-n small{font-size:.8rem;color:var(--muted);font-family:"Nunito",sans-serif}
+.pr-ico{font-size:1.65rem;letter-spacing:2px;line-height:1.3;margin:4px 0}
+.pr-ico .new{display:inline-block;outline:2px dashed var(--sabbe);border-radius:8px;animation:pop .5s}
+@keyframes pop{from{transform:scale(.4)}to{transform:scale(1)}}
+.pr-d{font-size:.84rem;color:var(--muted)}
+.pr-d em{font-style:normal;font-weight:800;color:var(--ink)}
+.badge{display:inline-block;background:var(--sabbe);color:#fff;font-size:.72rem;font-weight:800;border-radius:99px;padding:1px 8px;margin-left:6px;vertical-align:3px}
+.seg3{grid-template-columns:repeat(3,1fr)}
+.qtag{display:inline-block;background:var(--danau-soft);color:var(--danau);font-size:.75rem;font-weight:800;border-radius:99px;padding:3px 10px;margin-bottom:8px}
+.qhint{margin:0 0 4px!important;color:var(--muted);font-size:.88rem;font-weight:700}
+.nutri{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.nutri div{background:var(--sabbe-soft);border-radius:16px;padding:10px 12px;display:grid;grid-template-columns:32px 1fr;column-gap:8px}
+.nutri i{font-style:normal;font-size:1.5rem;grid-row:span 2;align-self:center}
+.nutri b{font-family:"Baloo 2",sans-serif;font-size:1rem}.nutri span{font-size:.8rem;font-weight:700;color:var(--muted)}
+.supp{display:grid;gap:10px}
+.supp>div{border-radius:16px;padding:12px 14px}.sp1{background:var(--bahaya-soft)}.sp2{background:var(--kelor-soft)}.sp3{background:var(--danau-soft)}
+.sp-h{display:flex;gap:8px;align-items:center;margin-bottom:4px}.sp-h i{font-style:normal;font-size:1.4rem}.sp-h b{font-family:"Baloo 2",sans-serif;font-size:1.05rem}
+.supp p{margin:0 0 6px;font-size:.92rem}.supp ul{margin:0;padding-left:18px;font-size:.88rem}
+.src{display:grid;gap:8px}
+.src>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.src i{font-style:normal;font-size:1.6rem}.src b{font-family:"Baloo 2",sans-serif;font-size:1rem;margin-right:6px}.src small{color:var(--muted);font-weight:700;font-size:.8rem}
+.src span{display:block;font-size:.88rem}
+.prv{display:none}.prv.on{display:block}
+#pr-kek svg{width:100%;max-width:380px;display:block;margin:0 auto 6px}
+details.acc{background:var(--surface);border:1px solid var(--line);border-radius:20px;margin-bottom:10px;overflow:hidden}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 16px;font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.08rem}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"▾";margin-left:auto;color:var(--muted);transition:transform .2s}
+details.acc[open] summary::after{transform:rotate(180deg)}
+details.acc summary i{font-style:normal;font-size:1.4rem}
+details.acc[open] summary{color:var(--sabbe)}
+.acc-b{padding:0 16px 16px}
+.tips{margin:0;padding-left:20px}.tips li{margin-bottom:6px}
+.evg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.ev{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center;display:flex;flex-direction:column;gap:2px}
+.ev b{font-size:.82rem}.ev-n{font-family:"Baloo 2",sans-serif;font-size:1.6rem;font-weight:800;line-height:1.1;color:var(--muted)}
+.ev small{font-size:.72rem;color:var(--muted);font-weight:700}
+.ev .g{color:var(--kelor)}.ev .c{color:var(--kunyit)}.ev .r{color:var(--bahaya)}
+.about{background:var(--danau-soft);border-radius:18px;padding:14px 16px;margin:0 0 14px}
+.about b{font-family:"Baloo 2",sans-serif;font-size:1.05rem;color:var(--danau)}
+.about p{margin:4px 0 8px;font-size:.92rem}
+.about-g{display:flex;flex-wrap:wrap;gap:6px}.about-g span{background:var(--surface);border-radius:99px;padding:4px 10px;font-size:.8rem;font-weight:700}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin-bottom:14px}
+.toc b{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.toc div{display:flex;flex-wrap:wrap;gap:6px}
+.toc a{font-size:.82rem;font-weight:700;color:var(--sabbe);background:var(--sabbe-soft);border-radius:99px;padding:5px 10px;text-decoration:none}
+.panel[id],#pustaka{scroll-margin-top:84px}
+.srcl{font-size:.74rem;color:var(--muted);margin:10px 0 0!important;padding-top:8px;border-top:1px dashed var(--line);font-style:italic}
+.srcl a{color:var(--danau);font-weight:700}
+.note-kek{font-size:.82rem;background:var(--kunyit-soft);border-left:4px solid var(--kunyit);border-radius:8px;padding:8px 10px;margin-top:10px!important}
+.refs{margin:0;padding-left:20px;font-size:.84rem}.refs li{margin-bottom:6px}
+.ovl{position:fixed;inset:0;background:rgba(20,20,30,.55);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}
+.ovl[hidden]{display:none}
+.dlg{background:var(--surface);color:var(--ink);border-radius:22px;padding:20px;max-width:400px;width:100%;max-height:90vh;overflow:auto}
+.dlg-w{max-width:440px}
+.dlg h3{font-size:1.25rem;color:var(--sabbe);margin-bottom:8px}
+.dlg input{width:100%;font:inherit;font-weight:800;font-size:1.1rem;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);margin:6px 0 12px;text-transform:uppercase}
+.dlg-b{display:flex;gap:8px;flex-wrap:wrap}
+.logsum{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.logsum div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.logsum b{display:block;font-family:"Baloo 2",sans-serif;font-size:1.3rem;color:var(--sabbe);line-height:1.1}
+.logsum small{font-size:.75rem;color:var(--muted);font-weight:700}
+.logtbl{max-height:40vh;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-bottom:12px}
+.logtbl table{width:100%;border-collapse:collapse;font-size:.78rem}
+.logtbl th{position:sticky;top:0;background:var(--sabbe-soft);text-align:left;padding:6px}
+.logtbl td{padding:6px;border-top:1px solid var(--line);vertical-align:top}
+/* Tape */
+.tape-wrap{overflow-x:auto; margin:6px -4px 4px; padding:0 4px}
+.tape{position:relative; height:86px; min-width:340px; border-radius:10px; background:linear-gradient(90deg,var(--bahaya-soft) 0 var(--cut), var(--kelor-soft) var(--cut) 100%); border:2px solid var(--line)}
+.tick{position:absolute; bottom:0; width:1.5px; background:var(--ink); opacity:.55}
+.tick.m{height:16px}.tick.s{height:8px}
+.tlabel{position:absolute; bottom:18px; transform:translateX(-50%); font-size:.72rem; font-weight:700; color:var(--muted)}
+.cutline{position:absolute; top:0; bottom:0; width:3px; background:var(--bahaya)}
+.cutline span{position:absolute; top:4px; left:6px; font-size:.72rem; font-weight:800; color:var(--bahaya); white-space:nowrap}
+.marker{position:absolute; top:-2px; bottom:-2px; width:0; transition:left .25s}
+.marker::before{content:""; position:absolute; left:-2px; top:0; bottom:0; width:4px; background:var(--danau); border-radius:2px}
+.marker::after{content:""; position:absolute; left:-8px; top:-2px; border:8px solid transparent; border-top-color:var(--danau)}
+.lila-in{display:flex; gap:10px; align-items:center; margin:14px 0}
+.lila-in input[type=range]{flex:1; accent-color:var(--danau)}
+.lila-in input[type=number]{width:92px; font:inherit; font-weight:800; font-size:1.1rem; padding:8px 10px; border-radius:12px; border:2px solid var(--line); background:var(--bg); color:var(--ink)}
+.result{border-radius:18px; padding:14px 16px; font-weight:600}
+.result h3{margin-bottom:4px}
+.result.ok{background:var(--kelor-soft)} .result.ok h3{color:var(--kelor)}
+.result.risk{background:var(--bahaya-soft)} .result.risk h3{color:var(--bahaya)}
+.btn{font:inherit; font-weight:800; border:0; border-radius:14px; padding:12px 18px; background:var(--danau); color:#fff; cursor:pointer}
+:root[data-theme="dark"] .btn{color:#0f1a1d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0f1a1d}}
+.btn.ghost{background:transparent; color:var(--danau); border:2px solid var(--danau)}
+.btn:focus-visible, button:focus-visible, input:focus-visible, label:focus-within{outline:3px solid var(--kunyit); outline-offset:2px}
+.hist{list-style:none; margin:10px 0 0; padding:0; font-size:.92rem}
+.hist li{display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--line)}
+.hist .r{color:var(--bahaya); font-weight:800} .hist .g{color:var(--kelor); font-weight:800}
+/* quiz */
+.q-meta{display:flex; justify-content:space-between; font-weight:700; color:var(--muted); font-size:.9rem; margin-bottom:6px}
+.opts{display:grid; gap:10px; margin-top:12px}
+.opt{font:inherit; text-align:left; padding:13px 14px; border-radius:16px; border:2px solid var(--line); background:var(--bg); color:var(--ink); cursor:pointer; font-weight:600}
+.opt.right{border-color:var(--kelor); background:var(--kelor-soft)}
+.opt.wrong{border-color:var(--bahaya); background:var(--bahaya-soft)}
+.opt:disabled{cursor:default}
+.explain{margin-top:12px; padding:12px 14px; border-radius:14px; background:var(--danau-soft); font-size:.94rem; display:none}
+.explain.on{display:block}
+.score{font-family:"Baloo 2"; font-size:3.2rem; color:var(--sabbe); line-height:1}
+/* schedule */
+.tri{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center}
+.tri div{background:var(--sabbe-soft); border-radius:16px; padding:10px 4px}
+.tri b{font-family:"Baloo 2"; font-size:1.9rem; color:var(--sabbe); display:block; line-height:1}
+.tri small{font-size:.78rem; font-weight:700}
+.dots{display:flex; gap:4px; justify-content:center; margin:6px 0 2px}
+.dots i{width:10px; height:10px; border-radius:50%; background:var(--sabbe)}
+.danger{border:2px solid var(--bahaya); background:var(--bahaya-soft)}
+.danger h3{color:var(--bahaya)}
+.danger ul{margin:0; padding-left:20px}
+.contact{display:flex; gap:8px; margin-top:8px}
+.contact input{flex:1; min-width:0; font:inherit; padding:10px 12px; border-radius:12px; border:2px solid var(--line); background:var(--bg); color:var(--ink)}
+/* myth */
+.myth{border:0; width:100%; text-align:left; font:inherit; color:var(--ink); cursor:pointer; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:16px; margin-bottom:12px; display:block}
+.myth .tag{display:inline-block; font-size:.78rem; font-weight:800; padding:3px 10px; border-radius:99px; margin-bottom:6px}
+.myth .m .tag{background:var(--bahaya-soft); color:var(--bahaya)}
+.myth .f .tag{background:var(--kelor-soft); color:var(--kelor)}
+.myth .f{display:none}
+.myth.open .m{display:none}.myth.open .f{display:block}
+.myth p{margin:0; font-weight:600}
+.myth .hint{font-size:.8rem; color:var(--muted); margin-top:6px; font-weight:600}
+.local{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+.local div{background:var(--kunyit-soft); border-radius:16px; padding:12px}
+.local b{display:block; font-family:"Baloo 2"; font-size:1.05rem}
+.local small{font-size:.84rem}
+.menu-day{list-style:none; padding:0; margin:0}
+.menu-day li{display:grid; grid-template-columns:86px 1fr; gap:8px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:.93rem}
+.menu-day li:last-child{border:0}
+.menu-day b{color:var(--danau)}
+.note{font-size:.8rem; color:var(--muted); text-align:center; margin:4px 12px 16px}
+/* nav */
+nav.tabs{position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:460px; background:var(--surface); border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(5,1fr); padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px)); z-index:10}
+nav.tabs button{font:inherit; background:none; border:0; color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:2px; font-size:.68rem; font-weight:700; padding:6px 2px; border-radius:12px; cursor:pointer; line-height:1.15}
+nav.tabs button svg{width:24px; height:24px}
+nav.tabs button[aria-selected="true"]{color:var(--sabbe); background:var(--sabbe-soft)}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="rgba(255,255,255,.18)"/><circle cx="24" cy="14" r="6" fill="#fff"/><path d="M15 40c0-9 3-17 9-17 4 0 6 3 6 6 4 1 6 4 6 7 0 2-1 4-3 4z" fill="#fff"/><circle cx="29" cy="33" r="4.5" fill="none" stroke="#B8336A" stroke-width="2" stroke-dasharray="2 2"/></svg>
+      <div><h1>Layanan Infogizi Ibu Hamil Remaja</h1><p>Cegah KEK, jaga ibu dan bayi</p></div>
+    </div>
+  </header>
+
+  <main>
+  <!-- 1. INFORMASI -->
+  <section class="screen on" id="s-info" aria-labelledby="h-info">
+    <h2 id="h-info">Informasi</h2>
+    <div class="about">
+      <b>Tentang media ini</b>
+      <p>Media infografis ini membantu ibu hamil remaja (usia 10–19 tahun) memahami, menyikapi, dan melakukan tindakan pencegahan Kekurangan Energi Kronik (KEK) secara mandiri.</p>
+      <div class="about-g"><span>👩 Sasaran: ibu hamil remaja</span><span>🎯 Tujuan: mencegah KEK</span></div>
+    </div>
+    <p class="lead">Mulai dari mengenal kehamilan remaja, lalu pelajari KEK dan cara mencegahnya.</p>
+
+    <div class="seg" role="tablist" aria-label="Bagian informasi">
+      <button role="tab" aria-selected="true" data-p="p-remaja">Ibu Hamil Remaja</button>
+      <button role="tab" aria-selected="false" data-p="p-kek">KEK pada Ibu Hamil</button>
+    </div>
+
+    <!-- BAGIAN A -->
+    <div class="part on" id="p-remaja">
+      <nav class="toc" aria-label="Isi bagian A"><b>Isi bagian ini</b><div>
+        <a href="#a1">1. Definisi</a><a href="#a2">2. Alasan</a><a href="#a3">3. Kebutuhan gizi</a><a href="#a4">4. Permasalahan</a></div></nav>
+      <div class="panel" id="a1">
+        <h3><span class="num">1</span>Siapa ibu hamil remaja?</h3>
+        <div class="age">
+          <div class="age-bar">
+            <div class="age-seg a1"><b>10–14</b>remaja awal</div>
+            <div class="age-seg a2"><b>15–19</b>remaja akhir</div>
+            <div class="age-seg a3"><b>20+</b>dewasa</div>
+          </div>
+          <div class="age-brace"></div><p class="age-lbl">Ibu hamil remaja: hamil di bawah usia 20 tahun</p>
+        </div>
+        <p>Menurut WHO, remaja adalah mereka yang berusia 10–19 tahun. Kehamilan yang terjadi pada usia ini disebut kehamilan remaja.</p>
+        <p class="tip">Di usia ini organ reproduksi belum berfungsi sempurna, sehingga kehamilan dan persalinan lebih mudah mengalami komplikasi.</p>
+      </div>
+
+      <div class="panel" id="a2">
+        <h3><span class="num">2</span>Mengapa kehamilan remaja bisa terjadi?</h3>
+        <div class="reasons">
+          <div><i>💍</i><b>Menikah di usia muda</b><small>Masih ada kebiasaan menikah di usia anak karena tradisi atau tekanan ekonomi.</small></div>
+          <div><i>📚</i><b>Kurang informasi kesehatan reproduksi</b><small>Belum memahami masa subur dan cara merencanakan kehamilan.</small></div>
+          <div><i>🏠</i><b>Ekonomi dan pendidikan keluarga</b><small>Keterbatasan biaya dan sekolah membatasi akses informasi dan layanan.</small></div>
+          <div><i>🗣️</i><b>Jarang dibicarakan di keluarga</b><small>Remaja mencari informasi dari teman atau internet yang belum tentu benar.</small></div>
+          <div><i>🏥</i><b>Layanan ramah remaja terbatas</b><small>Malu atau takut dinilai membuat remaja enggan bertanya ke tenaga kesehatan.</small></div>
+        </div>
+        <p class="tip">Apa pun alasannya, yang terpenting sekarang adalah menjaga kesehatan ibu dan bayi. Ibu tidak sendiri, bidan dan kader siap membantu.</p>
+      </div>
+
+      <div class="panel" id="a3">
+        <h3><span class="num">3</span>Kebutuhan gizi ibu hamil remaja</h3>
+        <div class="duo"><div class="c">Gizi untuk tubuh ibu yang masih tumbuh</div><div class="plus">+</div><div class="c k">Gizi untuk janin yang sedang tumbuh</div></div>
+        <p>Karena dua pertumbuhan terjadi bersamaan, kebutuhan gizi ibu hamil remaja meningkat. Inilah yang paling bertambah saat hamil:</p>
+        <div class="nutri">
+          <div><i>⚡</i><b>Energi</b><span>+180 kkal (trimester I)<br>+300 kkal (trimester II–III)</span></div>
+          <div><i>🐟</i><b>Protein</b><span>+1 g (trimester I), +10 g (trimester II)<br>+30 g (trimester III)</span></div>
+          <div><i>🩸</i><b>Zat besi</b><span>+9 mg<br>(trimester II–III)</span></div>
+          <div><i>🥬</i><b>Asam folat</b><span>+200 mcg<br>sejak awal hamil</span></div>
+          <div><i>🥛</i><b>Kalsium</b><span>+200 mg<br>sepanjang kehamilan</span></div>
+          <div><i>🍊</i><b>Vitamin A dan C</b><span>+300 RE dan +10 mg</span></div>
+        </div>
+        <p class="tip">Tambahan +300 kkal kira-kira sama dengan sepiring kecil nasi dan sepotong ikan, bukan makan dua kali lipat. Sumber: AKG 2019.</p>
+        <button class="btn ghost" data-goto="p-kek" data-scroll="b7">Lihat porsi makan harian</button>
+      </div>
+
+      <div class="panel" id="a4">
+        <h3><span class="num">4</span>Permasalahan yang sering dialami</h3>
+        <div class="probs">
+          <div class="pb" style="background:var(--sabbe-soft)"><b>Kesehatan ibu</b><small>Anemia, KEK, preeklamsia, infeksi, persalinan lama</small></div>
+          <div class="pb" style="background:var(--danau-soft)"><b>Kesehatan bayi</b><small>Berat lahir rendah (BBLR) dan lahir prematur</small></div>
+          <div class="pb" style="background:var(--kunyit-soft)"><b>Perasaan</b><small>Stres, cemas, dan bingung menjalani peran baru</small></div>
+          <div class="pb" style="background:var(--kelor-soft)"><b>Sekolah dan ekonomi</b><small>Putus sekolah dan bergantung pada keluarga atau pasangan</small></div>
+          <div class="pb wide" style="background:var(--surface);border:2px solid var(--line)"><b>Lingkungan sosial</b><small>Stigma dan omongan orang sekitar yang membuat ibu enggan memeriksakan diri</small></div>
+        </div>
+        <p class="tip">Salah satu masalah gizi yang paling sering adalah KEK. Lanjutkan ke bagian berikutnya.</p>
+        <button class="btn" data-goto="p-kek" style="margin-top:6px">Lanjut: KEK pada Ibu Hamil</button>
+      </div>
+    </div>
+
+    <!-- BAGIAN B -->
+    <div class="part" id="p-kek">
+      <nav class="toc" aria-label="Isi bagian B"><b>Isi bagian ini</b><div>
+        <a href="#b1">1. Definisi KEK</a><a href="#b2">2. Dampak pada ibu</a><a href="#b3">3. Dampak pada bayi</a><a href="#b4">4. Intervensi gizi</a><a href="#b5">5. Suplementasi</a><a href="#b6">6. Sumber gizi</a><a href="#b7">7. Porsi harian</a><a href="#b8">8. Pencegahan</a><a href="#b9">9. Isi Piringku</a></div></nav>
+      <div class="panel" id="b1">
+        <h3><span class="num">1</span>Apa itu KEK pada ibu hamil?</h3>
+        <div class="big-def">
+          <div class="ring"><div><b>&lt;23,5</b><span>cm LILA</span></div></div>
+          <div><p>Kekurangan Energi Kronik (KEK) adalah kondisi kurang energi dan protein yang berlangsung lama. Ibu hamil disebut KEK bila lingkar lengan atas (LILA) kurang dari 23,5 cm.</p></div>
+        </div>
+        <p style="margin-top:12px;font-weight:700">Tanda yang perlu diwaspadai:</p>
+        <div class="icons">
+          <div><i>📏</i>LILA &lt;23,5 cm</div><div><i>😮‍💨</i>Mudah lelah</div><div><i>🫥</i>Wajah pucat</div>
+          <div><i>💫</i>Sering pusing</div><div><i>🍽️</i>Nafsu makan turun</div><div><i>⚖️</i>Berat badan naiknya kurang</div>
+        </div>
+      </div>
+
+      <div class="panel" id="b2">
+        <h3><span class="num">2</span>Penyebab dan dampak KEK pada ibu</h3>
+        <h4 class="sub">Penyebab</h4>
+        <div class="chips">
+          <span>Hamil di usia &lt;20 tahun</span><span>Pola makan tidak teratur</span><span>Jarang makan lauk hewani</span><span>Kurang zat besi</span><span>Pantangan makan saat hamil</span><span>Pengetahuan gizi kurang</span><span>Keterbatasan ekonomi</span><span>Anemia dan infeksi</span>
+        </div>
+        <h4 class="sub">Dampak pada ibu</h4>
+        <div class="icons">
+          <div style="background:var(--sabbe-soft)"><i>🩸</i>Anemia</div><div style="background:var(--sabbe-soft)"><i>⏳</i>Persalinan lama</div><div style="background:var(--sabbe-soft)"><i>🚨</i>Perdarahan setelah melahirkan</div>
+          <div style="background:var(--sabbe-soft)"><i>🦠</i>Mudah infeksi</div><div style="background:var(--sabbe-soft)"><i>⚠️</i>Komplikasi persalinan</div><div style="background:var(--sabbe-soft)"><i>🪫</i>Tubuh lemah</div>
+        </div>
+      </div>
+
+      <div class="panel" id="b3">
+        <h3><span class="num">3</span>Penyebab dan dampak pada bayi</h3>
+        <h4 class="sub">Bagaimana KEK ibu sampai ke bayi</h4>
+        <ol class="flow">
+          <li>Ibu kurang makan dalam waktu lama</li>
+          <li>Tubuh ibu memakai cadangan lemak dan otot</li>
+          <li>Plasenta (ari-ari) tidak berfungsi optimal</li>
+          <li>Gizi dan oksigen ke janin berkurang</li>
+        </ol>
+        <h4 class="sub">Dampak pada bayi</h4>
+        <div class="split">
+          <div class="baby"><h4>Saat lahir</h4><ul><li>Berat lahir rendah (&lt;2.500 g)</li><li>Lahir prematur</li><li>Sulit bernapas (asfiksia)</li><li>Pertumbuhan janin terhambat</li></ul></div>
+          <div class="mom"><h4>Jangka panjang</h4><ul><li>Berisiko stunting</li><li>Perkembangan otak kurang optimal</li><li>Mudah sakit</li></ul></div>
+        </div>
+      </div>
+
+      <div class="panel" id="b4">
+        <h3><span class="num">4</span>Intervensi gizi pada ibu hamil KEK</h3>
+        <p>Bila LILA ibu di bawah 23,5 cm, tenaga kesehatan akan memberikan:</p>
+        <div class="intv">
+          <div><i>🍱</i><b>Makanan tambahan (PMT)</b><small>Berbahan pangan lokal dari puskesmas, dimakan sebagai tambahan, bukan pengganti makan utama.</small></div>
+          <div><i>💊</i><b>Suplementasi gizi</b><small>Tablet tambah darah setiap hari dan suplemen lain sesuai anjuran (lihat poin 5).</small></div>
+          <div><i>🗣️</i><b>Konseling gizi</b><small>Bidan atau ahli gizi membantu menyusun porsi dan menu sesuai kondisi ibu.</small></div>
+          <div><i>📈</i><b>Pemantauan rutin</b><small>LILA dan berat badan diukur setiap periksa kehamilan.</small></div>
+        </div>
+      </div>
+
+      <div class="panel" id="b5">
+        <h3><span class="num">5</span>Suplementasi gizi</h3>
+        <div class="supp">
+          <div class="sp1"><div class="sp-h"><i>💊</i><b>Tablet tambah darah (TTD)</b></div>
+            <p>Berisi zat besi dan asam folat untuk mencegah anemia dan KEK.</p>
+            <ul><li>1 tablet setiap hari, minimal 90 tablet selama hamil</li><li>Minum dengan air putih atau jus jeruk, bukan teh, kopi, atau susu</li><li>Diminum malam sebelum tidur agar tidak mual</li><li>Tinja berwarna hitam merupakan hal yang normal</li></ul></div>
+          <div class="sp2"><div class="sp-h"><i>🥬</i><b>Asam folat</b></div>
+            <p>Penting sejak awal kehamilan untuk pembentukan otak dan saraf janin. Sudah terkandung dalam TTD.</p></div>
+          <div class="sp3"><div class="sp-h"><i>🥛</i><b>Kalsium</b></div>
+            <p>Untuk tulang dan gigi ibu serta janin. Diminum sesuai anjuran tenaga kesehatan, dengan jarak waktu dari TTD karena kalsium menghambat penyerapan zat besi.</p></div>
+        </div>
+        <p class="tip">Minum suplemen hanya yang diberikan atau dianjurkan bidan atau dokter.</p>
+      </div>
+
+      <div class="panel" id="b6">
+        <h3><span class="num">6</span>Sumber gizi utama ibu hamil remaja</h3>
+        <div class="src">
+          <div><i>🍚</i><div><b>Karbohidrat</b><small>Sumber tenaga</small><span>Nasi, jagung, ubi, sagu, roti</span></div></div>
+          <div><i>🐟</i><div><b>Protein</b><small>Membangun tubuh ibu dan janin</small><span>Ikan, telur, ayam, daging, tempe, tahu, kacang hijau</span></div></div>
+          <div><i>🩸</i><div><b>Zat besi</b><small>Membentuk darah, mencegah anemia</small><span>Hati ayam, daging, ikan, daun kelor, bayam</span></div></div>
+          <div><i>🥬</i><div><b>Asam folat</b><small>Pembentukan otak dan saraf janin</small><span>Sayuran hijau, kacang-kacangan, hati</span></div></div>
+          <div><i>🥛</i><div><b>Kalsium</b><small>Tulang dan gigi ibu serta janin</small><span>Susu, ikan teri, tahu, tempe, sayuran hijau</span></div></div>
+          <div><i>🍊</i><div><b>Vitamin C</b><small>Membantu penyerapan zat besi</small><span>Jeruk, jambu biji, pepaya, tomat</span></div></div>
+        </div>
+        <h4 class="sub">Pangan lokal yang mudah didapat</h4>
+        <div class="chips"><span>Ikan air tawar dari danau dan sungai</span><span>Telur</span><span>Daun kelor</span><span>Tempe dan tahu</span><span>Kacang hijau</span><span>Pisang dan pepaya</span></div>
+      </div>
+
+      <div class="panel" id="b7">
+        <h3><span class="num">7</span>Porsi makan harian ibu hamil remaja</h3>
+        <p>Jumlah porsi makan dalam sehari menurut trimester:</p>
+        <div class="seg seg-sm" role="tablist" aria-label="Pilih trimester">
+          <button role="tab" aria-selected="true" data-tm="1">Trimester I</button>
+          <button role="tab" aria-selected="false" data-tm="2">Trimester II–III</button>
+        </div>
+        <div class="porsi" id="porsi"></div>
+        <p class="tip">Bagi ke 3 kali makan utama dan 2–3 kali selingan. Sumber: Kementerian Kesehatan RI (2023).</p>
+      </div>
+
+      <div class="panel" id="b8">
+        <h3><span class="num">8</span>Mencegah KEK pada ibu hamil</h3>
+        <ol class="steps">
+          <li><div><b>Makan gizi seimbang setiap hari</b><small>Ikuti Isi Piringku dan porsi harian sesuai trimester.</small></div></li>
+          <li><div><b>Minum tablet tambah darah setiap hari</b><small>Minimal 90 tablet selama hamil.</small></div></li>
+          <li><div><b>Periksa kehamilan minimal 6 kali</b><small>Di posyandu, bidan desa, atau puskesmas.</small></div></li>
+          <li><div><b>Ukur LILA dan timbang berat badan</b><small>Pantau sendiri lewat menu Pengukuran LILA.</small></div></li>
+          <li><div><b>Hindari pantangan makan yang tidak perlu</b><small>Tanyakan ke bidan bila ragu dengan suatu makanan.</small></div></li>
+          <li><div><b>Libatkan keluarga</b><small>Minta dukungan suami dan orang tua untuk makan teratur dan periksa rutin.</small></div></li>
+        </ol>
+      </div>
+
+      <div class="panel" id="b9">
+        <h3><span class="num">9</span>Isi Piringku</h3>
+        <div class="seg seg-sm" role="tablist" aria-label="Pilih isi piring">
+          <button role="tab" aria-selected="true" data-pr="pr-hamil">Ibu hamil</button>
+          <button role="tab" aria-selected="false" data-pr="pr-kek">Ibu hamil KEK</button>
+        </div>
+        <div class="prv on" id="pr-hamil">
+          <div class="piring">
+          <svg viewBox="0 0 220 220" role="img" aria-label="Isi Piringku: setengah piring sayur dan buah, setengah piring makanan pokok dan lauk pauk">
+            <circle cx="110" cy="110" r="108" fill="var(--surface)" stroke="var(--line)" stroke-width="3"/>
+            <path d="M110,110 L110,10 A100,100 0 0 1 196.6,160 Z" fill="#7DBE5E"/>
+            <path d="M110,110 L196.6,160 A100,100 0 0 1 110,210 Z" fill="#F2A541"/>
+            <path d="M110,110 L110,210 A100,100 0 0 1 23.4,60 Z" fill="#F4E3B5"/>
+            <path d="M110,110 L23.4,60 A100,100 0 0 1 110,10 Z" fill="#E77F8C"/>
+            <g stroke="var(--surface)" stroke-width="3"><line x1="110" y1="110" x2="110" y2="10"/><line x1="110" y1="110" x2="196.6" y2="160"/><line x1="110" y1="110" x2="110" y2="210"/><line x1="110" y1="110" x2="23.4" y2="60"/></g>
+            <g font-family="Nunito,sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#24313B">
+              <text x="160" y="72" font-size="24">🥬</text><text x="160" y="90">Sayur</text>
+              <text x="140" y="156" font-size="22">🍌</text><text x="140" y="172">Buah</text>
+              <text x="62" y="140" font-size="24">🍚</text><text x="62" y="158">Makanan</text><text x="62" y="170">pokok</text>
+              <text x="78" y="54" font-size="20">🐟</text><text x="78" y="70">Lauk</text>
+            </g>
+          </svg>
+          <ul class="piring-key">
+            <li><i style="background:#7DBE5E"></i><span><b>Sayur</b> paling banyak, sepertiga piring</span></li>
+            <li><i style="background:#F2A541"></i><span><b>Buah</b> seperenam piring</span></li>
+            <li><i style="background:#F4E3B5"></i><span><b>Nasi atau pengganti</b> sepertiga piring</span></li>
+            <li><i style="background:#E77F8C"></i><span><b>Lauk</b> ikan, telur, tempe, tahu</span></li>
+          </ul>
+        </div>
+          <p class="tip">Setiap kali makan: setengah piring sayur dan buah, setengah piring nasi dan lauk. Makan 3 kali sehari ditambah 2–3 kali selingan.</p>
+        </div>
+        <div class="prv" id="pr-kek">
+          <svg viewBox="0 0 330 220" role="img" aria-label="Isi Piringku ibu hamil KEK: piring seimbang ditambah lauk hewani tambahan dan makanan tambahan">
+
+            <circle cx="110" cy="110" r="108" fill="var(--surface)" stroke="var(--line)" stroke-width="3"/>
+            <path d="M110,110 L110,10 A100,100 0 0 1 196.6,160 Z" fill="#7DBE5E"/>
+            <path d="M110,110 L196.6,160 A100,100 0 0 1 110,210 Z" fill="#F2A541"/>
+            <path d="M110,110 L110,210 A100,100 0 0 1 23.4,60 Z" fill="#F4E3B5"/>
+            <path d="M110,110 L23.4,60 A100,100 0 0 1 110,10 Z" fill="#E77F8C"/>
+            <g stroke="var(--surface)" stroke-width="3"><line x1="110" y1="110" x2="110" y2="10"/><line x1="110" y1="110" x2="196.6" y2="160"/><line x1="110" y1="110" x2="110" y2="210"/><line x1="110" y1="110" x2="23.4" y2="60"/></g>
+            <g font-family="Nunito,sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#24313B">
+              <text x="160" y="72" font-size="24">🥬</text><text x="160" y="90">Sayur</text>
+              <text x="140" y="156" font-size="22">🍌</text><text x="140" y="172">Buah</text>
+              <text x="62" y="140" font-size="24">🍚</text><text x="62" y="158">Makanan</text><text x="62" y="170">pokok</text>
+              <text x="78" y="54" font-size="20">🐟</text><text x="78" y="70">Lauk</text>
+            </g>
+
+            <g font-family="Nunito,sans-serif" font-weight="800" text-anchor="middle" fill="var(--ink)">
+              <text x="232" y="66" font-size="22" fill="var(--sabbe)">+</text>
+              <circle cx="285" cy="58" r="36" fill="#E77F8C" stroke="var(--surface)" stroke-width="3"/>
+              <text x="285" y="58" font-size="20">🥚</text><text x="285" y="76" font-size="9.5" fill="#24313B">Lauk hewani</text><text x="285" y="87" font-size="9.5" fill="#24313B">tambahan</text>
+              <text x="232" y="166" font-size="22" fill="var(--sabbe)">+</text>
+              <circle cx="285" cy="160" r="36" fill="#F2A541" stroke="var(--surface)" stroke-width="3"/>
+              <text x="285" y="160" font-size="20">🍪</text><text x="285" y="178" font-size="9.5" fill="#24313B">Selingan</text><text x="285" y="189" font-size="9.5" fill="#24313B">PMT</text>
+            </g>
+          </svg>
+          <ol class="steps">
+            <li><div><b>Isi piring tetap seimbang</b><small>Setengah piring sayur dan buah, setengah piring nasi dan lauk.</small></div></li>
+            <li><div><b>Tambah lauk hewani setiap makan</b><small>Misalnya ikan ditambah telur, atau ayam ditambah tempe.</small></div></li>
+            <li><div><b>Makan sedikit tapi sering</b><small>3 kali makan utama dan 2–3 kali selingan.</small></div></li>
+            <li><div><b>Habiskan PMT dari puskesmas</b><small>Sebagai selingan di antara makan utama, bukan pengganti makan.</small></div></li>
+            <li><div><b>Pilih makanan padat energi</b><small>Bubur kacang hijau, susu, atau masakan bersantan secukupnya.</small></div></li>
+          </ol>
+          <p class="note-kek">Gambar ini adalah anjuran penatalaksanaan gizi bagi ibu hamil KEK, bukan Isi Piringku resmi. Jumlah porsi yang tepat ditentukan bersama bidan atau ahli gizi.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Target saya hari ini</h3>
+        <div class="progress" aria-hidden="true"><i id="chk-bar"></i></div>
+        <ul class="check" id="checklist"></ul>
+        <p class="tip" id="chk-msg"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. KUIS -->
+  <section class="screen" id="s-kuis" aria-labelledby="h-kuis">
+    <h2 id="h-kuis">Kuis</h2>
+    <p class="lead">Evaluasi pengetahuan, sikap, dan tindakan Ibu dalam mencegah KEK. Setiap jawaban langsung diberi penjelasan.</p>
+    <div class="panel evalbox" id="evalbox"></div>
+    <div class="seg seg3" role="tablist" aria-label="Jenis kuis">
+      <button role="tab" aria-selected="true" data-qs="p">Pengetahuan</button>
+      <button role="tab" aria-selected="false" data-qs="s">Sikap</button>
+      <button role="tab" aria-selected="false" data-qs="b">Tindakan</button>
+    </div>
+    <div class="panel" id="quiz"></div>
+  </section>
+
+  <!-- 3. UKUR LILA -->
+  <section class="screen" id="s-lila" aria-labelledby="h-lila">
+    <h2 id="h-lila">Pengukuran LILA</h2>
+    <p class="lead">Ukur lingkar lengan atas dengan pita LILA, lalu masukkan hasilnya.</p>
+
+    <div class="panel">
+      <h3>Cara mengukur</h3>
+      <svg viewBox="0 0 320 130" width="100%" role="img" aria-label="Ilustrasi lengan kiri dengan pita LILA di titik tengah antara bahu dan siku">
+        <rect x="20" y="40" width="250" height="52" rx="26" fill="var(--sabbe-soft)" stroke="var(--sabbe)" stroke-width="2"/>
+        <circle cx="34" cy="66" r="22" fill="var(--sabbe-soft)" stroke="var(--sabbe)" stroke-width="2"/>
+        <circle cx="270" cy="66" r="14" fill="var(--sabbe-soft)" stroke="var(--sabbe)" stroke-width="2"/>
+        <text x="34" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)" font-family="Nunito,sans-serif">Bahu</text>
+        <text x="270" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)" font-family="Nunito,sans-serif">Siku</text>
+        <line x1="34" y1="22" x2="270" y2="22" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <circle cx="152" cy="22" r="5" fill="var(--kunyit)"/>
+        <text x="152" y="14" text-anchor="middle" font-size="12" font-weight="800" fill="var(--kunyit)" font-family="Nunito,sans-serif">titik tengah</text>
+        <rect x="142" y="36" width="20" height="60" rx="4" fill="var(--danau)" opacity=".85"/>
+        <text x="152" y="112" text-anchor="middle" font-size="12" font-weight="800" fill="var(--danau)" font-family="Nunito,sans-serif">pita LILA</text>
+      </svg>
+      <ol class="steps">
+        <li><div><b>Tentukan bahu dan siku</b><small>Gunakan lengan kiri (lengan kanan bila kidal).</small></div></li>
+        <li><div><b>Letakkan pita di antara bahu dan siku</b><small>Lengan dibiarkan lemas, baju tidak menekan.</small></div></li>
+        <li><div><b>Tandai titik tengahnya</b></div></li>
+        <li><div><b>Lingkarkan pita di titik tengah</b></div></li>
+        <li><div><b>Jangan terlalu ketat</b></div></li>
+        <li><div><b>Jangan terlalu longgar</b></div></li>
+        <li><div><b>Baca angka di pita dengan teliti</b><small>Pita harus rata, tidak kusut atau terlipat.</small></div></li>
+      </ol>
+    </div>
+
+    <div class="panel">
+      <h3>Masukkan hasil ukur Ibu</h3>
+      <div class="tape-wrap"><div class="tape" id="tape"><div class="marker" id="marker"></div></div></div>
+      <div class="lila-in">
+        <input type="range" id="lila-range" min="18" max="34" step="0.1" value="23.5" aria-label="Geser hasil LILA">
+        <input type="number" id="lila-num" min="15" max="45" step="0.1" value="23.5" aria-label="Hasil LILA dalam cm"><span>cm</span>
+      </div>
+      <div class="result" id="lila-result"></div>
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn" id="lila-save">Simpan hasil</button>
+        <button class="btn ghost" id="lila-clear">Hapus riwayat</button>
+      </div>
+      <ul class="hist" id="lila-hist"></ul>
+    </div>
+  </section>
+
+  <!-- 4. LAYANAN -->
+  <section class="screen" id="s-layanan" aria-labelledby="h-layanan">
+    <h2 id="h-layanan">Layanan Info Ibu Hamil Remaja</h2>
+    <p class="lead">Di mana periksa, apa yang didapat, dan kapan harus segera ke fasilitas kesehatan.</p>
+
+    <div class="panel">
+      <h3>Tempat periksa kehamilan</h3>
+      <div class="intv">
+        <div><i>🏘️</i><b>Posyandu</b><small>Timbang berat badan, ukur LILA, dapat TTD, dan penyuluhan gizi.</small></div>
+        <div><i>👩‍⚕️</i><b>Bidan desa atau pustu</b><small>Pemeriksaan kehamilan rutin dan konsultasi.</small></div>
+        <div><i>🏥</i><b>Puskesmas</b><small>Pemeriksaan lengkap, cek Hb, konseling gizi, PMT, dan pemeriksaan dokter.</small></div>
+      </div>
+      <p class="tip">Jadwal pemeriksaan ada di menu Info Menarik.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Tablet tambah darah (TTD)</h3>
+      <p>Minum 1 tablet setiap hari, minimal 90 tablet selama hamil. TTD gratis di posyandu dan puskesmas.</p>
+      <div class="split" style="margin-top:10px">
+        <div class="baby" style="background:var(--kelor-soft)"><h4>Minum dengan</h4><ul><li>Air putih</li><li>Jus jeruk atau buah</li></ul></div>
+        <div class="mom" style="background:var(--bahaya-soft)"><h4>Hindari bersama</h4><ul><li>Teh dan kopi</li><li>Susu</li></ul></div>
+      </div>
+      <p class="tip">Diminum malam sebelum tidur bisa mengurangi rasa mual.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Makanan tambahan (PMT)</h3>
+      <p>Ibu hamil dengan LILA di bawah 23,5 cm berhak mendapat PMT berbahan pangan lokal dari puskesmas. Tanyakan ke bidan desa saat pemeriksaan.</p>
+    </div>
+
+    <div class="panel danger">
+      <h3>Segera ke bidan atau puskesmas bila</h3>
+      <ul>
+        <li>Keluar darah dari jalan lahir</li>
+        <li>Sakit kepala hebat, pandangan kabur, kaki/tangan/wajah bengkak</li>
+        <li>Demam tinggi</li>
+        <li>Gerakan janin berkurang atau tidak terasa</li>
+        <li>Keluar air ketuban sebelum waktunya</li>
+        <li>Muntah terus-menerus dan tidak bisa makan</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>Nomor bidan desa saya</h3>
+      <p class="tip" style="margin-top:0">Simpan nomornya di sini supaya mudah dihubungi.</p>
+      <div class="contact">
+        <input type="tel" id="bidan" placeholder="Contoh: 0812…" aria-label="Nomor telepon bidan desa">
+        <button class="btn" id="bidan-save">Simpan</button>
+      </div>
+      <p id="bidan-link" class="tip"></p>
+    </div>
+  </section>
+
+  <!-- 5. INFO MENARIK -->
+  <section class="screen" id="s-menarik" aria-labelledby="h-menarik">
+    <h2 id="h-menarik">Info Menarik</h2>
+    <p class="lead">Ketuk setiap topik untuk membaca isinya.</p>
+
+    <details class="acc" open><summary><i>✅</i>Tips cegah KEK</summary><div class="acc-b">
+      <ol class="steps">
+        <li><div><b>Jangan lewatkan sarapan</b><small>Siapkan bahan sejak malam agar pagi lebih mudah.</small></div></li>
+        <li><div><b>Ada lauk hewani setiap hari</b><small>Ikan dan telur murah dan mudah didapat.</small></div></li>
+        <li><div><b>Sediakan selingan sehat</b><small>Pisang, ubi rebus, atau bubur kacang hijau.</small></div></li>
+        <li><div><b>Minum TTD setiap malam</b><small>Pasang pengingat di ponsel.</small></div></li>
+        <li><div><b>Ukur LILA tiap periksa</b><small>Catat hasilnya di menu Pengukuran LILA.</small></div></li>
+        <li><div><b>Tanyakan ke bidan bila ragu</b><small>Terutama soal pantangan makanan.</small></div></li>
+      </ol></div></details>
+
+    <details class="acc"><summary><i>🍽️</i>Menu gizi ibu hamil</summary><div class="acc-b">
+      <p class="tip" style="margin-top:0">Contoh menu sehari untuk ibu hamil dengan LILA normal.</p>
+      <ul class="menu-day">
+        <li><b>Pagi</b><span>Nasi, telur dadar, sayur bening kelor</span></li>
+        <li><b>Selingan</b><span>Bubur kacang hijau</span></li>
+        <li><b>Siang</b><span>Nasi, ikan bakar, tempe goreng, sayur kangkung, pisang</span></li>
+        <li><b>Selingan</b><span>Segelas susu dan pepaya</span></li>
+        <li><b>Malam</b><span>Nasi, ikan kuah kuning, tahu, sayur bayam, jeruk</span></li>
+      </ul></div></details>
+
+    <details class="acc"><summary><i>🍲</i>Menu gizi harian ibu hamil KEK</summary><div class="acc-b">
+      <p class="tip" style="margin-top:0">Lebih sering makan, lebih banyak lauk hewani, dan ada PMT.</p>
+      <ul class="menu-day">
+        <li><b>Pagi</b><span>Nasi, telur rebus dan tempe goreng, sayur bening kelor</span></li>
+        <li><b>Pukul 10.00</b><span>PMT dari puskesmas dan segelas susu</span></li>
+        <li><b>Siang</b><span>Nasi, ikan bakar dan tahu, sayur bayam, pisang</span></li>
+        <li><b>Pukul 16.00</b><span>Bubur kacang hijau dengan santan</span></li>
+        <li><b>Malam</b><span>Nasi, ayam atau ikan kuah kuning, tempe, sayur kangkung, jeruk</span></li>
+        <li><b>Sebelum tidur</b><span>Segelas susu atau PMT, lalu minum TTD dengan air putih</span></li>
+      </ul>
+      <p class="tip">Sesuaikan dengan anjuran bidan atau ahli gizi. Beri jarak antara susu dan TTD.</p></div></details>
+
+    <details class="acc"><summary><i>🩺</i>Pentingnya pemeriksaan kehamilan</summary><div class="acc-b">
+      <div class="icons">
+        <div><i>📏</i>Deteksi KEK lewat LILA</div><div><i>🩸</i>Cek anemia (Hb)</div><div><i>⚖️</i>Pantau berat badan</div>
+        <div><i>👶</i>Pantau tumbuh janin</div><div><i>💊</i>Dapat TTD dan PMT</div><div><i>🚨</i>Kenali tanda bahaya</div>
+      </div>
+      <p class="tip">Masalah yang ditemukan lebih awal lebih mudah ditangani.</p></div></details>
+
+    <details class="acc"><summary><i>📅</i>Jadwal pemeriksaan kehamilan</summary><div class="acc-b">
+      <div class="tri">
+        <div><b>2×</b><div class="dots"><i></i><i></i></div><small>Trimester 1<br>(0–12 minggu)</small></div>
+        <div><b>1×</b><div class="dots"><i></i></div><small>Trimester 2<br>(13–27 minggu)</small></div>
+        <div><b>3×</b><div class="dots"><i></i><i></i><i></i></div><small>Trimester 3<br>(28 minggu–lahir)</small></div>
+      </div>
+      <p class="tip">Minimal 6 kali, 2 kali di antaranya diperiksa dokter (trimester 1 dan 3).</p></div></details>
+
+    <details class="acc"><summary><i>😋</i>Tips meningkatkan nafsu makan</summary><div class="acc-b">
+      <ul class="tips">
+        <li>Makan sedikit tapi sering, 5–6 kali sehari</li>
+        <li>Pilih makanan yang disukai dan variasikan menunya</li>
+        <li>Sajikan selagi hangat dan menarik</li>
+        <li>Minum di sela waktu makan, bukan saat makan, agar perut tidak cepat penuh</li>
+        <li>Makan bersama keluarga</li>
+        <li>Saat mual pagi hari, mulai dengan biskuit atau roti kering</li>
+        <li>Hindari bau masakan yang menyengat</li>
+        <li>Jalan santai sebelum makan</li>
+      </ul></div></details>
+
+    <details class="acc"><summary><i>🚶‍♀️</i>Aktivitas fisik dan istirahat</summary><div class="acc-b">
+      <div class="split">
+        <div style="background:var(--kelor-soft)"><h4>Aktivitas</h4><ul><li>Jalan kaki santai sekitar 30 menit sehari</li><li>Ikut senam hamil</li><li>Pekerjaan rumah ringan</li><li>Hindari mengangkat beban berat</li></ul></div>
+        <div style="background:var(--danau-soft)"><h4>Istirahat</h4><ul><li>Tidur malam sekitar 8 jam</li><li>Tidur siang 1–2 jam</li><li>Tidur miring ke kiri</li><li>Hentikan aktivitas bila pusing atau sesak</li></ul></div>
+      </div></div></details>
+
+    <details class="acc"><summary><i>👨‍👩‍👧</i>Peran keluarga</summary><div class="acc-b">
+      <div class="intv">
+        <div><i>🛒</i><b>Menyediakan makanan bergizi</b><small>Ikan, telur, sayur, dan buah ada di rumah setiap hari.</small></div>
+        <div><i>⏰</i><b>Mengingatkan</b><small>Waktu makan, minum TTD, dan jadwal periksa.</small></div>
+        <div><i>🛵</i><b>Mengantar periksa</b><small>Ke posyandu, bidan, atau puskesmas.</small></div>
+        <div><i>🧺</i><b>Membantu pekerjaan rumah</b><small>Agar ibu cukup istirahat.</small></div>
+        <div><i>💬</i><b>Memberi dukungan</b><small>Mendengarkan, tidak menyalahkan, dan tidak memaksakan pantangan.</small></div>
+      </div></div></details>
+
+    <details class="acc"><summary><i>💡</i>Mitos dan fakta</summary><div class="acc-b">
+      <div id="myths"></div></div></details>
+      <details class="acc" id="pustaka"><summary><i>📚</i>Daftar pustaka</summary><div class="acc-b">
+      <ol class="refs">
+        <li>Kementerian Kesehatan RI. (2014). <i>Pedoman gizi seimbang</i> (Permenkes No. 41 Tahun 2014). Kemenkes RI.</li>
+        <li>Kementerian Kesehatan RI. (2019). <i>Angka kecukupan gizi yang dianjurkan untuk masyarakat Indonesia</i> (Permenkes No. 28 Tahun 2019). Kemenkes RI.</li>
+        <li>Kementerian Kesehatan RI. (2022). <i>Pedoman gizi ibu hamil</i>. Kemenkes RI.</li>
+        <li>Kementerian Kesehatan RI. (2023a). <i>Rencana aksi nasional percepatan penurunan stunting</i>. Kemenkes RI.</li>
+        <li>Kementerian Kesehatan RI. (2023b). <i>Buku resep makanan lokal balita dan ibu hamil</i>. Kemenkes RI.</li>
+        <li>Kementerian Kesehatan RI. (2024). <i>Buku kesehatan ibu dan anak</i> (Edisi revisi 2024). Kemenkes RI.</li>
+        <li>Nugraha, A., Putri, D., &amp; Sari, R. (2019). Panduan pengukuran lingkar lengan atas (LILA) untuk ibu hamil. <i>Jurnal Gizi Klinik Indonesia, 12</i>(1), 12–18.</li>
+        <li>Suryadi, A., Wulandari, S., &amp; Sari, P. (2023). Panduan teknis pengukuran LILA pada ibu hamil. <i>Jurnal Gizi dan Kesehatan, 14</i>(1), 34–42.</li>
+        <li>UNICEF. (2023). <i>State of the world’s children 2023: Nutrition and health</i>. United Nations Children’s Fund.</li>
+        <li>Widyawati, W., &amp; Sulistyoningtyas, S. (2020). Karakteristik ibu hamil kekurangan energi kronik (KEK) di Puskesmas Pajangan Bantul. <i>Jurnal JKFT, 5</i>(2), 68.</li>
+        <li>World Health Organization. (2017). <i>Global nutrition targets 2025: Low birth weight policy brief</i>. WHO.</li>
+        <li>World Health Organization. (2022). <i>Adolescent pregnancy: Guidelines for prevention and care</i>. WHO.</li>
+        <li>World Health Organization. (2023). <i>Adolescent health and development</i>. WHO.</li>
+        <li>World Health Organization. (2024). <i>Adolescent pregnancy</i> [Fact sheet]. WHO.</li>
+        <li>Yastirin, P. A., Sahara, R., &amp; Sehmawati. (2024). Dampak kesehatan ibu pada kehamilan remaja. <i>Jurnal Profesi Bidan Indonesia, 4</i>(2).</li>
+      </ol></div></details>
+</section>
+  </main>
+
+  <p class="note">Media edukasi ini tidak menggantikan pemeriksaan oleh bidan atau dokter.</p>
+
+  <div class="ovl" id="kode-ovl" hidden>
+    <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="kode-h">
+      <h3 id="kode-h">Selamat datang</h3>
+      <p>Masukkan <b>kode responden</b> yang diberikan peneliti. Kode ini dipakai untuk mencatat penggunaan aplikasi tanpa nama Ibu.</p>
+      <input id="kode-in" type="text" inputmode="text" autocomplete="off" placeholder="Contoh: INT-07" aria-label="Kode responden">
+      <div class="dlg-b"><button class="btn" id="kode-ok">Mulai</button><button class="btn ghost" id="kode-skip">Lewati</button></div>
+      <p class="tip">Data penggunaan (waktu buka, menu yang dibaca, lama membaca, hasil kuis) dicatat untuk keperluan penelitian.</p>
+    </div>
+  </div>
+  <div class="ovl" id="log-ovl" hidden>
+    <div class="dlg dlg-w" role="dialog" aria-modal="true" aria-labelledby="log-h">
+      <h3 id="log-h">Data penggunaan (khusus peneliti)</h3>
+      <div class="logsum" id="log-sum"></div>
+      <div class="logtbl"><table><thead><tr><th>Waktu</th><th>Kegiatan</th><th>Keterangan</th></tr></thead><tbody id="log-rows"></tbody></table></div>
+      <div class="dlg-b">
+        <button class="btn" id="log-copy">Salin data (CSV)</button>
+        <button class="btn ghost" id="log-share">Kirim</button>
+        <button class="btn ghost" id="log-close">Tutup</button>
+      </div>
+      <p class="tip" id="log-msg"></p>
+    </div>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Menu utama">
+    <button role="tab" aria-selected="true" data-s="s-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>Informasi</button>
+    <button role="tab" aria-selected="false" data-s="s-kuis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><path d="M12 17.5v.5"/><rect x="3" y="3" width="18" height="18" rx="5"/></svg>Kuis</button>
+    <button role="tab" aria-selected="false" data-s="s-lila"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="8" width="20" height="8" rx="2"/><path d="M6 8v3M10 8v4M14 8v3M18 8v4"/></svg>Pengukuran LILA</button>
+    <button role="tab" aria-selected="false" data-s="s-layanan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 21V9l8-6 8 6v12z"/><path d="M12 10v6M9 13h6"/></svg>Layanan Info</button>
+    <button role="tab" aria-selected="false" data-s="s-menarik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg>Info Menarik</button>
+  </nav>
+</div>
+
+<script>
+(function(){
+  const store = {
+    get(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+    set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+
+  /* Tabs */
+  const tabs = document.querySelectorAll('nav.tabs button');
+  tabs.forEach(b => b.addEventListener('click', () => {
+    tabs.forEach(t => t.setAttribute('aria-selected', t === b ? 'true' : 'false'));
+    document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === b.dataset.s));
+    window.scrollTo(0,0);
+  }));
+
+  /* Info sub-sections */
+  const segs = document.querySelectorAll('.seg button[data-p]');
+  function openPart(id){
+    segs.forEach(b => b.setAttribute('aria-selected', b.dataset.p === id ? 'true' : 'false'));
+    document.querySelectorAll('.part').forEach(p => p.classList.toggle('on', p.id === id));
+    window.scrollTo(0,0);
+  }
+  segs.forEach(b => b.addEventListener('click', () => openPart(b.dataset.p)));
+  document.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => { openPart(b.dataset.goto); if (b.dataset.scroll) { const t = document.getElementById(b.dataset.scroll); if (t) t.scrollIntoView({block:'center'}); } }));
+
+  /* Porsi harian */
+  const PORSI = [
+    {i:'🍚', n:'Makanan pokok', ex:'nasi, jagung, ubi, sagu', a:5, b:6, u:'¾ gelas nasi (100 g)', z:'Sumber tenaga'},
+    {i:'🐟', n:'Lauk hewani', ex:'ikan, telur, ayam, daging', a:4, b:4, u:'1 potong sedang ikan (50 g) atau 1 butir telur', z:'Protein dan zat besi'},
+    {i:'🫘', n:'Lauk nabati', ex:'tempe, tahu, kacang-kacangan', a:4, b:4, u:'1 potong sedang tempe (50 g)', z:'Protein dan serat'},
+    {i:'🥬', n:'Sayuran', ex:'kelor, bayam, kangkung, wortel', a:4, b:4, u:'1 mangkuk (100 g)', z:'Vitamin, mineral, serat'},
+    {i:'🍌', n:'Buah-buahan', ex:'pisang, pepaya, jeruk', a:4, b:4, u:'1 potong sedang (100 g)', z:'Vitamin, mineral, serat'},
+    {i:'🥄', n:'Minyak / lemak', ex:'termasuk santan, gorengan, tumisan', a:5, b:5, u:'1 sendok teh (5 g)', z:'Secukupnya', lim:true},
+    {i:'🍬', n:'Gula', ex:'termasuk kue manis, teh manis', a:2, b:2, u:'1 sendok makan (10 g)', z:'Dibatasi', lim:true}
+  ];
+  const porsiBox = document.getElementById('porsi');
+  function drawPorsi(tm){
+    porsiBox.innerHTML = PORSI.map(p => {
+      const n = tm === 1 ? p.a : p.b, up = tm === 2 && p.b > p.a;
+      let ico = '';
+      for (let k = 0; k < n; k++) ico += (up && k >= p.a) ? `<span class="new">${p.i}</span>` : p.i;
+      return `<div class="pr${p.lim?' lim':''}"><div class="pr-top"><b>${p.n}${up?'<span class="badge">+'+(p.b-p.a)+' porsi</span>':''}</b><span class="pr-n">${n} <small>porsi</small></span></div>
+        <div class="pr-ico" aria-hidden="true">${ico}</div>
+        <div class="pr-d">${p.ex}<br><em>1 porsi = ${p.u}</em> · ${p.z}</div></div>`;
+    }).join('');
+  }
+  const tmBtns = document.querySelectorAll('[data-tm]');
+  tmBtns.forEach(b => b.addEventListener('click', () => {
+    tmBtns.forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+    drawPorsi(+b.dataset.tm);
+  }));
+  drawPorsi(1);
+
+  /* Isi Piringku toggle */
+  const prBtns = document.querySelectorAll('[data-pr]');
+  prBtns.forEach(b => b.addEventListener('click', () => {
+    prBtns.forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+    document.querySelectorAll('.prv').forEach(v => v.classList.toggle('on', v.id === b.dataset.pr));
+  }));
+
+  /* Sumber per panel */
+  const SRC = {
+    'Siapa ibu hamil remaja?':'WHO (2023, 2024); Kemenkes RI (2022)',
+    'Mengapa kehamilan remaja bisa terjadi?':'WHO (2022); UNICEF (2023)',
+    'Kebutuhan gizi ibu hamil remaja':'Kemenkes RI (2019)',
+    'Permasalahan yang sering dialami':'WHO (2024); Yastirin et al. (2024)',
+    'Apa itu KEK pada ibu hamil?':'Kemenkes RI (2022); Widyawati & Sulistyoningtyas (2020)',
+    'Penyebab dan dampak KEK pada ibu':'WHO (2022); UNICEF (2023); Kemenkes RI (2022)',
+    'Penyebab dan dampak pada bayi':'UNICEF (2023); WHO (2017)',
+    'Intervensi gizi pada ibu hamil KEK':'Kemenkes RI (2022)',
+    'Suplementasi gizi':'Kemenkes RI (2022, 2024)',
+    'Sumber gizi utama ibu hamil remaja':'Kemenkes RI (2022, 2023b)',
+    'Porsi makan harian ibu hamil remaja':'Kemenkes RI (2023b)',
+    'Mencegah KEK pada ibu hamil':'Kemenkes RI (2022, 2023a)',
+    'Isi Piringku':'Kemenkes RI (2014); Kemenkes RI (2022)',
+    'Cara mengukur':'Nugraha et al. (2019); Suryadi et al. (2023)',
+    'Tempat periksa kehamilan':'Kemenkes RI (2024)',
+    'Tablet tambah darah (TTD)':'Kemenkes RI (2022, 2024)',
+    'Makanan tambahan (PMT)':'Kemenkes RI (2022)',
+    'Segera ke bidan atau puskesmas bila':'Kemenkes RI (2024)',
+    'Tips cegah KEK':'Kemenkes RI (2022)',
+    'Menu gizi ibu hamil':'Kemenkes RI (2023b)',
+    'Menu gizi harian ibu hamil KEK':'Kemenkes RI (2022, 2023b)',
+    'Pentingnya pemeriksaan kehamilan':'Kemenkes RI (2024)',
+    'Jadwal pemeriksaan kehamilan':'Kemenkes RI (2024)',
+    'Tips meningkatkan nafsu makan':'Kemenkes RI (2022)',
+    'Aktivitas fisik dan istirahat':'Kemenkes RI (2024)',
+    'Peran keluarga':'UNICEF (2023); Kemenkes RI (2024)',
+    'Mitos dan fakta':'Kemenkes RI (2022)'
+  };
+  document.querySelectorAll('.panel > h3, details.acc > summary').forEach(h => {
+    const key = h.textContent.replace(/^[^A-Za-z0-9]+/, '').replace(/^\d+/, '').trim();
+    const src = SRC[key]; if (!src) return;
+    const box = h.tagName === 'SUMMARY' ? h.parentElement.querySelector('.acc-b') : h.parentElement;
+    const pEl = document.createElement('p'); pEl.className = 'srcl';
+    pEl.innerHTML = `Sumber: ${src}. <a href="#pustaka" data-pustaka>Daftar pustaka</a>`;
+    box.appendChild(pEl);
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-pustaka]'); if (!a) return;
+    e.preventDefault();
+    document.querySelector('nav.tabs button[data-s="s-menarik"]').click();
+    const d = document.getElementById('pustaka'); d.open = true; d.scrollIntoView({block:'start'});
+  });
+  /* Daftar isi */
+  document.querySelectorAll('.toc a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({block:'start'});
+  }));
+
+  /* ===== Pencatatan penggunaan aplikasi ===== */
+  // Isi LOG_URL dengan alamat Google Apps Script (lihat panduan) agar data terkirim ke Google Sheets.
+  const LOG_URL = '';
+  const LOGK = 'log-penggunaan', QK = 'log-antrian';
+  const devId = (() => { let d = store.get('perangkat', ''); if (!d) { d = 'HP-' + Math.random().toString(36).slice(2, 8).toUpperCase(); store.set('perangkat', d); } return d; })();
+  let kode = store.get('kode-responden', '');
+  const pad = n => String(n).padStart(2, '0');
+  const stamp = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  function logEv(kegiatan, ket, durasi){
+    const e = {waktu: stamp(new Date()), kode: kode || 'UMUM', perangkat: devId, kegiatan, keterangan: ket || '', durasi_detik: durasi || ''};
+    const all = store.get(LOGK, []); all.push(e); store.set(LOGK, all.slice(-2000));
+    const q = store.get(QK, []); q.push(e); store.set(QK, q.slice(-2000));
+    kirim();
+  }
+  let sending = false;
+  async function kirim(){
+    if (!LOG_URL || sending || !navigator.onLine) return;
+    const q = store.get(QK, []); if (!q.length) return;
+    sending = true;
+    try {
+      await fetch(LOG_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(q)});
+      const now = store.get(QK, []); store.set(QK, now.slice(q.length));
+    } catch (err) {} finally { sending = false; }
+  }
+  window.addEventListener('online', kirim);
+  setInterval(kirim, 60000);
+
+  // Kunjungan dan lama membaca per menu
+  const MENU = {'s-info':'Informasi','s-kuis':'Kuis','s-lila':'Pengukuran LILA','s-layanan':'Layanan Info','s-menarik':'Info Menarik'};
+  let curMenu = 's-info', menuStart = Date.now(), hiddenAt = 0;
+  function tutupMenu(){ const d = Math.round((Date.now() - menuStart)/1000); if (d >= 3) logEv('baca_menu', MENU[curMenu], d); }
+  function mulaiKunjungan(){ logEv('kunjungan', 'Membuka aplikasi'); menuStart = Date.now(); }
+  document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.s === curMenu) return; tutupMenu(); curMenu = b.dataset.s; menuStart = Date.now();
+  }));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { tutupMenu(); hiddenAt = Date.now(); }
+    else { if (Date.now() - hiddenAt > 30*60*1000) mulaiKunjungan(); else menuStart = Date.now(); }
+  });
+  window.addEventListener('pagehide', tutupMenu);
+  document.querySelectorAll('.seg button[data-p]').forEach(b => b.addEventListener('click', () => logEv('buka_bagian', b.textContent.trim())));
+  document.querySelectorAll('details.acc').forEach(d => d.addEventListener('toggle', () => { if (d.open) logEv('buka_topik', d.querySelector('summary').textContent.replace(/^[^A-Za-z0-9]+/, '').trim()); }));
+  document.getElementById('lila-save').addEventListener('click', () => { const v = parseFloat(document.getElementById('lila-num').value); if (!isNaN(v) && v >= 15 && v <= 45) logEv('simpan_lila', v.toFixed(1).replace('.', ',') + ' cm'); });
+  window.__logEval = (k, p) => logEv('kuis_selesai', ({p:'Pengetahuan', s:'Sikap', t:'Tindakan'})[k] + ' ' + p + '%');
+
+  // Kode responden
+  const ovl = document.getElementById('kode-ovl');
+  function simpanKode(v){ kode = v; store.set('kode-responden', v); ovl.hidden = true; mulaiKunjungan(); }
+  if (!kode) { ovl.hidden = false; } else { mulaiKunjungan(); }
+  document.getElementById('kode-ok').onclick = () => { const v = document.getElementById('kode-in').value.trim().toUpperCase(); if (v) simpanKode(v); else document.getElementById('kode-in').focus(); };
+  document.getElementById('kode-skip').onclick = () => simpanKode('UMUM');
+
+  // Panel peneliti: ketuk judul aplikasi 5 kali
+  const logOvl = document.getElementById('log-ovl');
+  let taps = 0, tapT = 0;
+  document.querySelector('header.top h1').addEventListener('click', () => {
+    const n = Date.now(); taps = (n - tapT < 1500) ? taps + 1 : 1; tapT = n;
+    if (taps >= 5) { taps = 0; bukaLog(); }
+  });
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function bukaLog(){
+    const all = store.get(LOGK, []);
+    const kunj = all.filter(e => e.kegiatan === 'kunjungan').length;
+    const det = all.filter(e => e.kegiatan === 'baca_menu').reduce((a, e) => a + (+e.durasi_detik || 0), 0);
+    const last = all.length ? all[all.length-1].waktu : '–';
+    const antri = store.get(QK, []).length;
+    document.getElementById('log-sum').innerHTML =
+      `<div><b>${esc(kode || 'UMUM')}</b><small>Kode responden (${devId})</small></div>` +
+      `<div><b>${kunj}</b><small>Jumlah kunjungan</small></div>` +
+      `<div><b>${Math.round(det/60)} menit</b><small>Total lama membaca</small></div>` +
+      `<div><b style="font-size:.95rem">${esc(last)}</b><small>Aktivitas terakhir</small></div>`;
+    document.getElementById('log-rows').innerHTML = all.slice().reverse().slice(0, 300).map(e =>
+      `<tr><td>${esc(e.waktu)}</td><td>${esc(e.kegiatan.replace('_', ' '))}</td><td>${esc(e.keterangan)}${e.durasi_detik ? ' (' + e.durasi_detik + ' dtk)' : ''}</td></tr>`).join('') || '<tr><td colspan="3">Belum ada data.</td></tr>';
+    document.getElementById('log-msg').textContent = LOG_URL ? (antri ? `${antri} data menunggu dikirim (perlu internet).` : 'Semua data sudah terkirim ke Google Sheets.') : 'Pengiriman otomatis belum diaktifkan. Gunakan tombol Salin atau Kirim.';
+    logOvl.hidden = false;
+  }
+  function csv(){
+    const all = store.get(LOGK, []);
+    const head = 'waktu,kode,perangkat,kegiatan,keterangan,durasi_detik';
+    return [head].concat(all.map(e => [e.waktu, e.kode, e.perangkat, e.kegiatan, e.keterangan, e.durasi_detik].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(','))).join('\n');
+  }
+  document.getElementById('log-close').onclick = () => logOvl.hidden = true;
+  document.getElementById('log-copy').onclick = async () => {
+    const m = document.getElementById('log-msg');
+    try { await navigator.clipboard.writeText(csv()); m.textContent = 'Data tersalin. Tempelkan ke Excel atau WhatsApp.'; }
+    catch (e) { m.textContent = 'Gagal menyalin. Gunakan tombol Kirim.'; }
+  };
+  document.getElementById('log-share').onclick = async () => {
+    const teks = 'Data penggunaan Infogizi - ' + (kode || 'UMUM') + '\n' + csv();
+    if (navigator.share) { try { await navigator.share({title:'Data penggunaan Infogizi', text: teks}); } catch (e) {} }
+    else { window.open('https://wa.me/?text=' + encodeURIComponent(teks.slice(0, 6000)), '_blank'); }
+  };
+
+  /* Checklist */
+  const items = ['Makan 3 kali dan 2 kali selingan','Ada lauk hewani (ikan/telur/daging)','Makan sayur dan buah','Minum tablet tambah darah','Minum air putih minimal 8 gelas'];
+  const today = new Date().toISOString().slice(0,10);
+  let chk = store.get('chk', {});
+  if (chk.date !== today) chk = {date: today, done: []};
+  const ul = document.getElementById('checklist');
+  function drawChk(){
+    ul.innerHTML = items.map((t,i) => `<li><label><input type="checkbox" data-i="${i}" ${chk.done.includes(i)?'checked':''}>${t}</label></li>`).join('');
+    const n = chk.done.length;
+    document.getElementById('chk-bar').style.width = (n/items.length*100)+'%';
+    document.getElementById('chk-msg').textContent = n === items.length ? 'Semua target tercapai hari ini. Pertahankan besok!' : `${n} dari ${items.length} target tercapai.`;
+  }
+  ul.addEventListener('change', e => {
+    const i = +e.target.dataset.i;
+    chk.done = e.target.checked ? [...new Set([...chk.done, i])] : chk.done.filter(x => x !== i);
+    store.set('chk', chk); drawChk();
+  });
+  drawChk();
+
+  /* Kuis: pengetahuan, sikap, perilaku */
+  const KQ = [
+    {ind:'Pengertian KEK', q:'Rina hamil 5 bulan. Hasil ukur LILA-nya 22 cm. Artinya…', o:['Rina tidak berisiko KEK','Rina berisiko KEK dan perlu segera ke bidan','Rina kelebihan berat badan'], a:1, e:'LILA di bawah 23,5 cm menandakan risiko KEK. Rina perlu segera diperiksa bidan dan mendapat makanan tambahan.'},
+    {ind:'Penyebab KEK', q:'Kebiasaan mana yang dapat menyebabkan KEK?', o:['Makan 3 kali sehari dengan lauk','Sering melewatkan makan dan jarang makan lauk hewani','Minum air putih 8 gelas sehari'], a:1, e:'Makan tidak teratur dan kurang protein dalam waktu lama membuat tubuh kekurangan energi dan protein.'},
+    {ind:'Faktor risiko KEK', q:'Siapa yang paling berisiko mengalami KEK?', o:['Ibu hamil usia 17 tahun yang sering tidak sarapan','Ibu hamil usia 25 tahun yang makan teratur','Ibu hamil usia 28 tahun yang rutin periksa'], a:0, e:'Usia di bawah 20 tahun dan pola makan tidak teratur adalah dua faktor risiko KEK.'},
+    {ind:'Dampak KEK pada ibu', q:'Ibu hamil KEK sering lemas dan pucat karena berisiko mengalami…', o:['Anemia (kurang darah)','Kelebihan gizi','Kencing manis'], a:0, e:'KEK sering disertai anemia, sehingga ibu mudah lelah, pucat, dan pusing.'},
+    {ind:'Dampak KEK pada bayi', q:'Jika tidak ditangani, anak dari ibu KEK berisiko mengalami… saat tumbuh besar.', o:['Stunting (tubuh lebih pendek dari seusianya)','Tumbuh lebih tinggi dari temannya','Lebih cepat tumbuh gigi'], a:0, e:'Bayi dari ibu KEK berisiko lahir dengan berat rendah dan mengalami stunting.'},
+    {ind:'Pencegahan: gizi seimbang', q:'Isi piring yang dianjurkan setiap kali makan adalah…', o:['Setengah piring nasi, sisanya kerupuk','Setengah piring sayur dan buah, setengah piring nasi dan lauk','Sepiring penuh nasi dengan sedikit lauk'], a:1, e:'Isi Piringku: setengah piring sayur dan buah, setengah piring makanan pokok dan lauk pauk.'},
+    {ind:'Pencegahan: TTD', q:'Tablet tambah darah sebaiknya diminum bersama…', o:['Teh manis','Kopi','Air putih atau jus jeruk'], a:2, e:'Teh, kopi, dan susu menghambat penyerapan zat besi. Air putih atau jus jeruk membantu.'},
+    {ind:'Pencegahan: ANC', q:'Selama hamil, ibu sebaiknya memeriksakan kehamilan minimal…', o:['2 kali','4 kali','6 kali'], a:2, e:'Minimal 6 kali: 2 kali di trimester 1, 1 kali di trimester 2, dan 3 kali di trimester 3.'},
+    {ind:'Pencegahan: ukur LILA', q:'Pita LILA dilingkarkan di bagian…', o:['Pergelangan tangan','Titik tengah antara bahu dan siku lengan kiri','Betis'], a:1, e:'Pita LILA dilingkarkan di titik tengah antara bahu dan siku, biasanya lengan kiri.'},
+    {ind:'Pencegahan: PMT', q:'Jika LILA ibu di bawah 23,5 cm, bantuan gizi yang dapat diperoleh dari puskesmas adalah…', o:['Makanan tambahan (PMT)','Vitamin rambut','Obat pelangsing'], a:0, e:'Ibu hamil KEK berhak mendapat PMT berbahan pangan lokal dari puskesmas.'},
+    {ind:'Suplementasi gizi', q:'Tablet tambah darah (TTD) untuk ibu hamil berisi…', o:['Zat besi dan asam folat','Vitamin C saja','Kalsium dan gula'], a:0, e:'TTD berisi zat besi dan asam folat untuk mencegah anemia dan mendukung pembentukan saraf janin.'},
+    {ind:'Sumber gizi utama', q:'Kelompok makanan yang kaya zat besi adalah…', o:['Teh dan kopi','Hati ayam, ikan, dan daun kelor','Kerupuk dan permen'], a:1, e:'Hati ayam, ikan, daging, dan sayuran hijau seperti daun kelor kaya zat besi.'},
+    {ind:'Isi Piringku ibu hamil KEK', q:'Anjuran makan yang tepat bagi ibu hamil KEK adalah…', o:['Makan sekali sehari dengan porsi besar','Mengurangi lauk agar tidak mual','Makan sedikit tapi sering, tambah lauk hewani, dan habiskan PMT'], a:2, e:'Ibu hamil KEK dianjurkan makan lebih sering dengan tambahan lauk hewani dan PMT sebagai selingan.'}
+  ];
+  const SO = ['Sangat setuju','Setuju','Tidak setuju','Sangat tidak setuju'];
+  const SQ = [
+    {asp:'Kognitif', s:'Mengukur LILA secara rutin penting agar risiko KEK cepat diketahui.', fav:true, good:'Tepat. Dengan mengukur LILA, risiko KEK bisa ditangani lebih awal.', bad:'KEK sering tidak terlihat dari luar. Mengukur LILA membantu Ibu mengetahuinya lebih awal.'},
+    {asp:'Kognitif', s:'Selama badan tidak terlihat kurus, ibu hamil tidak perlu khawatir terkena KEK.', fav:false, good:'Tepat. KEK bisa terjadi walau badan tidak terlihat kurus.', bad:'KEK bisa terjadi walau badan tidak terlihat kurus. Cara memastikannya adalah mengukur LILA.'},
+    {asp:'Afektif', s:'Saya merasa senang ketika berhasil makan lauk ikan atau telur hari ini.', fav:true, good:'Bagus! Rasa senang ini membantu Ibu menjadikan lauk hewani sebagai kebiasaan.', bad:'Tidak apa-apa. Coba mulai dari satu lauk hewani yang Ibu sukai, misalnya telur atau ikan bakar.'},
+    {asp:'Afektif', s:'Saya merasa malu memeriksakan kehamilan karena usia saya masih muda.', fav:false, good:'Hebat. Memeriksakan kehamilan adalah tanda Ibu peduli pada diri dan bayi.', bad:'Perasaan itu wajar. Bidan siap membantu tanpa menghakimi, dan pemeriksaan penting untuk Ibu dan bayi.'},
+    {asp:'Konatif', s:'Saya mau bertanya kepada bidan jika ragu tentang makanan yang boleh dimakan saat hamil.', fav:true, good:'Tepat. Bertanya ke bidan lebih aman daripada mengikuti kata orang.', bad:'Bidan adalah sumber informasi yang paling tepat. Simpan nomornya di menu Layanan supaya mudah dihubungi.'},
+    {asp:'Konatif', s:'Saya akan berhenti minum TTD jika merasa mual, tanpa bertanya ke bidan.', fav:false, good:'Tepat. Jika mual, tanyakan ke bidan. TTD bisa diminum malam sebelum tidur.', bad:'Jangan berhenti sendiri. Tanyakan ke bidan; TTD bisa diminum malam sebelum tidur agar mual berkurang.'}
+  ];
+  const PO = ['Setiap hari','4–6 hari','1–3 hari','Tidak pernah'];
+  const PQ = [
+    {ind:'Tindakan: gizi seimbang', q:'sarapan sebelum beraktivitas?', tip:'Sarapan memberi tenaga untuk Ibu dan janin. Coba siapkan nasi dan telur sejak malam.'},
+    {ind:'Tindakan: gizi seimbang', q:'makan lauk hewani (ikan, telur, ayam, atau daging)?', tip:'Usahakan ada lauk hewani setiap hari. Ikan dan telur mudah didapat dan terjangkau.'},
+    {ind:'Tindakan: gizi seimbang', q:'makan sayur dan buah?', tip:'Isi setengah piring dengan sayur dan buah, misalnya sayur kelor dan pisang.'},
+    {ind:'Tindakan: gizi seimbang', q:'makan selingan sehat di antara makan utama?', tip:'Selingan seperti bubur kacang hijau atau buah membantu memenuhi tambahan porsi.'},
+    {ind:'Tindakan: kepatuhan anjuran', q:'minum tablet tambah darah (TTD)?', tip:'TTD perlu diminum 1 tablet setiap hari. Pasang pengingat di ponsel agar tidak lupa.'},
+    {ind:'Tindakan: kepatuhan anjuran', q:'tetap makan makanan bergizi (ikan, telur, sayur) tanpa berpantang karena mitos?', tip:'Ikan, telur, dan sayur aman dan penting untuk Ibu hamil. Lihat menu Info Menarik untuk fakta selengkapnya.'}
+  ];
+
+  /* Rekap hasil evaluasi */
+  const evalBox = document.getElementById('evalbox');
+  const cat = p => p >= 76 ? ['Baik','g'] : p >= 56 ? ['Cukup','c'] : ['Perlu ditingkatkan','r'];
+  function drawEval(){
+    const e = store.get('eval', {});
+    const row = (k,l) => { const v = e[k]; if (!v) return `<div class="ev"><b>${l}</b><span class="ev-n">–</span><small>Belum dikerjakan</small></div>`;
+      const [c,cl] = cat(v.p); return `<div class="ev"><b>${l}</b><span class="ev-n ${cl}">${v.p}%</span><small class="${cl}">${c}</small><small>${v.d}</small></div>`; };
+    evalBox.innerHTML = `<h3>Hasil evaluasi saya</h3><div class="evg">${row('p','Pengetahuan')}${row('s','Sikap')}${row('t','Tindakan')}</div><p class="tip">Baik: 76–100%, Cukup: 56–75%, Perlu ditingkatkan: di bawah 56%.</p>`;
+  }
+  function saveEval(k,p){ if (window.__logEval) window.__logEval(k,p); const e = store.get('eval', {}); e[k] = {p, d:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short'})}; store.set('eval', e); drawEval(); }
+  drawEval();
+  let qmode = 'p', qi = 0, score = 0;
+  const qbox = document.getElementById('quiz');
+  const bar = (i,n) => `<div class="progress"><i style="width:${i/n*100}%"></i></div>`;
+  const meta = (l,i,n,r) => `<div class="q-meta"><span>${l} ${i+1} dari ${n}</span><span>${r||''}</span></div>`;
+  function endBox(big, msg, extra){
+    qbox.innerHTML = `<div style="text-align:center"><div class="score">${big}</div><p style="margin:10px 0 12px;font-weight:700">${msg}</p></div>${extra||''}<div style="text-align:center;margin-top:12px"><button class="btn" id="q-again">Ulangi</button></div>`;
+    document.getElementById('q-again').onclick = () => { qi = 0; score = 0; drawQ(); };
+  }
+  function answerUI(opts, onPick){
+    qbox.querySelectorAll('.opt').forEach(b => b.onclick = () => onPick(+b.dataset.i, b));
+  }
+  function nextBtn(ex, last, label){
+    ex.innerHTML += `<div style="margin-top:10px"><button class="btn" id="q-next">${last ? label : 'Berikutnya'}</button></div>`;
+    ex.classList.add('on');
+    document.getElementById('q-next').onclick = () => { qi++; drawQ(); };
+  }
+  const missed = [];
+  function drawQ(){
+    if (qmode === 'p'){
+      if (qi >= KQ.length){
+        const msg = score >= 11 ? 'Hebat! Pengetahuan Ibu tentang KEK sudah sangat baik.' : score >= 8 ? 'Bagus. Baca lagi menu Informasi untuk soal yang belum tepat.' : 'Yuk pelajari lagi menu Informasi, lalu coba sekali lagi.';
+        saveEval('p', Math.round(score/KQ.length*100));
+        return endBox(`${score}/${KQ.length}`, msg);
+      }
+      const x = KQ[qi];
+      qbox.innerHTML = meta('Soal',qi,KQ.length,'Skor '+score)+bar(qi,KQ.length)+`<span class="qtag">${x.ind}</span><h3>${x.q}</h3><div class="opts">${x.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
+      answerUI(x.o, pick => {
+        const ok = pick === x.a; if (ok) score++;
+        qbox.querySelectorAll('.opt').forEach((o,i) => { o.disabled = true; if (i === x.a) o.classList.add('right'); else if (i === pick) o.classList.add('wrong'); });
+        const ex = document.getElementById('ex'); ex.innerHTML = `<b>${ok?'Benar.':'Belum tepat.'}</b> ${x.e}`;
+        nextBtn(ex, qi === KQ.length-1, 'Lihat skor');
+      });
+    } else if (qmode === 's'){
+      if (qi >= SQ.length){
+        const pct = Math.round(score / (SQ.length*4) * 100); saveEval('s', pct);
+        const msg = pct >= 75 ? 'Sikap Ibu sangat mendukung pencegahan KEK. Pertahankan!' : pct >= 50 ? 'Sikap Ibu cukup mendukung. Baca lagi penjelasan pada pernyataan yang masih ragu.' : 'Masih ada sikap yang perlu diperkuat. Diskusikan dengan bidan atau keluarga, ya.';
+        return endBox(`${pct}%`, msg);
+      }
+      const x = SQ[qi];
+      qbox.innerHTML = meta('Pernyataan',qi,SQ.length)+bar(qi,SQ.length)+`<span class="qtag">Sikap ${x.asp.toLowerCase()}</span><p class="qhint">Seberapa setuju Ibu dengan pernyataan ini?</p><h3>“${x.s}”</h3><div class="opts">${SO.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
+      answerUI(SO, (pick, btn) => {
+        const positive = x.fav ? pick <= 1 : pick >= 2;
+        score += x.fav ? 4 - pick : pick + 1;
+        qbox.querySelectorAll('.opt').forEach(o => o.disabled = true);
+        btn.classList.add(positive ? 'right' : 'wrong');
+        const ex = document.getElementById('ex'); ex.innerHTML = positive ? x.good : x.bad;
+        nextBtn(ex, qi === SQ.length-1, 'Lihat hasil');
+      });
+    } else {
+      if (qi === 0) missed.length = 0;
+      if (qi >= PQ.length){
+        const good = PQ.length - missed.length; saveEval('t', Math.round(score/(PQ.length*3)*100));
+        const hist = store.get('perilaku', []); hist.push({d:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short'}), s:score}); store.set('perilaku', hist.slice(-8));
+        const prev = hist.length > 1 ? `<p class="tip" style="text-align:center">Hasil sebelumnya: ${Math.round(hist[hist.length-2].s/(PQ.length*3)*100)}% (${hist[hist.length-2].d})</p>` : '';
+        const list = missed.length ? `<div class="explain on"><b>Kebiasaan yang perlu ditingkatkan:</b><ul style="margin:6px 0 0;padding-left:18px">${missed.map(m=>`<li>${m}</li>`).join('')}</ul></div>` : '';
+        return endBox(`${Math.round(score/(PQ.length*3)*100)}%`, missed.length ? `${good} dari ${PQ.length} kebiasaan baik sudah rutin Ibu lakukan.` : 'Luar biasa! Semua kebiasaan baik sudah rutin Ibu lakukan.', prev + list);
+      }
+      const x = PQ[qi];
+      qbox.innerHTML = meta('Pertanyaan',qi,PQ.length)+bar(qi,PQ.length)+`<span class="qtag">${x.ind}</span><p class="qhint">Dalam 7 hari terakhir, berapa hari Ibu…</p><h3>${x.q}</h3><div class="opts">${PO.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
+      answerUI(PO, (pick, btn) => {
+        score += 3 - pick;
+        qbox.querySelectorAll('.opt').forEach(o => o.disabled = true);
+        btn.classList.add(pick === 0 ? 'right' : 'wrong');
+        if (pick > 0) missed.push(x.q.charAt(0).toUpperCase() + x.q.slice(1).replace('?',''));
+        const ex = document.getElementById('ex'); ex.innerHTML = pick === 0 ? '<b>Hebat!</b> Pertahankan kebiasaan ini setiap hari.' : `<b>Ayo tingkatkan.</b> ${x.tip}`;
+        nextBtn(ex, qi === PQ.length-1, 'Lihat hasil');
+      });
+    }
+  }
+  const qsBtns = document.querySelectorAll('[data-qs]');
+  qsBtns.forEach(b => b.addEventListener('click', () => {
+    qsBtns.forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+    qmode = b.dataset.qs; qi = 0; score = 0; drawQ();
+  }));
+  drawQ();
+
+  /* LILA tape */
+  const MIN = 18, MAX = 34, CUT = 23.5;
+  const tape = document.getElementById('tape');
+  const pct = v => ((v - MIN) / (MAX - MIN) * 100);
+  tape.style.setProperty('--cut', pct(CUT) + '%');
+  let html = '';
+  for (let v = MIN; v <= MAX; v += 0.5){
+    const major = Number.isInteger(v);
+    html += `<div class="tick ${major?'m':'s'}" style="left:${pct(v)}%"></div>`;
+    if (major && v % 2 === 0) html += `<div class="tlabel" style="left:${pct(v)}%">${v}</div>`;
+  }
+  html += `<div class="cutline" style="left:calc(${pct(CUT)}% - 1.5px)"><span>23,5 cm</span></div>`;
+  tape.insertAdjacentHTML('beforeend', html);
+  const range = document.getElementById('lila-range'), num = document.getElementById('lila-num');
+  const marker = document.getElementById('marker'), res = document.getElementById('lila-result');
+  const fmt = v => v.toFixed(1).replace('.', ',');
+  function show(v){
+    if (isNaN(v)) return;
+    marker.style.left = Math.min(100, Math.max(0, pct(v))) + '%';
+    if (v < CUT){
+      res.className = 'result risk';
+      res.innerHTML = `<h3>${fmt(v)} cm: berisiko KEK</h3>Segera temui bidan atau puskesmas untuk pemeriksaan dan makanan tambahan (PMT). Tambah porsi lauk hewani dan minum TTD setiap hari.`;
+    } else {
+      res.className = 'result ok';
+      res.innerHTML = `<h3>${fmt(v)} cm: tidak berisiko KEK</h3>Pertahankan makan gizi seimbang, minum TTD setiap hari, dan ukur LILA lagi saat periksa kehamilan.`;
+    }
+  }
+  range.oninput = () => { num.value = range.value; show(+range.value); };
+  num.oninput = () => { const v = parseFloat(num.value); if (!isNaN(v)) { range.value = Math.min(MAX, Math.max(MIN, v)); show(v); } };
+  show(23.5);
+
+  let hist = store.get('lila', []);
+  const hul = document.getElementById('lila-hist');
+  function drawHist(){
+    hul.innerHTML = hist.length ? hist.slice().reverse().map(h => `<li><span>${h.d}</span><span class="${h.v < CUT ? 'r' : 'g'}">${fmt(h.v)} cm</span></li>`).join('') : '<li><span>Belum ada hasil tersimpan. Simpan hasil pertamamu untuk memantau perubahan.</span></li>';
+  }
+  document.getElementById('lila-save').onclick = () => {
+    const v = parseFloat(num.value);
+    if (isNaN(v) || v < 15 || v > 45){ res.className='result risk'; res.innerHTML = '<h3>Angka belum sesuai</h3>Masukkan hasil LILA antara 15 dan 45 cm.'; return; }
+    hist.push({d: new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}), v});
+    hist = hist.slice(-12); store.set('lila', hist); drawHist();
+  };
+  document.getElementById('lila-clear').onclick = () => { hist = []; store.set('lila', hist); drawHist(); };
+  drawHist();
+
+  /* Bidan contact */
+  const bi = document.getElementById('bidan'), bl = document.getElementById('bidan-link');
+  function drawBidan(){
+    const n = store.get('bidan', '');
+    bi.value = n;
+    bl.innerHTML = n ? `Tersimpan. <a href="tel:${n.replace(/[^0-9+]/g,'')}" style="color:var(--danau);font-weight:800">Telepon bidan</a>` : '';
+  }
+  document.getElementById('bidan-save').onclick = () => { store.set('bidan', bi.value.trim()); drawBidan(); };
+  drawBidan();
+
+  /* Myths */
+  const M = [
+    ['Ibu hamil harus makan dua kali lipat porsi biasa.','Yang dibutuhkan tambahan sekitar 180–300 kkal per hari, setara satu porsi kecil nasi dan lauk. Yang penting kualitas dan keragaman makanannya.'],
+    ['Makan ikan saat hamil membuat bayi berbau amis.','Ikan adalah sumber protein dan lemak sehat untuk pertumbuhan otak janin. Tidak ada hubungan dengan bau badan bayi.'],
+    ['Tablet tambah darah membuat bayi terlalu besar dan sulit lahir.','TTD mencegah anemia dan membantu suplai oksigen ke janin. TTD tidak membuat bayi terlalu besar.'],
+    ['Kalau badan tidak terlihat kurus, pasti tidak KEK.','KEK bisa tidak terlihat dari luar. Cara pastinya adalah mengukur LILA dengan pita.'],
+    ['Remaja yang hamil cukup makan seperti biasa.','Tubuh remaja masih tumbuh, jadi kebutuhan gizinya justru lebih tinggi dibanding ibu hamil dewasa.']
+  ];
+  const mb = document.getElementById('myths');
+  mb.innerHTML = M.map(([m,f]) => `<button class="myth" aria-expanded="false"><div class="m"><span class="tag">Mitos</span><p>${m}</p><div class="hint">Ketuk untuk lihat fakta</div></div><div class="f"><span class="tag">Fakta</span><p>${f}</p></div></button>`).join('');
+  mb.addEventListener('click', e => { const b = e.target.closest('.myth'); if (!b) return; b.classList.toggle('open'); b.setAttribute('aria-expanded', b.classList.contains('open')); });
+})();
+</script>
+</body>
+</html>

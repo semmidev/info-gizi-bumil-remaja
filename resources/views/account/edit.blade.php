@@ -1,0 +1,39 @@
+@extends('layouts.app')
+
+@section('title', 'Akun Saya')
+@section('menu', 'Akun')
+
+@section('content')
+<section class="screen on" id="s-akun">
+  <h2>Akun Saya</h2>
+  <p class="lead">Lihat info akunmu dan ganti kata sandi bila perlu.</p>
+
+  <div class="panel">
+    <h3>Informasi pengguna</h3>
+    <div class="akun-row"><span>Nama pengguna</span><b>{{ $user->username }}</b></div>
+    <div class="akun-row"><span>Bergabung</span><b>{{ $user->created_at->translatedFormat('j F Y') }}</b></div>
+  </div>
+
+  <div class="panel">
+    <h3>Ubah kata sandi</h3>
+    <p class="tip" style="margin-top:0">Masukkan kata sandi baru. Tidak perlu kata sandi lama.</p>
+    <form method="POST" action="{{ route('akun.password') }}">
+      @csrf
+      @method('PUT')
+      <div class="field">
+        <label for="password">Kata sandi baru</label>
+        <span class="hint">Minimal 6 karakter, pilih yang mudah kamu ingat.</span>
+        <div class="pass-wrap">
+          <input id="password" name="password" type="password" autocomplete="new-password" required>
+          <button type="button" class="toggle-eye" data-toggle-pass="password" aria-label="Tampilkan kata sandi" aria-pressed="false">
+            <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l18 18"/><path d="M10.6 6.2A10.9 10.9 0 0 1 12 6c6.5 0 10 6 10 6a17 17 0 0 1-3.2 3.7"/><path d="M6.2 6.2A17 17 0 0 0 2 12s3.5 6 10 6a10.5 10.5 0 0 0 4-.8"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+          </button>
+        </div>
+        @error('password')<span class="err">{{ $message }}</span>@enderror
+      </div>
+      <button type="submit" class="btn-primary">Simpan kata sandi</button>
+    </form>
+  </div>
+</section>
+@endsection
