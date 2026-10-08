@@ -261,4 +261,5 @@
       </div>
     </div>
   </section>
+<script>window.__DATA = @json($data);</script>
 @endsection

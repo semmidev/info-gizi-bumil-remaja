@@ -103,4 +103,5 @@
         <li>Yastirin, P. A., Sahara, R., &amp; Sehmawati. (2024). Dampak kesehatan ibu pada kehamilan remaja. <i>Jurnal Profesi Bidan Indonesia, 4</i>(2).</li>
       </ol></div></details>
 </section>
+<script>window.__DATA = @json($data);</script>
 @endsection

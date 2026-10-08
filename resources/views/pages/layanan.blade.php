@@ -55,4 +55,5 @@
       <p id="bidan-link" class="tip"></p>
     </div>
   </section>
+<script>window.__DATA = @json($data);</script>
 @endsection

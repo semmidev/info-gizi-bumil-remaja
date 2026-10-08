@@ -20,5 +20,10 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin123',
             'role' => 'admin',
         ]);
+
+        $this->call([
+            ChecklistItemSeeder::class,
+            QuizSeeder::class,
+        ]);
     }
 }

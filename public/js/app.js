@@ -1,37 +1,51 @@
 (function(){
   const body = document.body;
-  const store = {
-    get(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
-    set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
-  };
+  const DATA = window.__DATA || {};
+  const csrf = document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+  async function api(method, url, payload){
+    const res = await fetch(url, {
+      method,
+      credentials: 'same-origin',
+      headers: {'Content-Type':'application/json', 'Accept':'application/json', 'X-CSRF-TOKEN': csrf},
+      body: payload === undefined ? undefined : JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
+  }
 
   /* ===== Pencatatan penggunaan aplikasi ===== */
-  const LOG_URL = '';
-  const LOGK = 'log-penggunaan', QK = 'log-antrian';
-  const devId = (() => { let d = store.get('perangkat', ''); if (!d) { d = 'HP-' + Math.random().toString(36).slice(2, 8).toUpperCase(); store.set('perangkat', d); } return d; })();
-  const kode = body.dataset.user || 'UMUM';
+  const QK = 'log-antrian';
+  const deviceId = (() => {
+    let d = '';
+    try { d = localStorage.getItem('perangkat') || ''; } catch(e){}
+    if (!d) { d = 'HP-' + Math.random().toString(36).slice(2, 8).toUpperCase(); try { localStorage.setItem('perangkat', d); } catch(e){} }
+    return d;
+  })();
   const menuLabel = body.dataset.menu || 'Aplikasi';
-  const pad = n => String(n).padStart(2, '0');
-  const stamp = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  function logEv(kegiatan, ket, durasi){
-    const e = {waktu: stamp(new Date()), kode: kode, perangkat: devId, kegiatan, keterangan: ket || '', durasi_detik: durasi || ''};
-    const all = store.get(LOGK, []); all.push(e); store.set(LOGK, all.slice(-2000));
-    const q = store.get(QK, []); q.push(e); store.set(QK, q.slice(-2000));
-    kirim();
+  let queue = [];
+  try { queue = JSON.parse(localStorage.getItem(QK) || '[]'); } catch(e){ queue = []; }
+
+  function logEv(event, description, duration){
+    queue.push({event, description: description || '', duration_seconds: duration || null});
+    if (queue.length > 500) queue = queue.slice(-500);
+    try { localStorage.setItem(QK, JSON.stringify(queue)); } catch(e){}
+    flush();
   }
   let sending = false;
-  async function kirim(){
-    if (!LOG_URL || sending || !navigator.onLine) return;
-    const q = store.get(QK, []); if (!q.length) return;
+  async function flush(){
+    if (sending || !queue.length || !navigator.onLine) return;
     sending = true;
+    const batch = queue.slice();
     try {
-      await fetch(LOG_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(q)});
-      const now = store.get(QK, []); store.set(QK, now.slice(q.length));
-    } catch (err) {} finally { sending = false; }
+      await api('POST', '/api/activity', {device_id: deviceId, events: batch});
+      queue = queue.slice(batch.length);
+      try { localStorage.setItem(QK, JSON.stringify(queue)); } catch(e){}
+    } catch(e) {} finally { sending = false; }
   }
-  window.addEventListener('online', kirim);
-  setInterval(kirim, 60000);
-  window.__logEval = (k, p) => logEv('kuis_selesai', ({p:'Pengetahuan', s:'Sikap', t:'Tindakan'})[k] + ' ' + p + '%');
+  window.addEventListener('online', flush);
+  setInterval(flush, 30000);
 
   // Kunjungan dan lama membaca per menu
   let menuStart = Date.now(), hiddenAt = 0;
@@ -165,27 +179,32 @@
   /* Panel peneliti: ketuk judul aplikasi 5 kali */
   const logOvl = document.getElementById('log-ovl');
   const h1 = document.querySelector('header.top h1');
-  const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  function bukaLog(){
-    const all = store.get(LOGK, []);
-    const kunj = all.filter(e => e.kegiatan === 'kunjungan').length;
-    const det = all.filter(e => e.kegiatan === 'baca_menu').reduce((a, e) => a + (+e.durasi_detik || 0), 0);
-    const last = all.length ? all[all.length-1].waktu : '–';
-    const antri = store.get(QK, []).length;
-    document.getElementById('log-sum').innerHTML =
-      `<div><b>${esc(kode)}</b><small>Pengguna (${devId})</small></div>` +
-      `<div><b>${kunj}</b><small>Jumlah kunjungan</small></div>` +
-      `<div><b>${Math.round(det/60)} menit</b><small>Total lama membaca</small></div>` +
-      `<div><b style="font-size:.95rem">${esc(last)}</b><small>Aktivitas terakhir</small></div>`;
-    document.getElementById('log-rows').innerHTML = all.slice().reverse().slice(0, 300).map(e =>
-      `<tr><td>${esc(e.waktu)}</td><td>${esc(e.kegiatan.replace('_', ' '))}</td><td>${esc(e.keterangan)}${e.durasi_detik ? ' (' + e.durasi_detik + ' dtk)' : ''}</td></tr>`).join('') || '<tr><td colspan="3">Belum ada data.</td></tr>';
-    document.getElementById('log-msg').textContent = LOG_URL ? (antri ? `${antri} data menunggu dikirim (perlu internet).` : 'Semua data sudah terkirim ke Google Sheets.') : 'Pengiriman otomatis belum diaktifkan. Gunakan tombol Salin atau Kirim.';
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let logRows = [];
+  async function bukaLog(){
     logOvl.hidden = false;
+    document.getElementById('log-sum').innerHTML = '<div><b>…</b><small>Memuat data</small></div>';
+    document.getElementById('log-rows').innerHTML = '<tr><td colspan="3">Memuat…</td></tr>';
+    try {
+      const res = await api('GET', '/api/activity');
+      const s = res.summary || {};
+      logRows = res.rows || [];
+      document.getElementById('log-sum').innerHTML =
+        `<div><b>${esc(s.user)}</b><small>Pengguna (${deviceId})</small></div>` +
+        `<div><b>${esc(s.kunjungan)}</b><small>Jumlah kunjungan</small></div>` +
+        `<div><b>${esc(s.minutes)} menit</b><small>Total lama membaca</small></div>` +
+        `<div><b style="font-size:.95rem">${esc(s.last)}</b><small>Aktivitas terakhir</small></div>`;
+      document.getElementById('log-rows').innerHTML = logRows.map(r =>
+        `<tr><td>${esc(r.waktu)}</td><td>${esc(String(r.kegiatan).replace('_', ' '))}</td><td>${esc(r.keterangan)}${r.durasi_detik ? ' (' + r.durasi_detik + ' dtk)' : ''}</td></tr>`).join('') || '<tr><td colspan="3">Belum ada data.</td></tr>';
+      document.getElementById('log-msg').textContent = 'Data tersimpan di server. Gunakan tombol Salin atau Kirim untuk mengekspor.';
+    } catch(e) {
+      document.getElementById('log-msg').textContent = 'Gagal memuat data. Periksa koneksi.';
+      document.getElementById('log-rows').innerHTML = '<tr><td colspan="3">Gagal memuat.</td></tr>';
+    }
   }
   function csv(){
-    const all = store.get(LOGK, []);
-    const head = 'waktu,kode,perangkat,kegiatan,keterangan,durasi_detik';
-    return [head].concat(all.map(e => [e.waktu, e.kode, e.perangkat, e.kegiatan, e.keterangan, e.durasi_detik].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(','))).join('\n');
+    const head = 'waktu,kegiatan,keterangan,durasi_detik';
+    return [head].concat(logRows.map(r => [r.waktu, r.kegiatan, r.keterangan, r.durasi_detik].map(v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"').join(','))).join('\n');
   }
   if (logOvl && h1){
     let taps = 0, tapT = 0;
@@ -197,82 +216,60 @@
     document.getElementById('log-copy').onclick = async () => {
       const m = document.getElementById('log-msg');
       try { await navigator.clipboard.writeText(csv()); m.textContent = 'Data tersalin. Tempelkan ke Excel atau WhatsApp.'; }
-      catch (e) { m.textContent = 'Gagal menyalin. Gunakan tombol Kirim.'; }
+      catch(e) { m.textContent = 'Gagal menyalin. Gunakan tombol Kirim.'; }
     };
     document.getElementById('log-share').onclick = async () => {
-      const teks = 'Data penggunaan Infogizi - ' + kode + '\n' + csv();
-      if (navigator.share) { try { await navigator.share({title:'Data penggunaan Infogizi', text: teks}); } catch (e) {} }
+      const teks = 'Data penggunaan Infogizi\n' + csv();
+      if (navigator.share) { try { await navigator.share({title:'Data penggunaan Infogizi', text: teks}); } catch(e) {} }
       else { window.open('https://wa.me/?text=' + encodeURIComponent(teks.slice(0, 6000)), '_blank'); }
     };
   }
 
-  /* Checklist */
-  const items = ['Makan 3 kali dan 2 kali selingan','Ada lauk hewani (ikan/telur/daging)','Makan sayur dan buah','Minum tablet tambah darah','Minum air putih minimal 8 gelas'];
+  /* Checklist (Target saya hari ini) */
+  const TARGETS = DATA.targets || [];
   const ul = document.getElementById('checklist');
   if (ul){
-    const today = new Date().toISOString().slice(0,10);
-    let chk = store.get('chk', {});
-    if (chk.date !== today) chk = {date: today, done: []};
     const drawChk = () => {
-      ul.innerHTML = items.map((t,i) => `<li><label><input type="checkbox" data-i="${i}" ${chk.done.includes(i)?'checked':''}>${t}</label></li>`).join('');
-      const n = chk.done.length;
-      document.getElementById('chk-bar').style.width = (n/items.length*100)+'%';
-      document.getElementById('chk-msg').textContent = n === items.length ? 'Semua target tercapai hari ini. Pertahankan besok!' : `${n} dari ${items.length} target tercapai.`;
+      ul.innerHTML = TARGETS.map((t,i) => `<li><label><input type="checkbox" data-i="${i}" ${t.done?'checked':''}>${t.label}</label></li>`).join('');
+      const n = TARGETS.filter(t => t.done).length;
+      document.getElementById('chk-bar').style.width = (TARGETS.length ? n/TARGETS.length*100 : 0)+'%';
+      document.getElementById('chk-msg').textContent = (n === TARGETS.length && TARGETS.length) ? 'Semua target tercapai hari ini. Pertahankan besok!' : `${n} dari ${TARGETS.length} target tercapai.`;
     };
     ul.addEventListener('change', e => {
       const i = +e.target.dataset.i;
-      chk.done = e.target.checked ? [...new Set([...chk.done, i])] : chk.done.filter(x => x !== i);
-      store.set('chk', chk); drawChk();
+      const t = TARGETS[i]; if (!t) return;
+      t.done = e.target.checked;
+      drawChk();
+      api('PUT', '/api/target', {checklist_item_id: t.id, is_done: t.done}).catch(() => {});
     });
     drawChk();
   }
 
-  /* Kuis: pengetahuan, sikap, perilaku */
-  const KQ = [
-    {ind:'Pengertian KEK', q:'Rina hamil 5 bulan. Hasil ukur LILA-nya 22 cm. Artinya…', o:['Rina tidak berisiko KEK','Rina berisiko KEK dan perlu segera ke bidan','Rina kelebihan berat badan'], a:1, e:'LILA di bawah 23,5 cm menandakan risiko KEK. Rina perlu segera diperiksa bidan dan mendapat makanan tambahan.'},
-    {ind:'Penyebab KEK', q:'Kebiasaan mana yang dapat menyebabkan KEK?', o:['Makan 3 kali sehari dengan lauk','Sering melewatkan makan dan jarang makan lauk hewani','Minum air putih 8 gelas sehari'], a:1, e:'Makan tidak teratur dan kurang protein dalam waktu lama membuat tubuh kekurangan energi dan protein.'},
-    {ind:'Faktor risiko KEK', q:'Siapa yang paling berisiko mengalami KEK?', o:['Ibu hamil usia 17 tahun yang sering tidak sarapan','Ibu hamil usia 25 tahun yang makan teratur','Ibu hamil usia 28 tahun yang rutin periksa'], a:0, e:'Usia di bawah 20 tahun dan pola makan tidak teratur adalah dua faktor risiko KEK.'},
-    {ind:'Dampak KEK pada ibu', q:'Ibu hamil KEK sering lemas dan pucat karena berisiko mengalami…', o:['Anemia (kurang darah)','Kelebihan gizi','Kencing manis'], a:0, e:'KEK sering disertai anemia, sehingga ibu mudah lelah, pucat, dan pusing.'},
-    {ind:'Dampak KEK pada bayi', q:'Jika tidak ditangani, anak dari ibu KEK berisiko mengalami… saat tumbuh besar.', o:['Stunting (tubuh lebih pendek dari seusianya)','Tumbuh lebih tinggi dari temannya','Lebih cepat tumbuh gigi'], a:0, e:'Bayi dari ibu KEK berisiko lahir dengan berat rendah dan mengalami stunting.'},
-    {ind:'Pencegahan: gizi seimbang', q:'Isi piring yang dianjurkan setiap kali makan adalah…', o:['Setengah piring nasi, sisanya kerupuk','Setengah piring sayur dan buah, setengah piring nasi dan lauk','Sepiring penuh nasi dengan sedikit lauk'], a:1, e:'Isi Piringku: setengah piring sayur dan buah, setengah piring makanan pokok dan lauk pauk.'},
-    {ind:'Pencegahan: TTD', q:'Tablet tambah darah sebaiknya diminum bersama…', o:['Teh manis','Kopi','Air putih atau jus jeruk'], a:2, e:'Teh, kopi, dan susu menghambat penyerapan zat besi. Air putih atau jus jeruk membantu.'},
-    {ind:'Pencegahan: ANC', q:'Selama hamil, ibu sebaiknya memeriksakan kehamilan minimal…', o:['2 kali','4 kali','6 kali'], a:2, e:'Minimal 6 kali: 2 kali di trimester 1, 1 kali di trimester 2, dan 3 kali di trimester 3.'},
-    {ind:'Pencegahan: ukur LILA', q:'Pita LILA dilingkarkan di bagian…', o:['Pergelangan tangan','Titik tengah antara bahu dan siku lengan kiri','Betis'], a:1, e:'Pita LILA dilingkarkan di titik tengah antara bahu dan siku, biasanya lengan kiri.'},
-    {ind:'Pencegahan: PMT', q:'Jika LILA ibu di bawah 23,5 cm, bantuan gizi yang dapat diperoleh dari puskesmas adalah…', o:['Makanan tambahan (PMT)','Vitamin rambut','Obat pelangsing'], a:0, e:'Ibu hamil KEK berhak mendapat PMT berbahan pangan lokal dari puskesmas.'},
-    {ind:'Suplementasi gizi', q:'Tablet tambah darah (TTD) untuk ibu hamil berisi…', o:['Zat besi dan asam folat','Vitamin C saja','Kalsium dan gula'], a:0, e:'TTD berisi zat besi dan asam folat untuk mencegah anemia dan mendukung pembentukan saraf janin.'},
-    {ind:'Sumber gizi utama', q:'Kelompok makanan yang kaya zat besi adalah…', o:['Teh dan kopi','Hati ayam, ikan, dan daun kelor','Kerupuk dan permen'], a:1, e:'Hati ayam, ikan, daging, dan sayuran hijau seperti daun kelor kaya zat besi.'},
-    {ind:'Isi Piringku ibu hamil KEK', q:'Anjuran makan yang tepat bagi ibu hamil KEK adalah…', o:['Makan sekali sehari dengan porsi besar','Mengurangi lauk agar tidak mual','Makan sedikit tapi sering, tambah lauk hewani, dan habiskan PMT'], a:2, e:'Ibu hamil KEK dianjurkan makan lebih sering dengan tambahan lauk hewani dan PMT sebagai selingan.'}
-  ];
-  const SO = ['Sangat setuju','Setuju','Tidak setuju','Sangat tidak setuju'];
-  const SQ = [
-    {asp:'Kognitif', s:'Mengukur LILA secara rutin penting agar risiko KEK cepat diketahui.', fav:true, good:'Tepat. Dengan mengukur LILA, risiko KEK bisa ditangani lebih awal.', bad:'KEK sering tidak terlihat dari luar. Mengukur LILA membantu Ibu mengetahuinya lebih awal.'},
-    {asp:'Kognitif', s:'Selama badan tidak terlihat kurus, ibu hamil tidak perlu khawatir terkena KEK.', fav:false, good:'Tepat. KEK bisa terjadi walau badan tidak terlihat kurus.', bad:'KEK bisa terjadi walau badan tidak terlihat kurus. Cara memastikannya adalah mengukur LILA.'},
-    {asp:'Afektif', s:'Saya merasa senang ketika berhasil makan lauk ikan atau telur hari ini.', fav:true, good:'Bagus! Rasa senang ini membantu Ibu menjadikan lauk hewani sebagai kebiasaan.', bad:'Tidak apa-apa. Coba mulai dari satu lauk hewani yang Ibu sukai, misalnya telur atau ikan bakar.'},
-    {asp:'Afektif', s:'Saya merasa malu memeriksakan kehamilan karena usia saya masih muda.', fav:false, good:'Hebat. Memeriksakan kehamilan adalah tanda Ibu peduli pada diri dan bayi.', bad:'Perasaan itu wajar. Bidan siap membantu tanpa menghakimi, dan pemeriksaan penting untuk Ibu dan bayi.'},
-    {asp:'Konatif', s:'Saya mau bertanya kepada bidan jika ragu tentang makanan yang boleh dimakan saat hamil.', fav:true, good:'Tepat. Bertanya ke bidan lebih aman daripada mengikuti kata orang.', bad:'Bidan adalah sumber informasi yang paling tepat. Simpan nomornya di menu Layanan supaya mudah dihubungi.'},
-    {asp:'Konatif', s:'Saya akan berhenti minum TTD jika merasa mual, tanpa bertanya ke bidan.', fav:false, good:'Tepat. Jika mual, tanyakan ke bidan. TTD bisa diminum malam sebelum tidur.', bad:'Jangan berhenti sendiri. Tanyakan ke bidan; TTD bisa diminum malam sebelum tidur agar mual berkurang.'}
-  ];
-  const PO = ['Setiap hari','4–6 hari','1–3 hari','Tidak pernah'];
-  const PQ = [
-    {ind:'Tindakan: gizi seimbang', q:'sarapan sebelum beraktivitas?', tip:'Sarapan memberi tenaga untuk Ibu dan janin. Coba siapkan nasi dan telur sejak malam.'},
-    {ind:'Tindakan: gizi seimbang', q:'makan lauk hewani (ikan, telur, ayam, atau daging)?', tip:'Usahakan ada lauk hewani setiap hari. Ikan dan telur mudah didapat dan terjangkau.'},
-    {ind:'Tindakan: gizi seimbang', q:'makan sayur dan buah?', tip:'Isi setengah piring dengan sayur dan buah, misalnya sayur kelor dan pisang.'},
-    {ind:'Tindakan: gizi seimbang', q:'makan selingan sehat di antara makan utama?', tip:'Selingan seperti bubur kacang hijau atau buah membantu memenuhi tambahan porsi.'},
-    {ind:'Tindakan: kepatuhan anjuran', q:'minum tablet tambah darah (TTD)?', tip:'TTD perlu diminum 1 tablet setiap hari. Pasang pengingat di ponsel agar tidak lupa.'},
-    {ind:'Tindakan: kepatuhan anjuran', q:'tetap makan makanan bergizi (ikan, telur, sayur) tanpa berpantang karena mitos?', tip:'Ikan, telur, dan sayur aman dan penting untuk Ibu hamil. Lihat menu Info Menarik untuk fakta selengkapnya.'}
-  ];
+  /* Kuis: pengetahuan, sikap, tindakan */
+  const QUIZ = DATA.quiz || {pengetahuan:[], sikap:[], tindakan:[]};
+  const KQ = QUIZ.pengetahuan, SQ = QUIZ.sikap, PQ = QUIZ.tindakan;
+  const EVAL = DATA.eval || {p:null, s:null, t:null};
+  const PERILAKU = DATA.perilaku || [];
+  const TYPE_OF = {p:'pengetahuan', s:'sikap', t:'tindakan'};
 
   const evalBox = document.getElementById('evalbox');
   const qbox = document.getElementById('quiz');
   if (evalBox && qbox){
     const cat = p => p >= 76 ? ['Baik','g'] : p >= 56 ? ['Cukup','c'] : ['Perlu ditingkatkan','r'];
     function drawEval(){
-      const e = store.get('eval', {});
-      const row = (k,l) => { const v = e[k]; if (!v) return `<div class="ev"><b>${l}</b><span class="ev-n">–</span><small>Belum dikerjakan</small></div>`;
-        const [c,cl] = cat(v.p); return `<div class="ev"><b>${l}</b><span class="ev-n ${cl}">${v.p}%</span><small class="${cl}">${c}</small><small>${v.d}</small></div>`; };
+      const row = (k,l) => { const v = EVAL[k]; if (!v) return `<div class="ev"><b>${l}</b><span class="ev-n">–</span><small>Belum dikerjakan</small></div>`;
+        const [c,cl] = cat(v.percentage); return `<div class="ev"><b>${l}</b><span class="ev-n ${cl}">${v.percentage}%</span><small class="${cl}">${c}</small><small>${v.date}</small></div>`; };
       evalBox.innerHTML = `<h3>Hasil evaluasi saya</h3><div class="evg">${row('p','Pengetahuan')}${row('s','Sikap')}${row('t','Tindakan')}</div><p class="tip">Baik: 76–100%, Cukup: 56–75%, Perlu ditingkatkan: di bawah 56%.</p>`;
     }
-    function saveEval(k,p){ if (window.__logEval) window.__logEval(k,p); const e = store.get('eval', {}); e[k] = {p, d:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short'})}; store.set('eval', e); drawEval(); }
+    async function saveEval(k, raw){
+      logEv('kuis_selesai', ({p:'Pengetahuan', s:'Sikap', t:'Tindakan'})[k] + ': ' + raw);
+      try {
+        const res = await api('POST', '/api/quiz-attempt', {type: TYPE_OF[k], raw_score: raw});
+        EVAL[k] = {percentage: res.percentage, date: res.date};
+        if (k === 't') { PERILAKU.push({percentage: res.percentage, date: res.date}); if (PERILAKU.length > 8) PERILAKU.shift(); }
+        drawEval();
+      } catch(e) {}
+    }
     drawEval();
     let qmode = 'p', qi = 0, score = 0;
     const bar = (i,n) => `<div class="progress"><i style="width:${i/n*100}%"></i></div>`;
@@ -294,28 +291,32 @@
       if (qmode === 'p'){
         if (qi >= KQ.length){
           const msg = score >= 11 ? 'Hebat! Pengetahuan Ibu tentang KEK sudah sangat baik.' : score >= 8 ? 'Bagus. Baca lagi menu Informasi untuk soal yang belum tepat.' : 'Yuk pelajari lagi menu Informasi, lalu coba sekali lagi.';
-          saveEval('p', Math.round(score/KQ.length*100));
+          saveEval('p', score);
           return endBox(`${score}/${KQ.length}`, msg);
         }
         const x = KQ[qi];
-        qbox.innerHTML = meta('Soal',qi,KQ.length,'Skor '+score)+bar(qi,KQ.length)+`<span class="qtag">${x.ind}</span><h3>${x.q}</h3><div class="opts">${x.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
-        answerUI(x.o, pick => {
-          const ok = pick === x.a; if (ok) score++;
-          qbox.querySelectorAll('.opt').forEach((o,i) => { o.disabled = true; if (i === x.a) o.classList.add('right'); else if (i === pick) o.classList.add('wrong'); });
-          const ex = document.getElementById('ex'); ex.innerHTML = `<b>${ok?'Benar.':'Belum tepat.'}</b> ${x.e}`;
+        const opts = x.options.map(o => o.label);
+        const ai = x.options.findIndex(o => o.correct);
+        qbox.innerHTML = meta('Soal',qi,KQ.length,'Skor '+score)+bar(qi,KQ.length)+`<span class="qtag">${x.indicator}</span><h3>${x.text}</h3><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
+        answerUI(opts, pick => {
+          const ok = pick === ai; if (ok) score++;
+          qbox.querySelectorAll('.opt').forEach((o,i) => { o.disabled = true; if (i === ai) o.classList.add('right'); else if (i === pick) o.classList.add('wrong'); });
+          const ex = document.getElementById('ex'); ex.innerHTML = `<b>${ok?'Benar.':'Belum tepat.'}</b> ${x.explanation}`;
           nextBtn(ex, qi === KQ.length-1, 'Lihat skor');
         });
       } else if (qmode === 's'){
         if (qi >= SQ.length){
-          const pct = Math.round(score / (SQ.length*4) * 100); saveEval('s', pct);
+          const pct = Math.round(score / (SQ.length*4) * 100); saveEval('s', score);
           const msg = pct >= 75 ? 'Sikap Ibu sangat mendukung pencegahan KEK. Pertahankan!' : pct >= 50 ? 'Sikap Ibu cukup mendukung. Baca lagi penjelasan pada pernyataan yang masih ragu.' : 'Masih ada sikap yang perlu diperkuat. Diskusikan dengan bidan atau keluarga, ya.';
           return endBox(`${pct}%`, msg);
         }
         const x = SQ[qi];
-        qbox.innerHTML = meta('Pernyataan',qi,SQ.length)+bar(qi,SQ.length)+`<span class="qtag">Sikap ${x.asp.toLowerCase()}</span><p class="qhint">Seberapa setuju Ibu dengan pernyataan ini?</p><h3>“${x.s}”</h3><div class="opts">${SO.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
-        answerUI(SO, (pick, btn) => {
-          const positive = x.fav ? pick <= 1 : pick >= 2;
-          score += x.fav ? 4 - pick : pick + 1;
+        const opts = x.options.map(o => o.label);
+        qbox.innerHTML = meta('Pernyataan',qi,SQ.length)+bar(qi,SQ.length)+`<span class="qtag">Sikap ${String(x.aspect).toLowerCase()}</span><p class="qhint">Seberapa setuju Ibu dengan pernyataan ini?</p><h3>“${x.text}”</h3><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
+        answerUI(opts, (pick, btn) => {
+          const favorable = x.favorable;
+          const positive = favorable ? pick <= 1 : pick >= 2;
+          score += favorable ? 4 - pick : pick + 1;
           qbox.querySelectorAll('.opt').forEach(o => o.disabled = true);
           btn.classList.add(positive ? 'right' : 'wrong');
           const ex = document.getElementById('ex'); ex.innerHTML = positive ? x.good : x.bad;
@@ -324,19 +325,19 @@
       } else {
         if (qi === 0) missed.length = 0;
         if (qi >= PQ.length){
-          const good = PQ.length - missed.length; saveEval('t', Math.round(score/(PQ.length*3)*100));
-          const hist = store.get('perilaku', []); hist.push({d:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short'}), s:score}); store.set('perilaku', hist.slice(-8));
-          const prev = hist.length > 1 ? `<p class="tip" style="text-align:center">Hasil sebelumnya: ${Math.round(hist[hist.length-2].s/(PQ.length*3)*100)}% (${hist[hist.length-2].d})</p>` : '';
+          const good = PQ.length - missed.length; saveEval('t', score);
+          const prev = PERILAKU.length > 1 ? `<p class="tip" style="text-align:center">Hasil sebelumnya: ${PERILAKU[PERILAKU.length-2].percentage}% (${PERILAKU[PERILAKU.length-2].date})</p>` : '';
           const list = missed.length ? `<div class="explain on"><b>Kebiasaan yang perlu ditingkatkan:</b><ul style="margin:6px 0 0;padding-left:18px">${missed.map(m=>`<li>${m}</li>`).join('')}</ul></div>` : '';
           return endBox(`${Math.round(score/(PQ.length*3)*100)}%`, missed.length ? `${good} dari ${PQ.length} kebiasaan baik sudah rutin Ibu lakukan.` : 'Luar biasa! Semua kebiasaan baik sudah rutin Ibu lakukan.', prev + list);
         }
         const x = PQ[qi];
-        qbox.innerHTML = meta('Pertanyaan',qi,PQ.length)+bar(qi,PQ.length)+`<span class="qtag">${x.ind}</span><p class="qhint">Dalam 7 hari terakhir, berapa hari Ibu…</p><h3>${x.q}</h3><div class="opts">${PO.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
-        answerUI(PO, (pick, btn) => {
+        const opts = x.options.map(o => o.label);
+        qbox.innerHTML = meta('Pertanyaan',qi,PQ.length)+bar(qi,PQ.length)+`<span class="qtag">${x.indicator}</span><p class="qhint">Dalam 7 hari terakhir, berapa hari Ibu…</p><h3>${x.text}</h3><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="explain" id="ex"></div>`;
+        answerUI(opts, (pick, btn) => {
           score += 3 - pick;
           qbox.querySelectorAll('.opt').forEach(o => o.disabled = true);
           btn.classList.add(pick === 0 ? 'right' : 'wrong');
-          if (pick > 0) missed.push(x.q.charAt(0).toUpperCase() + x.q.slice(1).replace('?',''));
+          if (pick > 0) missed.push(x.text.charAt(0).toUpperCase() + x.text.slice(1).replace('?',''));
           const ex = document.getElementById('ex'); ex.innerHTML = pick === 0 ? '<b>Hebat!</b> Pertahankan kebiasaan ini setiap hari.' : `<b>Ayo tingkatkan.</b> ${x.tip}`;
           nextBtn(ex, qi === PQ.length-1, 'Lihat hasil');
         });
@@ -382,19 +383,25 @@
     num.oninput = () => { const v = parseFloat(num.value); if (!isNaN(v)) { range.value = Math.min(MAX, Math.max(MIN, v)); show(v); } };
     show(23.5);
 
-    let hist = store.get('lila', []);
+    let hist = DATA.lila || [];
     const hul = document.getElementById('lila-hist');
     function drawHist(){
-      hul.innerHTML = hist.length ? hist.slice().reverse().map(h => `<li><span>${h.d}</span><span class="${h.v < CUT ? 'r' : 'g'}">${fmt(h.v)} cm</span></li>`).join('') : '<li><span>Belum ada hasil tersimpan. Simpan hasil pertamamu untuk memantau perubahan.</span></li>';
+      hul.innerHTML = hist.length ? hist.slice(-12).slice().reverse().map(h => `<li><span>${h.date}</span><span class="${h.value < CUT ? 'r' : 'g'}">${fmt(h.value)} cm</span></li>`).join('') : '<li><span>Belum ada hasil tersimpan. Simpan hasil pertamamu untuk memantau perubahan.</span></li>';
     }
-    document.getElementById('lila-save').onclick = () => {
+    document.getElementById('lila-save').onclick = async () => {
       const v = parseFloat(num.value);
       if (isNaN(v) || v < 15 || v > 45){ res.className='result risk'; res.innerHTML = '<h3>Angka belum sesuai</h3>Masukkan hasil LILA antara 15 dan 45 cm.'; return; }
-      hist.push({d: new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}), v});
-      hist = hist.slice(-12); store.set('lila', hist); drawHist();
-      logEv('simpan_lila', v.toFixed(1).replace('.', ',') + ' cm');
+      try {
+        const saved = await api('POST', '/api/lila', {value_cm: v});
+        hist.push(saved);
+        drawHist();
+        logEv('simpan_lila', v.toFixed(1).replace('.', ',') + ' cm');
+      } catch(e) {}
     };
-    document.getElementById('lila-clear').onclick = () => { hist = []; store.set('lila', hist); drawHist(); };
+    document.getElementById('lila-clear').onclick = async () => {
+      try { await api('DELETE', '/api/lila'); } catch(e) {}
+      hist = []; drawHist();
+    };
     drawHist();
   }
 
@@ -402,12 +409,16 @@
   const bi = document.getElementById('bidan');
   if (bi){
     const bl = document.getElementById('bidan-link');
+    let saved = DATA.bidan || '';
     function drawBidan(){
-      const n = store.get('bidan', '');
-      bi.value = n;
-      bl.innerHTML = n ? `Tersimpan. <a href="tel:${n.replace(/[^0-9+]/g,'')}" style="color:var(--danau);font-weight:800">Telepon bidan</a>` : '';
+      bi.value = saved;
+      bl.innerHTML = saved ? `Tersimpan. <a href="tel:${saved.replace(/[^0-9+]/g,'')}" style="color:var(--danau);font-weight:800">Telepon bidan</a>` : '';
     }
-    document.getElementById('bidan-save').onclick = () => { store.set('bidan', bi.value.trim()); drawBidan(); };
+    document.getElementById('bidan-save').onclick = async () => {
+      saved = bi.value.trim();
+      drawBidan();
+      try { await api('PUT', '/api/bidan', {bidan_phone: saved}); } catch(e) {}
+    };
     drawBidan();
   }
 

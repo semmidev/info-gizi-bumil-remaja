@@ -48,4 +48,5 @@
       <ul class="hist" id="lila-hist"></ul>
     </div>
   </section>
+<script>window.__DATA = @json($data);</script>
 @endsection
