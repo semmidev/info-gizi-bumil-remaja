@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body data-menu="Admin">
-<div class="app">
+<div class="app admin">
   <header class="top">
     <div class="brand">
       <div class="brand-menu">

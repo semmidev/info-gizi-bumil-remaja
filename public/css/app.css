@@ -378,3 +378,22 @@ nav.tabs.nav-4{grid-template-columns:repeat(4,1fr)}
 .card-link small{color:var(--muted); font-weight:700; font-size:.8rem}
 .card-link i{font-style:normal; font-size:1.6rem; display:block; margin-bottom:4px}
 @media (max-width:380px){.stat-grid,.cards{grid-template-columns:1fr}}
+
+/* ===== Admin desktop: tablet melebar, desktop sidebar (user tetap 460px) ===== */
+@media (min-width:768px){
+  body[data-menu="Admin"] .app.admin{max-width:720px}
+  body[data-menu="Admin"] nav.tabs{max-width:720px}
+  body[data-menu="Admin"] .stat-grid{grid-template-columns:repeat(3,1fr)}
+  body[data-menu="Admin"] .cards{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1024px){
+  body[data-menu="Admin"] .app.admin{max-width:1360px; display:grid; grid-template-columns:240px minmax(0,1fr); grid-template-areas:"side head" "side main"; padding-bottom:0; min-height:100vh; align-content:start}
+  body[data-menu="Admin"] .app.admin > header.top{grid-area:head; border-radius:0 0 0 28px}
+  body[data-menu="Admin"] .app.admin > main{grid-area:main; padding:32px; min-width:0}
+  body[data-menu="Admin"] .app.admin > nav.tabs.nav-4{grid-area:side; position:sticky; top:0; left:auto; transform:none; width:auto; max-width:none; align-self:start; max-height:100vh; grid-template-columns:1fr; grid-template-rows:repeat(4,min-content); align-content:start; gap:4px; border-top:0; border-right:1px solid var(--line); padding:20px 10px; z-index:5}
+  body[data-menu="Admin"] .app.admin > nav.tabs a{flex-direction:row; align-items:center; gap:12px; font-size:.92rem; padding:12px 14px; text-align:left}
+  body[data-menu="Admin"] .app.admin > nav.tabs a svg{flex:none}
+  body[data-menu="Admin"] .atable{min-width:0}
+  body[data-menu="Admin"] .table-scroll{margin:0; padding:0; overflow-x:visible}
+  body[data-menu="Admin"] .filter-bar input{min-width:200px}
+}
