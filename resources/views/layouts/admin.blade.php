@@ -39,13 +39,13 @@
 
   <main>
     @if (session('sukses'))
-      <div class="panel" style="background:var(--kelor-soft);border:0">
+      <div class="panel flash-msg" style="background:var(--kelor-soft);border:0" data-flash="{{ session('sukses') }}">
         <b style="color:var(--kelor)">{{ session('sukses') }}</b>
       </div>
     @endif
 
     @if ($errors->any())
-      <div class="panel" style="background:var(--bahaya-soft);border:0">
+      <div class="panel flash-msg" style="background:var(--bahaya-soft);border:0">
         @foreach ($errors->all() as $error)
           <b style="color:var(--bahaya); display:block">{{ $error }}</b>
         @endforeach

@@ -1,4 +1,34 @@
 (function () {
+  /* Toast ringan (tanpa lib) */
+  function toast(msg, type) {
+    var wrap = document.querySelector('.toast-wrap');
+    if (!wrap) { wrap = document.createElement('div'); wrap.className = 'toast-wrap'; wrap.setAttribute('aria-live', 'polite'); document.body.appendChild(wrap); }
+    var el = document.createElement('div');
+    el.className = 'toast' + (type ? ' ' + type : '');
+    el.textContent = msg;
+    wrap.appendChild(el);
+    while (wrap.children.length > 3) wrap.firstChild.remove();
+    setTimeout(function () { el.classList.add('out'); setTimeout(function () { el.remove(); }, 250); }, 3500);
+  }
+
+  /* Flash dari server tampil sebagai toast */
+  document.querySelectorAll('[data-flash]').forEach(function (el) {
+    toast(el.dataset.flash || el.textContent.trim(), 'ok');
+    el.remove();
+  });
+
+  /* Transisi pindah halaman (View Transitions API + fallback CSS) */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('nav.tabs a[href]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var dest;
+    try { dest = new URL(a.getAttribute('href'), location.origin); } catch (err) { return; }
+    if (dest.origin !== location.origin || dest.pathname === location.pathname) return;
+    if (!document.startViewTransition) return;
+    e.preventDefault();
+    try { document.startViewTransition(function () { location.href = dest.href; }); } catch (err2) { location.href = dest.href; }
+  });
+
   /* Dropdown akun */
   var brandBtn = document.getElementById('brand-btn');
   var brandDrop = document.getElementById('brand-dropdown');

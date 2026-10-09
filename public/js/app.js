@@ -15,6 +15,41 @@
     return text ? JSON.parse(text) : null;
   }
 
+  /* ===== Toast ringan (tanpa lib) ===== */
+  function toast(msg, type){
+    let wrap = document.querySelector('.toast-wrap');
+    if (!wrap){ wrap = document.createElement('div'); wrap.className = 'toast-wrap'; wrap.setAttribute('aria-live', 'polite'); document.body.appendChild(wrap); }
+    const el = document.createElement('div');
+    el.className = 'toast' + (type ? ' ' + type : '');
+    el.textContent = msg;
+    wrap.appendChild(el);
+    while (wrap.children.length > 3) wrap.firstChild.remove();
+    setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 250); }, 3500);
+  }
+
+  /* Flash dari server tampil sebagai toast, panel statis dilepas */
+  document.querySelectorAll('[data-flash]').forEach(el => {
+    toast(el.dataset.flash || el.textContent.trim(), 'ok');
+    el.remove();
+  });
+
+  /* ===== Transisi pindah halaman (View Transitions API + fallback CSS) ===== */
+  function go(url){
+    if (document.startViewTransition){
+      try { document.startViewTransition(() => { location.href = url; }); return; } catch(e){}
+    }
+    location.href = url;
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('nav.tabs a[href]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    let dest;
+    try { dest = new URL(a.getAttribute('href'), location.origin); } catch(err){ return; }
+    if (dest.origin !== location.origin || dest.pathname === location.pathname) return;
+    e.preventDefault();
+    go(dest.href);
+  });
+
   /* ===== Pencatatan penggunaan aplikasi ===== */
   const QK = 'log-antrian';
   const deviceId = (() => {
@@ -240,7 +275,11 @@
       const t = TARGETS[i]; if (!t) return;
       t.done = e.target.checked;
       drawChk();
-      api('PUT', '/api/target', {checklist_item_id: t.id, is_done: t.done}).catch(() => {});
+      api('PUT', '/api/target', {checklist_item_id: t.id, is_done: t.done}).catch(() => {
+        t.done = !t.done;
+        drawChk();
+        toast('Gagal menyimpan target. Periksa koneksi.', 'err');
+      });
     });
     drawChk();
   }
@@ -269,7 +308,7 @@
         EVAL[k] = {percentage: res.percentage, date: res.date};
         if (k === 't') { PERILAKU.push({percentage: res.percentage, date: res.date}); if (PERILAKU.length > 8) PERILAKU.shift(); }
         drawEval();
-      } catch(e) {}
+      } catch(e) { toast('Hasil kuis tersimpan lokal. Gagal sinkron ke server.', 'err'); }
     }
     drawEval();
     let qmode = 'p', qi = 0, score = 0;
@@ -289,6 +328,7 @@
     }
     const missed = [];
     function drawQ(){
+      qbox.classList.remove('q-enter'); void qbox.offsetWidth; qbox.classList.add('q-enter');
       if (qmode === 'p'){
         if (qi >= KQ.length){
           const msg = score >= 11 ? 'Hebat! Pengetahuan Ibu tentang KEK sudah sangat baik.' : score >= 8 ? 'Bagus. Baca lagi menu Informasi untuk soal yang belum tepat.' : 'Yuk pelajari lagi menu Informasi, lalu coba sekali lagi.';
@@ -388,9 +428,11 @@
     show(23.5);
 
     const hul = document.getElementById('lila-hist');
-    document.getElementById('lila-save').onclick = async () => {
+    document.getElementById('lila-save').onclick = async e => {
+      const btn = e.currentTarget;
       const v = parseFloat(num.value);
       if (isNaN(v) || v < 15 || v > 45){ res.className='result risk'; res.innerHTML = '<h3>Angka belum sesuai</h3>Masukkan hasil LILA antara 15 dan 45 cm.'; return; }
+      btn.disabled = true;
       try {
         const saved = await api('POST', '/api/lila', {value_cm: v});
         const first = hul.querySelector('li');
@@ -399,7 +441,9 @@
         li.innerHTML = `<span>${saved.date}</span><span class="${saved.value < CUT ? 'r' : 'g'}">${fmt(saved.value)} cm</span>`;
         hul.prepend(li);
         logEv('simpan_lila', v.toFixed(1).replace('.', ',') + ' cm');
-      } catch(e) {}
+        toast('Hasil LILA tersimpan.', 'ok');
+      } catch(e) { toast('Gagal menyimpan. Periksa koneksi.', 'err'); }
+      finally { btn.disabled = false; }
     };
     document.getElementById('lila-clear').onclick = async () => {
       try { await api('DELETE', '/api/lila'); } catch(e) {}
@@ -416,10 +460,14 @@
       bi.value = saved;
       bl.innerHTML = saved ? `Tersimpan. <a href="tel:${saved.replace(/[^0-9+]/g,'')}" style="color:var(--danau);font-weight:800">Telepon bidan</a>` : '';
     }
-    document.getElementById('bidan-save').onclick = async () => {
+    document.getElementById('bidan-save').onclick = async e => {
+      const btn = e.currentTarget;
       saved = bi.value.trim();
       drawBidan();
-      try { await api('PUT', '/api/bidan', {bidan_phone: saved}); } catch(e) {}
+      btn.disabled = true;
+      try { await api('PUT', '/api/bidan', {bidan_phone: saved}); toast('Nomor bidan tersimpan.', 'ok'); }
+      catch(e) { toast('Gagal menyimpan nomor. Periksa koneksi.', 'err'); }
+      finally { btn.disabled = false; }
     };
     drawBidan();
   }

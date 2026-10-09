@@ -19,7 +19,7 @@
 
   <div class="auth-card">
     @if (session('sukses'))
-      <div class="flash">{{ session('sukses') }}</div>
+      <div class="flash flash-msg" data-flash="{{ session('sukses') }}">{{ session('sukses') }}</div>
     @endif
     @yield('content')
   </div>
@@ -27,5 +27,6 @@
   <p class="auth-foot">Media edukasi ini tidak menggantikan pemeriksaan oleh bidan atau dokter.</p>
 </div>
 <script src="{{ asset('js/pass.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
