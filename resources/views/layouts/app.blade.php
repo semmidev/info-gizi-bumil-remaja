@@ -24,6 +24,9 @@
             <b>{{ auth()->user()->username ?? 'Pengguna' }}</b>
           </div>
           <a href="{{ route('akun') }}">Akun saya</a>
+          @if(auth()->check() && auth()->user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}">Buka Dashboard Admin</a>
+          @endif
           <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Keluar</button>
@@ -60,6 +63,21 @@
   </div>
 
   @include('partials.nav')
+
+  @php
+    $profileUser = auth()->user();
+    $showProfileModal = $profileUser && $profileUser->needsProfileCompletion() && ! request()->routeIs('akun');
+    $missing = [];
+    if ($showProfileModal) {
+      if (! trim((string) $profileUser->full_name)) $missing[] = 'nama lengkap';
+      if (! $profileUser->age) $missing[] = 'umur';
+      if (! trim((string) $profileUser->address)) $missing[] = 'alamat';
+      $missing = implode(', ', $missing);
+    }
+  @endphp
+  @if($showProfileModal)
+    @include('partials.profile-modal', ['missing' => $missing])
+  @endif
 </div>
 <script src="{{ asset('js/pass.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>

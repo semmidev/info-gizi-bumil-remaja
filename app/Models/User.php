@@ -59,6 +59,12 @@ class User extends Authenticatable
         return $this->hasMany(DailyTargetLog::class);
     }
 
+    public function needsProfileCompletion(): bool
+    {
+        return $this->role !== 'admin'
+            && (! trim((string) $this->full_name) || ! $this->age || ! trim((string) $this->address));
+    }
+
     public function quizAttempts(): HasMany
     {
         return $this->hasMany(QuizAttempt::class);

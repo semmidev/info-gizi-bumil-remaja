@@ -297,8 +297,8 @@
     let answers = [];
     const cat = p => p >= 76 ? ['Baik','g'] : p >= 56 ? ['Cukup','c'] : ['Perlu ditingkatkan','r'];
     function drawEval(){
-      const row = (k,l) => { const v = EVAL[k]; if (!v) return `<div class="ev"><b>${l}</b><span class="ev-n">–</span><small>Belum dikerjakan</small></div>`;
-        const [c,cl] = cat(v.percentage); return `<div class="ev"><b>${l}</b><span class="ev-n ${cl}">${v.percentage}%</span><small class="${cl}">${c}</small><small>${v.date}</small></div>`; };
+      const row = (k,l) => { const v = EVAL[k]; const pct = Number(v && v.percentage); if (!v || !Number.isFinite(pct)) return `<div class="ev"><b>${l}</b><span class="ev-n">–</span><small>Belum dikerjakan</small></div>`;
+        const [c,cl] = cat(pct); return `<div class="ev"><b>${l}</b><span class="ev-n ${cl}">${pct}%</span><small class="${cl}">${c}</small><small>${v.date}</small></div>`; };
       evalBox.innerHTML = `<h3>Hasil evaluasi saya</h3><div class="evg">${row('p','Pengetahuan')}${row('s','Sikap')}${row('t','Tindakan')}</div><p class="tip">Baik: 76–100%, Cukup: 56–75%, Perlu ditingkatkan: di bawah 56%.</p>`;
     }
     async function saveEval(k, raw){
@@ -312,7 +312,7 @@
     }
     drawEval();
     let qmode = 'p', qi = 0, score = 0;
-    const bar = (i,n) => `<div class="progress"><i style="width:${i/n*100}%"></i></div>`;
+    const bar = (i,n) => `<div class="progress"><i style="width:${n > 0 ? i/n*100 : 0}%"></i></div>`;
     const meta = (l,i,n,r) => `<div class="q-meta"><span>${l} ${i+1} dari ${n}</span><span>${r||''}</span></div>`;
     function endBox(big, msg, extra){
       qbox.innerHTML = `<div style="text-align:center"><div class="score">${big}</div><p style="margin:10px 0 12px;font-weight:700">${msg}</p></div>${extra||''}<div style="text-align:center;margin-top:12px"><button class="btn" id="q-again">Ulangi</button></div>`;
@@ -329,6 +329,11 @@
     const missed = [];
     function drawQ(){
       qbox.classList.remove('q-enter'); void qbox.offsetWidth; qbox.classList.add('q-enter');
+      const list = qmode === 'p' ? KQ : qmode === 's' ? SQ : PQ;
+      if (!list.length){
+        qbox.innerHTML = `<div style="text-align:center"><p style="font-weight:700">Belum ada soal untuk bagian ini.</p><p class="tip">Coba lagi nanti atau hubungi bidan.</p></div>`;
+        return;
+      }
       if (qmode === 'p'){
         if (qi >= KQ.length){
           const msg = score >= 11 ? 'Hebat! Pengetahuan Ibu tentang KEK sudah sangat baik.' : score >= 8 ? 'Bagus. Baca lagi menu Informasi untuk soal yang belum tepat.' : 'Yuk pelajari lagi menu Informasi, lalu coba sekali lagi.';

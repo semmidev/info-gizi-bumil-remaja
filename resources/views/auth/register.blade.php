@@ -14,8 +14,8 @@
     <div class="field">
       <label for="username">Nama pengguna</label>
       <span class="hint">Boleh huruf, angka, atau garis bawah. Contoh: rina_17</span>
-      <input id="username" name="username" type="text" value="{{ old('username') }}" autocomplete="username" autofocus
-        required>
+        <input id="username" name="username" type="text" value="{{ old('username') }}" autocomplete="username" autofocus
+        required placeholder="Contoh: rina_17">
       @error('username')<span class="err">{{ $message }}</span>@enderror
     </div>
 
@@ -23,7 +23,7 @@
       <label for="password">Kata sandi</label>
       <span class="hint">Minimal 6 karakter, pilih yang mudah kamu ingat.</span>
       <div class="pass-wrap">
-        <input id="password" name="password" type="password" autocomplete="new-password" required>
+          <input id="password" name="password" type="password" autocomplete="new-password" required placeholder="Tulis kata sandimu">
         @include('partials.toggle-eye', ['target' => 'password'])
       </div>
       @error('password')<span class="err">{{ $message }}</span>@enderror

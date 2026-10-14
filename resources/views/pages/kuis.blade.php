@@ -11,7 +11,7 @@
     <div class="seg seg3" role="tablist" aria-label="Jenis kuis">
       <button role="tab" aria-selected="true" data-qs="p">Pengetahuan</button>
       <button role="tab" aria-selected="false" data-qs="s">Sikap</button>
-      <button role="tab" aria-selected="false" data-qs="b">Tindakan</button>
+      <button role="tab" aria-selected="false" data-qs="t">Tindakan</button>
     </div>
     <div class="panel" id="quiz"></div>
 
@@ -22,7 +22,7 @@
         <details class="acc">
           <summary>
             <span>{{ ['pengetahuan' => 'Pengetahuan', 'sikap' => 'Sikap', 'tindakan' => 'Tindakan'][$attempt->type] ?? ucfirst($attempt->type) }}</span>
-            <span class="pill {{ $attempt->percentage >= 76 ? 'ok' : ($attempt->percentage >= 56 ? 'user' : 'risk') }}">{{ $attempt->percentage }}%</span>
+            <span class="pill {{ $attempt->percentage >= 76 ? 'ok' : ($attempt->percentage >= 56 ? 'user' : 'risk') }}">{{ (int) ($attempt->percentage ?? 0) }}%</span>
             <small style="color:var(--muted); font-weight:700; margin-left:auto">{{ $attempt->taken_at->translatedFormat('d M Y') }}</small>
           </summary>
           <div class="acc-b">
