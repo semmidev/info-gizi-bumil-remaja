@@ -344,6 +344,10 @@ nav.tabs.nav-4{grid-template-columns:repeat(4,1fr)}
 .list-item b{font-family:"Baloo 2",sans-serif; font-size:1rem; display:block}
 .list-item small{color:var(--muted); font-weight:700; font-size:.8rem; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .list-item .li-side{text-align:right; flex:none}
+.list-item a.li-main{flex:1; border-radius:12px; padding:4px 8px; margin:-4px -8px; text-decoration:none; color:inherit}
+.list-item a.li-main b{color:var(--danau)}
+.list-item a.li-main:hover{background:var(--danau-soft)}
+.list-item a.li-main:hover b{text-decoration:underline}
 .pill{display:inline-block; font-size:.72rem; font-weight:800; border-radius:99px; padding:3px 10px}
 .pill.admin{background:var(--sabbe-soft); color:var(--sabbe)}
 .pill.user{background:var(--danau-soft); color:var(--danau)}

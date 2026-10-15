@@ -23,13 +23,14 @@
   <div class="panel">
     @forelse ($users as $user)
       <div class="list-item">
-        <a class="li-main" href="{{ route('admin.users.show', $user) }}" style="text-decoration:none;color:inherit">
-          <b>{{ $user->username }}</b>
+        <a class="li-main" href="{{ route('admin.users.show', $user) }}">
+          <b>{{ $user->username }} <span aria-hidden="true">›</span></b>
           <small>{{ $user->bidan_phone ?: 'Tanpa nomor bidan' }} · {{ $user->created_at->translatedFormat('d M Y') }}</small>
         </a>
         <div class="li-side">
           <span class="pill {{ $user->role }}">{{ $user->role === 'admin' ? 'Admin' : 'Pengguna' }}</span>
-          <div style="margin-top:6px; display:flex; gap:6px; justify-content:flex-end">
+          <div style="margin-top:6px; display:flex; gap:6px; justify-content:flex-end; flex-wrap:wrap">
+            <a class="btn ghost small" href="{{ route('admin.users.show', $user) }}">Detail</a>
             <a class="btn ghost small" href="{{ route('admin.users.edit', $user) }}">Edit</a>
             <form method="POST" action="{{ route('admin.users.destroy', $user) }}" data-confirm="Hapus pengguna {{ $user->username }} beserta semua datanya?">
               @csrf @method('DELETE')
