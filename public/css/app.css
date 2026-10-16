@@ -35,16 +35,14 @@ body{
 }
 h1,h2,h3{font-family:"Baloo 2","Nunito",system-ui,sans-serif; line-height:1.15; margin:0}
 .app{max-width:460px; margin:0 auto; min-height:100vh; background:var(--bg); position:relative; padding-bottom:96px; box-shadow:0 0 0 1px var(--line)}
-header.top{padding:20px 20px 14px; background:var(--sabbe); color:#fff; border-radius:0 0 28px 28px}
-.app:not(.admin) > header.top{position:sticky; top:0; z-index:20; padding:12px 16px 10px; border-radius:0 0 22px 22px}
-.app:not(.admin) .brand h1{font-size:1.08rem}
-.app:not(.admin) .brand-btn img{width:36px; height:36px}
+header.top{padding:12px 16px 10px; background:var(--sabbe); color:#fff; border-radius:0 0 22px 22px}
+.app > header.top{position:sticky; top:0; z-index:20}
 :root[data-theme="dark"] header.top{color:#1a1013}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top{color:#1a1013}}
 .brand{display:flex; gap:12px; align-items:center}
 .brand svg{flex:none}
-.brand h1{font-size:1.32rem; font-weight:800}
-.brand p{margin:0; font-size:.86rem; opacity:.9}
+.brand h1{font-size:1.08rem; font-weight:800}
+.brand p{margin:0; font-size:13px; opacity:.9}
 main{padding:18px 16px 8px}
 .screen{display:none}
 .screen.on{display:block}
@@ -275,8 +273,8 @@ details.acc[open] summary{color:var(--sabbe)}
 .note{font-size:.8rem; color:var(--muted); text-align:center; margin:4px 12px 16px}
 /* nav */
 nav.tabs{position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:460px; background:var(--surface); border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(5,1fr); padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px)); z-index:10}
-nav.tabs:not(.nav-4) > a + a{position:relative}
-nav.tabs:not(.nav-4) > a + a::before{content:""; position:absolute; left:-1px; top:50%; transform:translateY(-50%); width:1px; height:22px; background:var(--line); border-radius:1px; pointer-events:none}
+nav.tabs a + a{position:relative}
+nav.tabs a + a::before{content:""; position:absolute; left:-1px; top:50%; transform:translateY(-50%); width:1px; height:22px; background:var(--line); border-radius:1px; pointer-events:none}
 nav.tabs a{font:inherit; background:none; border:0; color:var(--muted); display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px; font-size:.68rem; font-weight:700; padding:6px 2px; border-radius:12px; cursor:pointer; line-height:1.15; text-decoration:none}
 nav.tabs a svg{width:24px; height:24px}
 nav.tabs a img{width:26px; height:26px; object-fit:contain}
@@ -323,7 +321,7 @@ nav.tabs a.active{color:var(--sabbe); background:var(--sabbe-soft)}
 .brand-btn:hover{background:rgba(255,255,255,.28)}
 .brand-btn:active{transform:scale(.96)}
 .brand-btn:focus-visible{outline:3px solid var(--kunyit); outline-offset:2px}
-.brand-btn img{width:44px; height:44px; border-radius:50%; object-fit:contain; background:#fce9f1; display:block}
+.brand-btn img{width:36px; height:36px; border-radius:50%; object-fit:contain; background:#fce9f1; display:block}
 .brand-cap{display:block; text-align:center; font-size:.66rem; font-weight:800; letter-spacing:.02em; margin-top:3px; opacity:.92; pointer-events:none}
 .dropdown{position:absolute; top:calc(100% + 10px); left:0; min-width:210px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 34px rgba(36,49,59,.22); padding:6px; z-index:40}
 .dropdown[hidden]{display:none}
@@ -423,17 +421,17 @@ nav.tabs.nav-4{grid-template-columns:repeat(4,1fr)}
 /* ===== Admin desktop: tablet melebar, desktop sidebar (user tetap 460px) ===== */
 @media (min-width:768px){
   body[data-menu="Admin"] .app.admin{max-width:720px}
-  body[data-menu="Admin"] nav.tabs{max-width:720px}
   body[data-menu="Admin"] .stat-grid{grid-template-columns:repeat(3,1fr)}
   body[data-menu="Admin"] .cards{grid-template-columns:repeat(3,1fr)}
 }
 @media (min-width:1024px){
   body[data-menu="Admin"] .app.admin{max-width:none; margin:0; box-shadow:none; display:grid; grid-template-columns:240px minmax(0,1fr); grid-template-rows:auto 1fr; grid-template-areas:"side head" "side main"; padding-bottom:0; min-height:100vh; min-height:100dvh; align-content:start}
-  body[data-menu="Admin"] .app.admin > header.top{grid-area:head; border-radius:0 0 0 28px}
+  body[data-menu="Admin"] .app.admin > header.top{grid-area:head; border-radius:0 0 0 22px}
   body[data-menu="Admin"] .app.admin > main{grid-area:main; padding:32px; min-width:0}
   body[data-menu="Admin"] .app.admin > nav.tabs.nav-4{grid-area:side; position:sticky; top:0; left:auto; transform:none; width:auto; max-width:none; align-self:stretch; height:100vh; height:100dvh; min-height:100vh; grid-template-columns:1fr; grid-template-rows:repeat(4,min-content); align-content:start; gap:4px; border-top:0; border-right:1px solid var(--line); padding:20px 10px; z-index:5}
-  body[data-menu="Admin"] .app.admin > nav.tabs a{flex-direction:row; align-items:center; gap:12px; font-size:.92rem; padding:12px 14px; text-align:left}
-  body[data-menu="Admin"] .app.admin > nav.tabs a svg{flex:none}
+  body[data-menu="Admin"] .app.admin > nav.tabs a{flex-direction:row; align-items:center; gap:10px; font-size:.82rem; padding:10px 12px; text-align:left}
+  body[data-menu="Admin"] .app.admin > nav.tabs a svg, body[data-menu="Admin"] .app.admin > nav.tabs a img{flex:none}
+  body[data-menu="Admin"] .app.admin > nav.tabs a + a::before{display:none}
   body[data-menu="Admin"] .atable{min-width:0}
   body[data-menu="Admin"] .table-scroll{margin:0; padding:0; overflow-x:visible}
   body[data-menu="Admin"] .filter-bar input{min-width:200px}

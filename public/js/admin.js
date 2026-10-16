@@ -17,6 +17,14 @@
     el.remove();
   });
 
+  /* Header sticky: bayangan halus saat scroll (samakan dengan halaman user) */
+  var adminHead = document.querySelector('.app > header.top');
+  if (adminHead) {
+    var onScroll = function () { adminHead.classList.toggle('scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   /* Transisi pindah halaman (View Transitions API + fallback CSS) */
   document.addEventListener('click', function (e) {
     var a = e.target.closest('nav.tabs a[href]');
