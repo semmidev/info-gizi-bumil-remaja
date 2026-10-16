@@ -455,6 +455,11 @@ header.top{view-transition-name:app-header}
 .explain.on{animation:q-in var(--dur-fast) var(--ease)}
 .score{animation:pop .4s var(--ease)}
 .result{transition:background var(--dur-med) var(--ease),border-color var(--dur-med) var(--ease)}
+
+/* Motion JS aktif: matikan animasi entry CSS biar tidak double-play (CSS tetap jadi fallback) */
+.motion-on main,.motion-on .auth-card,.motion-on .flash-msg,.motion-on .toast,.motion-on #quiz.q-enter,.motion-on .score,.motion-on .explain.on{animation:none}
+.app > header.top{transition:box-shadow var(--dur-fast) var(--ease)}
+.app > header.top.scrolled{box-shadow:0 8px 22px rgba(36,49,59,.28)}
 details.acc[open] .acc-b{animation:q-in var(--dur-med) var(--ease)}
 
 /* Toast */

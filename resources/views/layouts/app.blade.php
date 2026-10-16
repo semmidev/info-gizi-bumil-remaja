@@ -13,6 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion-on')}catch(e){}</script>
 </head>
 
 <body data-menu="@yield('menu', 'Aplikasi')" data-user="{{ auth()->user()->username ?? 'UMUM' }}">
@@ -107,6 +108,8 @@
   </div>
   <script src="{{ asset('js/pass.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
+  <script defer src="{{ asset('js/vendor/motion.min.js') }}"></script>
+  <script defer src="{{ asset('js/motion-ui.js') }}"></script>
 </body>
 
 </html>
