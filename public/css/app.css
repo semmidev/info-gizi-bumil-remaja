@@ -89,7 +89,7 @@ main{padding:18px 16px 8px}
 .check input{width:22px; height:22px; accent-color:var(--kelor); flex:none}
 .progress{height:10px; background:var(--line); border-radius:99px; overflow:hidden; margin:6px 0 12px}
 .progress i{display:block; height:100%; width:0; background:var(--kelor); transition:width .3s}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:5px;margin-bottom:16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:5px;margin-bottom:16px}
 .seg button{font:inherit;font-weight:800;font-size:.9rem;border:0;border-radius:12px;padding:10px 6px;background:transparent;color:var(--muted);cursor:pointer}
 .seg button[aria-selected="true"]{background:var(--sabbe);color:#fff}
 .part{display:none}.part.on{display:block}
@@ -130,7 +130,7 @@ table.nut{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem;
 .piring-key li{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:start;margin-bottom:8px}
 .piring-key i{width:14px;height:14px;border-radius:4px;margin-top:4px}
 @media (max-width:380px){.piring{grid-template-columns:1fr}.piring svg{max-width:220px;margin:0 auto}}
-.seg-sm{position:static;margin-bottom:12px}
+.seg-sm{margin-bottom:12px}
 .porsi{display:grid;gap:10px}
 .pr{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:12px 14px}
 .pr.lim{background:var(--kunyit-soft);border-style:dashed}
