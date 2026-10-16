@@ -125,8 +125,13 @@ class PageController extends Controller
 
     public function layanan(Request $request): View
     {
+        return view('pages.layanan', ['data' => ['bidan' => $request->user()->bidan_phone ?? '']]);
+    }
+
+    public function menarik(): View
+    {
         $contents = Content::with(['category', 'images'])->orderBy('position')->get();
 
-        return view('pages.layanan', ['data' => ['bidan' => $request->user()->bidan_phone ?? ''], 'contents' => $contents]);
+        return view('pages.menarik', ['data' => [], 'contents' => $contents]);
     }
 }

@@ -121,7 +121,7 @@ class ContentManagementTest extends TestCase
         Storage::disk('public')->assertExists($content->fresh()->cover);
     }
 
-    public function test_layanan_shows_managed_contents(): void
+    public function test_menarik_shows_managed_contents(): void
     {
         $category = ContentCategory::create(['name' => 'Gizi', 'position' => 0]);
         $content = Content::create([
@@ -130,7 +130,7 @@ class ContentManagementTest extends TestCase
         ]);
         ContentImage::create(['content_id' => $content->id, 'image' => 'slides/a.jpg', 'position' => 0]);
 
-        $this->actingAs($this->user())->get(route('layanan'))
+        $this->actingAs($this->user())->get(route('menarik'))
             ->assertOk()
             ->assertSee('Menu Sehat Bumil')
             ->assertSee('Gizi')

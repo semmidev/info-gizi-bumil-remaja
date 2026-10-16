@@ -31,7 +31,7 @@
 <div class="field">
   <label for="cover">Sampul (opsional, maks 2MB)</label>
   @if ($content->coverUrl())
-    <div style="margin-bottom:8px"><img src="{{ $content->coverUrl() }}" alt="Sampul" style="max-width:100%; border-radius:14px"></div>
+    <div style="margin-bottom:8px; text-align:center"><img src="{{ $content->coverUrl() }}" alt="Sampul" style="width:240px; max-width:100%; border-radius:14px"></div>
   @endif
   <input id="cover" name="cover" type="file" accept="image/*">
   @error('cover')<span class="err">{{ $message }}</span>@enderror
