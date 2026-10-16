@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChecklistItem;
+use App\Models\Content;
 use App\Models\QuizQuestion;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -119,6 +120,8 @@ class PageController extends Controller
 
     public function layanan(Request $request): View
     {
-        return view('pages.layanan', ['data' => ['bidan' => $request->user()->bidan_phone ?? '']]);
+        $contents = Content::with(['category', 'images'])->orderBy('position')->get();
+
+        return view('pages.layanan', ['data' => ['bidan' => $request->user()->bidan_phone ?? ''], 'contents' => $contents]);
     }
 }

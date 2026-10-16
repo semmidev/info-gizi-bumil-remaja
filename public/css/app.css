@@ -396,6 +396,28 @@ nav.tabs.nav-4{grid-template-columns:repeat(4,1fr)}
 .card-link i{font-style:normal; font-size:1.6rem; display:block; margin-bottom:4px}
 @media (max-width:380px){.stat-grid,.cards{grid-template-columns:1fr}}
 
+/* Konten info menarik (dari admin) — grid kartu yang bisa dibuka */
+.kgrid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.kcard{background:var(--bg); border:1px solid var(--line); border-radius:18px; overflow:hidden; min-width:0; transition:border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease)}
+.kcard:hover{border-color:var(--sabbe); box-shadow:0 6px 18px rgba(36,49,59,.10)}
+.kcard[open]{grid-column:1 / -1; background:var(--surface)}
+.kcard summary{list-style:none; cursor:pointer; display:block; padding:0}
+.kcard summary::-webkit-details-marker{display:none}
+.kcard-cover{display:block; background:var(--sabbe-soft)}
+.kcard-cover img{width:100%; aspect-ratio:1 / 1; object-fit:cover; display:block}
+.kcard[open] .kcard-cover img{aspect-ratio:16 / 9}
+.kcard-ph{display:grid; place-items:center; aspect-ratio:1 / 1; font-size:1.8rem; opacity:.75}
+.kcard[open] .kcard-ph{aspect-ratio:16 / 9}
+.kcard-meta{display:block; padding:8px 10px 10px; min-width:0}
+.kcard-tag{display:inline-block; font-size:.64rem; font-weight:800; color:var(--sabbe); background:var(--sabbe-soft); border-radius:99px; padding:2px 8px; margin-bottom:4px; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.kcard-meta b{display:-webkit-box; font-size:.82rem; line-height:1.25; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.kcard[open] .kcard-meta b{-webkit-line-clamp:unset; font-size:1.02rem; font-family:"Baloo 2",sans-serif}
+.kcard-more{display:block; margin-top:4px; font-size:.7rem; font-weight:800; color:var(--danau)}
+.kcard[open] .kcard-more{color:var(--muted)}
+.kcard-body{padding:0 12px 14px}
+.kslide{width:100%; border-radius:14px; display:block; margin-top:10px}
+@media (max-width:340px){.kgrid{grid-template-columns:1fr}}
+
 /* ===== Admin desktop: tablet melebar, desktop sidebar (user tetap 460px) ===== */
 @media (min-width:768px){
   body[data-menu="Admin"] .app.admin{max-width:720px}

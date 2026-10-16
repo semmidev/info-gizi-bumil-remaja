@@ -63,6 +63,39 @@
     </div>
 
     <div class="part" id="p-menarik">
+    @if (($contents ?? collect())->isNotEmpty())
+      <div class="panel">
+        <h3>Info terbaru</h3>
+        <div class="kgrid">
+          @foreach ($contents as $konten)
+            <details class="kcard">
+              <summary>
+                <span class="kcard-cover">
+                  @if ($konten->coverUrl())
+                    <img src="{{ $konten->coverUrl() }}" alt="{{ $konten->title }}" loading="lazy">
+                  @else
+                    <span class="kcard-ph">📰</span>
+                  @endif
+                </span>
+                <span class="kcard-meta">
+                  @if ($konten->category)<span class="kcard-tag">{{ $konten->category->name }}</span>@endif
+                  <b>{{ $konten->title }}</b>
+                  <small class="kcard-more">Lihat detail</small>
+                </span>
+              </summary>
+              <div class="kcard-body">
+                @if ($konten->description)<p class="tip" style="margin-top:0">{{ $konten->description }}</p>@endif
+                @forelse ($konten->images as $slide)
+                  <img class="kslide" src="{{ $slide->imageUrl() }}" alt="{{ $konten->title }} {{ $loop->iteration }}" loading="lazy">
+                @empty
+                  <p class="empty">Belum ada gambar.</p>
+                @endforelse
+              </div>
+            </details>
+          @endforeach
+        </div>
+      </div>
+    @endif
     <p class="lead">Ketuk setiap topik untuk membaca isinya.</p>
 
     <details class="acc" open><summary><i>✅</i>Tips cegah KEK</summary><div class="acc-b">

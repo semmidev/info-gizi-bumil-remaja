@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\ChecklistItemController;
+use App\Http\Controllers\Admin\ContentCategoryController;
+use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\ContentImageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\ExportController;
@@ -72,6 +75,23 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/target/{target}/edit', [ChecklistItemController::class, 'edit'])->name('target.edit');
     Route::put('/target/{target}', [ChecklistItemController::class, 'update'])->name('target.update');
     Route::delete('/target/{target}', [ChecklistItemController::class, 'destroy'])->name('target.destroy');
+
+    Route::get('/kategori', [ContentCategoryController::class, 'index'])->name('categories.index');
+    Route::get('/kategori/create', [ContentCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/kategori', [ContentCategoryController::class, 'store'])->name('categories.store');
+    Route::get('/kategori/{category}/edit', [ContentCategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/kategori/{category}', [ContentCategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/kategori/{category}', [ContentCategoryController::class, 'destroy'])->name('categories.destroy');
+
+    Route::get('/konten', [ContentController::class, 'index'])->name('contents.index');
+    Route::get('/konten/create', [ContentController::class, 'create'])->name('contents.create');
+    Route::post('/konten', [ContentController::class, 'store'])->name('contents.store');
+    Route::get('/konten/{content}/edit', [ContentController::class, 'edit'])->name('contents.edit');
+    Route::put('/konten/{content}', [ContentController::class, 'update'])->name('contents.update');
+    Route::delete('/konten/{content}', [ContentController::class, 'destroy'])->name('contents.destroy');
+    Route::post('/konten/{content}/slides', [ContentImageController::class, 'store'])->name('contents.slides.store');
+    Route::put('/konten/slides/{slide}', [ContentImageController::class, 'update'])->name('contents.slides.update');
+    Route::delete('/konten/slides/{slide}', [ContentImageController::class, 'destroy'])->name('contents.slides.destroy');
 
     Route::get('/data/lila', [DataController::class, 'lila'])->name('data.lila');
     Route::delete('/data/lila/{lila}', [DataController::class, 'destroyLila'])->name('data.lila.destroy');
