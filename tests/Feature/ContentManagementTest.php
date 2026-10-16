@@ -76,7 +76,7 @@ class ContentManagementTest extends TestCase
             'title' => 'Menu Sehat',
             'description' => 'Contoh menu harian.',
             'cover' => UploadedFile::fake()->image('cover.jpg'),
-        ])->assertRedirect(route('admin.contents.index'));
+        ])->assertRedirect(route('admin.contents.edit', Content::where('title', 'Menu Sehat')->firstOrFail()).'#slides');
 
         $content = Content::where('title', 'Menu Sehat')->firstOrFail();
         Storage::disk('public')->assertExists($content->cover);

@@ -13,7 +13,7 @@
     </form>
   </div>
 
-  <div class="panel">
+  <div class="panel" id="slides">
     <h3>Slide gambar ({{ $content->images->count() }})</h3>
     @forelse ($content->images as $slide)
       <div class="list-item">

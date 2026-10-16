@@ -34,9 +34,12 @@ class ContentController extends Controller
             ? $request->file('cover')->store('covers', 'public')
             : null;
 
-        Content::create($data);
+        $content = Content::create($data);
 
-        return redirect()->route('admin.contents.index')->with('sukses', 'Konten ditambahkan.');
+        return redirect()
+            ->route('admin.contents.edit', $content)
+            ->withFragment('slides')
+            ->with('sukses', 'Konten ditambahkan. Tambahkan slide gambar di bawah.');
     }
 
     public function edit(Content $content): View
