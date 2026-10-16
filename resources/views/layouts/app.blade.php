@@ -22,7 +22,7 @@
         <div class="brand-menu">
           <button type="button" class="brand-btn" id="brand-btn" aria-haspopup="true" aria-expanded="false"
             aria-label="Menu akun" title="Menu akun">
-            <img src="{{ asset(auth()->user()?->logoPath() ?? 'logo/logo-hijab.png') }}" alt="Logo" width="44" height="44">
+            <img src="{{ asset(auth()->user()?->logoPath() ?? 'logo/logo-hijab.png') }}" alt="Logo" width="36" height="36">
           </button>
           <span class="brand-cap">Akun</span>
           <div class="dropdown" id="brand-dropdown" hidden>
