@@ -9,6 +9,7 @@
     <div class="stat d"><b>{{ $stats['users'] }}</b><small>Total pengguna</small></div>
     <div class="stat g"><b>{{ $stats['new_users'] }}</b><small>Pengguna baru (7 hari)</small></div>
     <div class="stat"><b>{{ $stats['lila'] }}</b><small>Pengukuran LILA</small></div>
+    <div class="stat"><b>{{ $stats['imt'] }}</b><small>Pengukuran IMT</small></div>
     <div class="stat c"><b>{{ $stats['quiz_avg'] }}%</b><small>Rata-rata skor kuis</small></div>
     <div class="stat r"><b>{{ $stats['risky'] }}</b><small>Berisiko KEK (LILA terakhir)</small></div>
     <div class="stat d"><b>{{ $stats['activity_today'] }}</b><small>Aktivitas hari ini</small></div>

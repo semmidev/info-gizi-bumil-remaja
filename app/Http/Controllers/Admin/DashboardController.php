@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
+use App\Models\ImtMeasurement;
 use App\Models\LilaMeasurement;
 use App\Models\QuizAttempt;
 use App\Models\User;
@@ -20,6 +21,7 @@ class DashboardController extends Controller
             'users' => User::count(),
             'new_users' => User::where('created_at', '>=', now()->subDays(7))->count(),
             'lila' => LilaMeasurement::count(),
+            'imt' => ImtMeasurement::count(),
             'quiz_avg' => (int) round(QuizAttempt::avg('percentage') ?? 0),
             'risky' => LilaMeasurement::whereIn('id', $latestLilaIds)->where('value_cm', '<', 23.5)->count(),
             'activity_today' => ActivityLog::whereDate('created_at', now()->toDateString())->count(),

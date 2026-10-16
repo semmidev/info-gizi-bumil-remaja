@@ -1,6 +1,7 @@
 @php
 $datasets = [
     ['route' => 'admin.data.lila', 'label' => 'Pengukuran LILA'],
+    ['route' => 'admin.data.imt', 'label' => 'Pengukuran IMT'],
     ['route' => 'admin.data.quiz', 'label' => 'Hasil Kuis'],
     ['route' => 'admin.data.target', 'label' => 'Target Harian'],
     ['route' => 'admin.data.activity', 'label' => 'Aktivitas'],

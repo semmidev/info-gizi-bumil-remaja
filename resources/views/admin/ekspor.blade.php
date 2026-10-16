@@ -12,6 +12,7 @@
       <a class="btn" href="{{ route('admin.export.download', 'users') }}">Pengguna ({{ $counts['users'] }})</a>
       <a class="btn" href="{{ route('admin.export.download', 'quiz') }}">Hasil kuis ({{ $counts['quiz'] }})</a>
       <a class="btn" href="{{ route('admin.export.download', 'lila') }}">Pengukuran LILA ({{ $counts['lila'] }})</a>
+      <a class="btn" href="{{ route('admin.export.download', 'imt') }}">Pengukuran IMT ({{ $counts['imt'] }})</a>
       <a class="btn" href="{{ route('admin.export.download', 'activity') }}">Aktivitas ({{ $counts['activity'] }})</a>
       <a class="btn" href="{{ route('admin.export.download', 'target') }}">Target harian ({{ $counts['target'] }})</a>
     </div>

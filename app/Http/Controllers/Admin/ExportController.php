@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\DailyTargetLog;
+use App\Models\ImtMeasurement;
 use App\Models\LilaMeasurement;
 use App\Models\QuizAttempt;
 use App\Models\User;
@@ -24,6 +25,7 @@ class ExportController extends Controller
                 'users' => User::where('role', '!=', 'admin')->count(),
                 'quiz' => QuizAttempt::whereHas('user', $onlyUsers)->count(),
                 'lila' => LilaMeasurement::whereHas('user', $onlyUsers)->count(),
+                'imt' => ImtMeasurement::whereHas('user', $onlyUsers)->count(),
                 'activity' => ActivityLog::whereHas('user', $onlyUsers)->count(),
                 'target' => DailyTargetLog::whereHas('user', $onlyUsers)->count(),
             ],
@@ -81,6 +83,22 @@ class ExportController extends Controller
                     $m->user?->full_name,
                     (float) $m->value_cm,
                     $this->statusLila($m->value_cm),
+                    $this->date($m->measured_at),
+                    $this->datetime($m->created_at),
+                ],
+            ),
+            'imt' => $this->stream(
+                'pengukuran-imt',
+                ['ID', 'Nama Pengguna', 'Nama Lengkap', 'Berat (kg)', 'Tinggi (cm)', 'IMT', 'Kategori', 'Tanggal Ukur', 'Waktu Dicatat'],
+                ImtMeasurement::with('user')->whereHas('user', $onlyUsers)->orderBy('id')->cursor(),
+                fn (ImtMeasurement $m) => [
+                    $m->id,
+                    $m->user?->username,
+                    $m->user?->full_name,
+                    (float) $m->weight_kg,
+                    (float) $m->height_cm,
+                    (float) $m->bmi,
+                    ImtMeasurement::kategori((float) $m->bmi),
                     $this->date($m->measured_at),
                     $this->datetime($m->created_at),
                 ],

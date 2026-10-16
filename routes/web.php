@@ -46,6 +46,8 @@ Route::middleware(['auth', 'role:user,admin'])->group(function () {
         Route::post('/quiz-attempt', [UserDataController::class, 'storeQuizAttempt'])->name('quiz-attempt.store');
         Route::post('/lila', [UserDataController::class, 'storeLila'])->name('lila.store');
         Route::delete('/lila', [UserDataController::class, 'destroyLila'])->name('lila.destroy');
+        Route::post('/imt', [UserDataController::class, 'storeImt'])->name('imt.store');
+        Route::delete('/imt', [UserDataController::class, 'destroyImt'])->name('imt.destroy');
         Route::put('/bidan', [UserDataController::class, 'updateBidan'])->name('bidan.update');
     });
 });
@@ -95,6 +97,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
     Route::get('/data/lila', [DataController::class, 'lila'])->name('data.lila');
     Route::delete('/data/lila/{lila}', [DataController::class, 'destroyLila'])->name('data.lila.destroy');
+    Route::get('/data/imt', [DataController::class, 'imt'])->name('data.imt');
+    Route::delete('/data/imt/{imt}', [DataController::class, 'destroyImt'])->name('data.imt.destroy');
     Route::get('/data/kuis', [DataController::class, 'quiz'])->name('data.quiz');
     Route::get('/data/kuis/{attempt}', [DataController::class, 'quizShow'])->name('data.quiz.show');
     Route::delete('/data/kuis/{attempt}', [DataController::class, 'destroyQuiz'])->name('data.quiz.destroy');
@@ -105,6 +109,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
     Route::get('/ekspor', [ExportController::class, 'index'])->name('export.index');
     Route::get('/ekspor/{dataset}', [ExportController::class, 'download'])
-        ->whereIn('dataset', ['users', 'quiz', 'lila', 'activity', 'target'])
+        ->whereIn('dataset', ['users', 'quiz', 'lila', 'imt', 'activity', 'target'])
         ->name('export.download');
 });

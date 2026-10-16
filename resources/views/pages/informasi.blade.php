@@ -11,7 +11,6 @@
       <p>Media ini untuk remaja yang TERLANJUR hamil agar tetap sehat. Jika belum hamil, tunda kehamilan sampai usia
         matang ≥ 20 tahun untuk mencegah anemia, KEK, preeklamsia, BBLR, stunting, hingga risiko kematian ibu &amp; bayi.
       </p>
-      <div class="about-g"><span>👩 Sasaran: ibu hamil remaja</span><span>🎯 Tujuan: mencegah KEK</span></div>
     </div>
     <p class="lead">Mulai dari mengenal kehamilan remaja, lalu pelajari KEK dan cara mencegahnya.</p>
 
@@ -82,6 +81,8 @@
         </div>
         <p class="tip">Tambahan +300 kkal kira-kira sama dengan sepiring kecil nasi dan sepotong ikan, bukan makan dua
           kali lipat. Sumber: AKG 2019.</p>
+        <img class="illus" src="{{ asset('perbandingan-suplemen-ibu-hamil.svg') }}"
+          alt="Perbandingan suplementasi untuk ibu hamil: TTD berisi Fe 60 mg dan folat 400 mcg minimal 90 tablet, dibanding MMS dengan 15 mikronutrien untuk mencegah anemia, KEK, BBLR, dan stunting. Jangan diminum bersamaan, gunakan salah satu TTD atau MMS, dan cek kadar Hb 2 kali selama kehamilan.">
         <button class="btn ghost" data-goto="p-kek" data-scroll="b7">Lihat porsi makan harian</button>
       </div>
 
@@ -120,10 +121,17 @@
             <div><b>&lt;23,5</b><span>cm LILA</span></div>
           </div>
           <div>
-            <p>Kekurangan Energi Kronik (KEK) adalah kondisi kurang energi dan protein yang berlangsung lama. Ibu hamil
-              disebut KEK bila lingkar lengan atas (LILA) kurang dari 23,5 cm.</p>
+            <p>KEK (Kekurangan Energi Kronis pada Ibu Hamil Remaja) adalah Kondisi ibu hamil yang mengalami kekurangan
+              energi dan zat
+              gizi secara
+              kronis dalam
+              jangka waktu lama.
+              Jika tidak ditangani dapat mengganggu kesehatan ibu dan tumbuh kembang janin. Ibu hamil disebut KEK bila
+              lingkar lengan atas (LILA) kurang dari 23,5 cm.</p>
           </div>
         </div>
+        <img class="illus" src="{{ asset('indikator-kek.svg') }}"
+          alt="Indikator baru KEK: LILA kurang dari 23,5 cm dan IMT kurang dari 18,5 kg/m². Rumus IMT = berat badan dibagi tinggi badan (meter) kuadrat.">
         <p style="margin-top:12px;font-weight:700">Tanda yang perlu diwaspadai:</p>
         <div class="icons">
           <div><i>📏</i>LILA &lt;23,5 cm</div>
@@ -335,62 +343,8 @@
             sehari ditambah 2–3 kali selingan.</p>
         </div>
         <div class="prv" id="pr-kek">
-          <svg viewBox="0 0 330 220" role="img"
-            aria-label="Isi Piringku ibu hamil KEK: piring seimbang ditambah lauk hewani tambahan dan makanan tambahan">
-
-            <circle cx="110" cy="110" r="108" fill="var(--surface)" stroke="var(--line)" stroke-width="3" />
-            <path d="M110,110 L110,10 A100,100 0 0 1 196.6,160 Z" fill="#7DBE5E" />
-            <path d="M110,110 L196.6,160 A100,100 0 0 1 110,210 Z" fill="#F2A541" />
-            <path d="M110,110 L110,210 A100,100 0 0 1 23.4,60 Z" fill="#F4E3B5" />
-            <path d="M110,110 L23.4,60 A100,100 0 0 1 110,10 Z" fill="#E77F8C" />
-            <g stroke="var(--surface)" stroke-width="3">
-              <line x1="110" y1="110" x2="110" y2="10" />
-              <line x1="110" y1="110" x2="196.6" y2="160" />
-              <line x1="110" y1="110" x2="110" y2="210" />
-              <line x1="110" y1="110" x2="23.4" y2="60" />
-            </g>
-            <g font-family="Nunito,sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#24313B">
-              <text x="160" y="72" font-size="24">🥬</text><text x="160" y="90">Sayur</text>
-              <text x="140" y="156" font-size="22">🍌</text><text x="140" y="172">Buah</text>
-              <text x="62" y="140" font-size="24">🍚</text><text x="62" y="158">Makanan</text><text x="62"
-                y="170">pokok</text>
-              <text x="78" y="54" font-size="20">🐟</text><text x="78" y="70">Lauk</text>
-            </g>
-
-            <g font-family="Nunito,sans-serif" font-weight="800" text-anchor="middle" fill="var(--ink)">
-              <text x="232" y="66" font-size="22" fill="var(--sabbe)">+</text>
-              <circle cx="285" cy="58" r="36" fill="#E77F8C" stroke="var(--surface)" stroke-width="3" />
-              <text x="285" y="58" font-size="20">🥚</text><text x="285" y="76" font-size="9.5" fill="#24313B">Lauk
-                hewani</text><text x="285" y="87" font-size="9.5" fill="#24313B">tambahan</text>
-              <text x="232" y="166" font-size="22" fill="var(--sabbe)">+</text>
-              <circle cx="285" cy="160" r="36" fill="#F2A541" stroke="var(--surface)" stroke-width="3" />
-              <text x="285" y="160" font-size="20">🍪</text><text x="285" y="178" font-size="9.5"
-                fill="#24313B">Selingan</text><text x="285" y="189" font-size="9.5" fill="#24313B">PMT</text>
-            </g>
-          </svg>
-          <ol class="steps">
-            <li>
-              <div><b>Isi piring tetap seimbang</b><small>Setengah piring sayur dan buah, setengah piring nasi dan
-                  lauk.</small></div>
-            </li>
-            <li>
-              <div><b>Tambah lauk hewani setiap makan</b><small>Misalnya ikan ditambah telur, atau ayam ditambah
-                  tempe.</small></div>
-            </li>
-            <li>
-              <div><b>Makan sedikit tapi sering</b><small>3 kali makan utama dan 2–3 kali selingan.</small></div>
-            </li>
-            <li>
-              <div><b>Habiskan PMT dari puskesmas</b><small>Sebagai selingan di antara makan utama, bukan pengganti
-                  makan.</small></div>
-            </li>
-            <li>
-              <div><b>Pilih makanan padat energi</b><small>Bubur kacang hijau, susu, atau masakan bersantan
-                  secukupnya.</small></div>
-            </li>
-          </ol>
-          <p class="note-kek">Gambar ini adalah anjuran penatalaksanaan gizi bagi ibu hamil KEK, bukan Isi Piringku resmi.
-            Jumlah porsi yang tepat ditentukan bersama bidan atau ahli gizi.</p>
+          <img class="illus" src="{{ asset('isi-piringku-kek-pmt.svg') }}"
+            alt="Isi Piringku untuk ibu hamil KEK ditambah PMT: setengah piring sayur dan buah, seperempat piring makanan pokok, dan seperempat piring lauk hewani dan nabati. Makan sedikit tapi sering, 3 kali makan utama dan 2–3 kali selingan. PMT pemulihan wajib dihabiskan sendiri dalam 1 hari dan diberikan untuk pemulihan ibu KEK selama 90 hari.">
         </div>
       </div>
 

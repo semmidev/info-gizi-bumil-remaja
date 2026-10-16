@@ -115,7 +115,12 @@ class PageController extends Controller
             ->orderByDesc('id')
             ->paginate(10);
 
-        return view('pages.lila', ['data' => [], 'lilaHistory' => $lilaHistory]);
+        $imtHistory = $request->user()->imtMeasurements()
+            ->orderByDesc('measured_at')
+            ->orderByDesc('id')
+            ->paginate(10, ['*'], 'imt_page');
+
+        return view('pages.lila', ['data' => [], 'lilaHistory' => $lilaHistory, 'imtHistory' => $imtHistory]);
     }
 
     public function layanan(Request $request): View

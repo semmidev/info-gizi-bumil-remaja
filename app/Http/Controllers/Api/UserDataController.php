@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ImtMeasurement;
 use App\Models\QuizQuestion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -109,6 +110,36 @@ class UserDataController extends Controller
     public function destroyLila(Request $request): JsonResponse
     {
         $request->user()->lilaMeasurements()->delete();
+
+        return response()->json(['ok' => true]);
+    }
+
+    public function storeImt(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'weight_kg' => ['required', 'numeric', 'between:20,200'],
+            'height_cm' => ['required', 'numeric', 'between:100,220'],
+        ]);
+
+        $bmi = round($data['weight_kg'] / ($data['height_cm'] / 100) ** 2, 1);
+
+        $measurement = $request->user()->imtMeasurements()->create([
+            'weight_kg' => $data['weight_kg'],
+            'height_cm' => $data['height_cm'],
+            'bmi' => $bmi,
+            'measured_at' => now()->toDateString(),
+        ]);
+
+        return response()->json([
+            'bmi' => (float) $measurement->bmi,
+            'category' => ImtMeasurement::kategori($bmi),
+            'date' => $measurement->measured_at->translatedFormat('j M Y'),
+        ]);
+    }
+
+    public function destroyImt(Request $request): JsonResponse
+    {
+        $request->user()->imtMeasurements()->delete();
 
         return response()->json(['ok' => true]);
     }

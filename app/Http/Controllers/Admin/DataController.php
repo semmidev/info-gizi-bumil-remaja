@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\DailyTargetLog;
+use App\Models\ImtMeasurement;
 use App\Models\LilaMeasurement;
 use App\Models\QuizAttempt;
 use Illuminate\Http\RedirectResponse;
@@ -30,6 +31,43 @@ class DataController extends Controller
         $lila->delete();
 
         return back()->with('sukses', 'Data LILA dihapus.');
+    }
+
+    public function imt(Request $request): View
+    {
+        $rows = ImtMeasurement::with('user')
+            ->when($request->filled('q'), fn ($q) => $q->whereHas('user', fn ($u) => $u->where('username', 'like', '%'.$request->string('q').'%')))
+            ->when($request->filled('category'), function ($q) use ($request) {
+                [$min, $max] = $this->bmiRange($request->string('category')->toString());
+                $q->where('bmi', '>=', $min)->where('bmi', '<', $max);
+            })
+            ->latest('measured_at')->latest('id')
+            ->paginate(20)->withQueryString();
+
+        return view('admin.data.imt', compact('rows'));
+    }
+
+    /**
+     * Batas bawah (inklusif) dan atas (eksklusif) IMT per kategori WHO.
+     *
+     * @return array{0: float, 1: float}
+     */
+    private function bmiRange(string $category): array
+    {
+        return match ($category) {
+            'kurus' => [0, 18.5],
+            'normal' => [18.5, 25],
+            'overweight' => [25, 30],
+            'obesitas' => [30, PHP_FLOAT_MAX],
+            default => [0, PHP_FLOAT_MAX],
+        };
+    }
+
+    public function destroyImt(ImtMeasurement $imt): RedirectResponse
+    {
+        $imt->delete();
+
+        return back()->with('sukses', 'Data IMT dihapus.');
     }
 
     public function quiz(Request $request): View

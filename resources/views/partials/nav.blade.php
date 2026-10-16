@@ -3,7 +3,7 @@
     <img src="{{ asset('icons/nav-informasi.webp') }}" width="24" height="24" alt="">Informasi
   </a>
   <a href="{{ route('lila') }}" class="{{ request()->routeIs('lila') ? 'active' : '' }}" @if(request()->routeIs('lila')) aria-current="page" @endif>
-    <img src="{{ asset('icons/nav-lila.webp') }}" width="24" height="24" alt="">Pengukuran LILA
+    <img src="{{ asset('icons/nav-lila.webp') }}" width="24" height="24" alt="">LILA &amp; IMT
   </a>
   <a href="{{ route('layanan') }}" class="{{ request()->routeIs('layanan') ? 'active' : '' }}" @if(request()->routeIs('layanan')) aria-current="page" @endif>
     <img src="{{ asset('icons/nav-layanan.webp') }}" width="24" height="24" alt="">Layanan

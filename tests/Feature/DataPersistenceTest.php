@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\ChecklistItem;
 use App\Models\DailyTargetLog;
+use App\Models\ImtMeasurement;
 use App\Models\LilaMeasurement;
 use App\Models\QuizAttempt;
 use App\Models\QuizOption;
@@ -159,6 +160,28 @@ class DataPersistenceTest extends TestCase
 
         $this->actingAs($user)->deleteJson(route('api.lila.destroy'))->assertOk();
         $this->assertDatabaseCount('lila_measurements', 0);
+    }
+
+    public function test_imt_measurements_are_saved_with_category_and_cleared(): void
+    {
+        $user = $this->user();
+
+        $this->actingAs($user)->postJson(route('api.imt.store'), ['weight_kg' => 45, 'height_cm' => 150])
+            ->assertOk()
+            ->assertJson(['bmi' => 20.0, 'category' => 'Normal / Ideal']);
+
+        $this->assertDatabaseHas('imt_measurements', ['user_id' => $user->id, 'bmi' => 20.0]);
+
+        $this->actingAs($user)->deleteJson(route('api.imt.destroy'))->assertOk();
+        $this->assertDatabaseCount('imt_measurements', 0);
+    }
+
+    public function test_imt_category_follows_who_thresholds(): void
+    {
+        $this->assertSame('Kurus (Underweight)', ImtMeasurement::kategori(17.0));
+        $this->assertSame('Normal / Ideal', ImtMeasurement::kategori(22.0));
+        $this->assertSame('Kelebihan berat badan (Overweight)', ImtMeasurement::kategori(27.0));
+        $this->assertSame('Obesitas', ImtMeasurement::kategori(31.0));
     }
 
     public function test_bidan_phone_is_saved_on_user(): void

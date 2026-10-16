@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\ActivityLog;
 use App\Models\ChecklistItem;
 use App\Models\DailyTargetLog;
+use App\Models\ImtMeasurement;
 use App\Models\LilaMeasurement;
 use App\Models\QuizAnswer;
 use App\Models\QuizAttempt;
@@ -59,6 +60,7 @@ class AdminTest extends TestCase
             'admin.target.index',
             'admin.target.create',
             'admin.data.lila',
+            'admin.data.imt',
             'admin.data.quiz',
             'admin.data.activity',
             'admin.data.target',
@@ -126,6 +128,33 @@ class AdminTest extends TestCase
 
         $this->actingAs($admin)->delete(route('admin.target.destroy', $item))->assertRedirect(route('admin.target.index'));
         $this->assertDatabaseMissing('checklist_items', ['id' => $item->id]);
+    }
+
+    public function test_admin_can_view_filter_and_delete_imt_measurements(): void
+    {
+        $admin = $this->admin();
+        $user = $this->regular();
+
+        $normal = ImtMeasurement::create(['user_id' => $user->id, 'weight_kg' => 45, 'height_cm' => 150, 'bmi' => 20.0, 'measured_at' => now()->toDateString()]);
+        $obese = ImtMeasurement::create(['user_id' => $user->id, 'weight_kg' => 80, 'height_cm' => 150, 'bmi' => 35.6, 'measured_at' => now()->toDateString()]);
+
+        $this->actingAs($admin)->get(route('admin.data.imt'))
+            ->assertOk()
+            ->assertSee('Normal / Ideal')
+            ->assertSee('Obesitas');
+
+        $this->actingAs($admin)->get(route('admin.data.imt', ['category' => 'obesitas']))
+            ->assertOk()
+            ->assertSee('Obesitas')
+            ->assertDontSee('Normal / Ideal');
+
+        $this->actingAs($admin)->get(route('admin.data.imt', ['q' => $user->username]))
+            ->assertOk()
+            ->assertSee($user->username);
+
+        $this->actingAs($admin)->delete(route('admin.data.imt.destroy', $normal))->assertRedirect();
+        $this->assertDatabaseMissing('imt_measurements', ['id' => $normal->id]);
+        $this->assertDatabaseHas('imt_measurements', ['id' => $obese->id]);
     }
 
     public function test_admin_can_create_knowledge_question_with_options(): void
@@ -263,6 +292,7 @@ class AdminTest extends TestCase
 
         DailyTargetLog::create(['user_id' => $user->id, 'log_date' => now()->toDateString(), 'checklist_item_id' => $item->id, 'is_done' => true]);
         LilaMeasurement::create(['user_id' => $user->id, 'value_cm' => 22.0, 'measured_at' => now()->toDateString()]);
+        ImtMeasurement::create(['user_id' => $user->id, 'weight_kg' => 45, 'height_cm' => 150, 'bmi' => 20.0, 'measured_at' => now()->toDateString()]);
         QuizAttempt::create(['user_id' => $user->id, 'type' => 'pengetahuan', 'raw_score' => 13, 'max_score' => 13, 'percentage' => 100, 'taken_at' => now()->toDateString()]);
 
         $target = $this->actingAs($admin)->get(route('admin.export.download', 'target'))->streamedContent();
@@ -273,6 +303,10 @@ class AdminTest extends TestCase
         $lila = $this->actingAs($admin)->get(route('admin.export.download', 'lila'))->streamedContent();
         $this->assertStringContainsString('Status', $lila);
         $this->assertStringContainsString('Berisiko KEK', $lila);
+
+        $imt = $this->actingAs($admin)->get(route('admin.export.download', 'imt'))->streamedContent();
+        $this->assertStringContainsString('Kategori', $imt);
+        $this->assertStringContainsString('Normal / Ideal', $imt);
 
         $quiz = $this->actingAs($admin)->get(route('admin.export.download', 'quiz'))->streamedContent();
         $this->assertStringContainsString('Kategori', $quiz);

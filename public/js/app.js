@@ -466,6 +466,58 @@
     };
   }
 
+  /* IMT (Indeks Massa Tubuh) */
+  const imtBerat = document.getElementById('imt-berat');
+  if (imtBerat){
+    const imtTinggi = document.getElementById('imt-tinggi');
+    const res = document.getElementById('imt-result');
+    const fmt = v => v.toFixed(1).replace('.', ',');
+    function kategori(b){
+      if (b < 18.5) return ['Kurus (Underweight)', 'risk', 'Tambah porsi makan bergizi seimbang dan lauk hewani. Konsultasi ke bidan bila berat sulit naik.'];
+      if (b < 25) return ['Normal / Ideal', 'ok', 'Pertahankan pola makan gizi seimbang dan aktivitas fisik yang cukup.'];
+      if (b < 30) return ['Kelebihan berat badan (Overweight)', 'risk', 'Jaga porsi dan pilih makanan bergizi. Kurangi gorengan dan minuman manis.'];
+      return ['Obesitas', 'risk', 'Konsultasikan pola makan dengan bidan atau ahli gizi untuk kesehatan Ibu dan bayi.'];
+    }
+    function showImt(){
+      const w = parseFloat(imtBerat.value), h = parseFloat(imtTinggi.value);
+      if (isNaN(w) || isNaN(h) || w < 20 || w > 200 || h < 100 || h > 220){
+        res.className = 'result';
+        res.innerHTML = '<h3>Angka belum sesuai</h3>Masukkan berat 20–200 kg dan tinggi 100–220 cm.';
+        return null;
+      }
+      const b = w / Math.pow(h / 100, 2);
+      const [label, cls, saran] = kategori(b);
+      res.className = 'result ' + cls;
+      res.innerHTML = `<h3>IMT ${fmt(b)} kg/m²: ${label}</h3>${saran}`;
+      return b;
+    }
+    imtBerat.oninput = showImt;
+    imtTinggi.oninput = showImt;
+    showImt();
+
+    const ihul = document.getElementById('imt-hist');
+    document.getElementById('imt-save').onclick = async e => {
+      const btn = e.currentTarget;
+      if (showImt() === null) return;
+      btn.disabled = true;
+      try {
+        const saved = await api('POST', '/api/imt', {weight_kg: parseFloat(imtBerat.value), height_cm: parseFloat(imtTinggi.value)});
+        const first = ihul.querySelector('li');
+        if (first && first.children.length === 1) first.remove();
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${saved.date}</span><span>${fmt(saved.bmi)} — ${saved.category}</span>`;
+        ihul.prepend(li);
+        logEv('simpan_imt', fmt(saved.bmi) + ' kg/m2 — ' + saved.category);
+        toast('Hasil IMT tersimpan.', 'ok');
+      } catch(e) { toast('Gagal menyimpan. Periksa koneksi.', 'err'); }
+      finally { btn.disabled = false; }
+    };
+    document.getElementById('imt-clear').onclick = async () => {
+      try { await api('DELETE', '/api/imt'); } catch(e) {}
+      location.reload();
+    };
+  }
+
   /* Bidan contact */
   const bi = document.getElementById('bidan');
   if (bi){

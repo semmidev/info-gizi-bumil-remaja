@@ -83,6 +83,11 @@ class User extends Authenticatable
         return $this->hasMany(LilaMeasurement::class);
     }
 
+    public function imtMeasurements(): HasMany
+    {
+        return $this->hasMany(ImtMeasurement::class);
+    }
+
     public function activityLogs(): HasMany
     {
         return $this->hasMany(ActivityLog::class);
