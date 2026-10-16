@@ -5,6 +5,7 @@
 @section('subtitle', 'Target harian per pengguna')
 
 @section('content')
+  @include('admin.partials.dataset-switcher')
   <form class="filter-bar" method="GET" action="{{ route('admin.data.target') }}">
     <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari pengguna…">
     <input type="date" name="date" value="{{ request('date') }}" data-auto-submit>

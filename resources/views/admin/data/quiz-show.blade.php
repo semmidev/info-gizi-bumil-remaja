@@ -5,6 +5,7 @@
 @section('subtitle', $attempt->user?->username ?? 'Pengguna terhapus')
 
 @section('content')
+  @include('admin.partials.dataset-switcher')
   <div class="panel">
     <h3>Ringkasan</h3>
     <div class="akun-row"><span>Pengguna</span><b>{{ $attempt->user?->username ?? '–' }}</b></div>

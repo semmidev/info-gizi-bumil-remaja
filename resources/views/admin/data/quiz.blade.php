@@ -5,6 +5,7 @@
 @section('subtitle', 'Riwayat pengerjaan kuis')
 
 @section('content')
+  @include('admin.partials.dataset-switcher')
   <form class="filter-bar" method="GET" action="{{ route('admin.data.quiz') }}">
     <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari pengguna…">
     <select name="type" data-auto-submit>

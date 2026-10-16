@@ -5,6 +5,7 @@
 @section('subtitle', 'Jejak penggunaan aplikasi')
 
 @section('content')
+  @include('admin.partials.dataset-switcher')
   <form class="filter-bar" method="GET" action="{{ route('admin.data.activity') }}">
     <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari pengguna…">
     <select name="event" data-auto-submit>

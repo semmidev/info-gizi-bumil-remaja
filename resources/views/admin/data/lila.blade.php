@@ -5,6 +5,7 @@
 @section('subtitle', 'Pengukuran lingkar lengan atas')
 
 @section('content')
+  @include('admin.partials.dataset-switcher')
   <form class="filter-bar" method="GET" action="{{ route('admin.data.lila') }}">
     <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari pengguna…">
     <select name="risk" data-auto-submit>
