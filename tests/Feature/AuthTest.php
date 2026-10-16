@@ -102,11 +102,13 @@ class AuthTest extends TestCase
     {
         $user = User::create(['username' => 'lia_21', 'password' => 'rahasia123', 'role' => 'admin']);
 
-        foreach (['informasi', 'kuis', 'lila', 'layanan', 'menarik'] as $name) {
+        foreach (['informasi', 'kuis', 'lila', 'layanan'] as $name) {
             $this->actingAs($user)->get(route($name))
                 ->assertOk()
                 ->assertSee('Layanan Infogizi');
         }
+
+        $this->actingAs($user)->get(route('menarik'))->assertRedirect(route('layanan'));
     }
 
     public function test_account_page_shows_profile_and_changes_password(): void

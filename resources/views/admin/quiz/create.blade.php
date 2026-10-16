@@ -2,7 +2,7 @@
 
 @section('title', 'Tambah Soal')
 @section('heading', 'Tambah Soal')
-@section('subtitle', 'Master kuis')
+@section('subtitle', 'Manajemen kuis')
 
 @section('content')
   <div class="panel">

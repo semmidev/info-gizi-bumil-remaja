@@ -5,12 +5,12 @@
 
 @section('content')
   <h2>Masuk ke akunmu</h2>
-  <p class="sub">Isi nama pengguna dan kata sandimu untuk lanjut.</p>
+  <p class="sub">Isi username pengguna dan kata sandimu untuk lanjut.</p>
 
   <form method="POST" action="{{ route('login') }}">
     @csrf
     <div class="field">
-      <label for="username">Nama pengguna</label>
+      <label for="username">Username pengguna</label>
       <input id="username" name="username" type="text" value="{{ old('username') }}" autocomplete="username" autofocus
         required placeholder="Contoh: rina_17">
       @error('username')<span class="err">{{ $message }}</span>@enderror
@@ -19,7 +19,8 @@
     <div class="field">
       <label for="password">Kata sandi</label>
       <div class="pass-wrap">
-        <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Tulis kata sandimu">
+        <input id="password" name="password" type="password" autocomplete="current-password" required
+          placeholder="Tulis kata sandimu">
         @include('partials.toggle-eye', ['target' => 'password'])
       </div>
       @error('password')<span class="err">{{ $message }}</span>@enderror

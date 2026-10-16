@@ -38,6 +38,16 @@
 </div>
 
 <div class="field">
+  <label for="religion">Agama (opsional)</label>
+  <select id="religion" name="religion">
+    <option value="" @selected(! old('religion', $user->religion))>— Pilih —</option>
+    @foreach (['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya'] as $agama)
+      <option value="{{ $agama }}" @selected(old('religion', $user->religion) === $agama)>{{ $agama }}</option>
+    @endforeach
+  </select>
+</div>
+
+<div class="field">
   <label for="password">Kata sandi</label>
   <span class="hint">{{ $isEdit ? 'Biarkan kosong bila tidak ingin diubah. Minimal 6 karakter.' : 'Minimal 6 karakter.' }}</span>
   <div class="pass-wrap">

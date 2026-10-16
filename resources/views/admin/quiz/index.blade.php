@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Master Kuis')
-@section('heading', 'Master Kuis')
+@section('title', 'Manajemen Kuis')
+@section('heading', 'Manajemen Kuis')
 @section('subtitle', $questions->flatten()->count() . ' soal')
 
 @section('content')

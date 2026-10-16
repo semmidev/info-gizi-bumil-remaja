@@ -37,7 +37,7 @@ class ExportController extends Controller
         return match ($dataset) {
             'users' => $this->stream(
                 'pengguna',
-                ['ID', 'Nama Pengguna', 'Nama Lengkap', 'Umur (tahun)', 'Kelompok Umur', 'Alamat', 'Usia Kehamilan (bulan)', 'Trimester', 'Nomor Bidan', 'Terakhir Masuk', 'Bergabung'],
+                ['ID', 'Nama Pengguna', 'Nama Lengkap', 'Umur (tahun)', 'Kelompok Umur', 'Alamat', 'Agama', 'Usia Kehamilan (bulan)', 'Trimester', 'Nomor Bidan', 'Terakhir Masuk', 'Bergabung'],
                 User::where('role', '!=', 'admin')->orderBy('id')->cursor(),
                 fn (User $u) => [
                     $u->id,
@@ -46,6 +46,7 @@ class ExportController extends Controller
                     $u->age,
                     $this->kelompokUmur($u->age),
                     $u->address,
+                    $u->religion,
                     $u->pregnancy_month,
                     $this->trimester($u->pregnancy_month),
                     $u->bidan_phone,

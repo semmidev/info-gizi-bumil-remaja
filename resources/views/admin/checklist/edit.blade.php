@@ -2,7 +2,7 @@
 
 @section('title', 'Edit Target')
 @section('heading', 'Edit Target')
-@section('subtitle', 'Master target harian')
+@section('subtitle', 'Manajemen target harian')
 
 @section('content')
   <div class="panel">

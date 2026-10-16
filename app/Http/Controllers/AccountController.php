@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class AccountController extends Controller
@@ -19,9 +20,11 @@ class AccountController extends Controller
             'full_name' => ['nullable', 'string', 'max:100'],
             'age' => ['nullable', 'integer', 'between:10,60'],
             'address' => ['nullable', 'string', 'max:255'],
+            'religion' => ['nullable', 'string', Rule::in(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya'])],
             'pregnancy_month' => ['nullable', 'integer', 'between:1,9'],
         ], [
             'age.between' => 'Umur harus antara 10 dan 60 tahun.',
+            'religion.in' => 'Agama yang dipilih tidak valid.',
             'pregnancy_month.between' => 'Usia kehamilan harus antara 1 dan 9 bulan.',
         ]);
 

@@ -21,6 +21,12 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::create([
+            'username' => 'sammi',
+            'password' => 'password',
+            'role' => 'user',
+        ]);
+
         $this->call([
             ChecklistItemSeeder::class,
             QuizSeeder::class,

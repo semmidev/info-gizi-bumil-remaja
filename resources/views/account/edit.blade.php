@@ -14,6 +14,7 @@
     <div class="akun-row"><span>Nama lengkap</span><b>{{ $user->full_name ?: '–' }}</b></div>
     <div class="akun-row"><span>Umur</span><b>{{ $user->age ? $user->age . ' tahun' : '–' }}</b></div>
     <div class="akun-row"><span>Alamat</span><b>{{ $user->address ?: '–' }}</b></div>
+    <div class="akun-row"><span>Agama</span><b>{{ $user->religion ?: '–' }}</b></div>
     <div class="akun-row"><span>Usia kehamilan</span><b>{{ $user->pregnancy_month ? $user->pregnancy_month . ' bulan' : '–' }}</b></div>
     <div class="akun-row"><span>Terakhir masuk</span><b>{{ $user->last_login_at ? $user->last_login_at->translatedFormat('d F Y, H:i') : '–' }}</b></div>
     <div class="akun-row"><span>Bergabung</span><b>{{ $user->created_at->translatedFormat('j F Y') }}</b></div>
@@ -44,6 +45,16 @@
         <label for="address">Alamat</label>
         <input id="address" name="address" type="text" value="{{ old('address', $user->address) }}" maxlength="255" placeholder="Desa / kecamatan, kota">
         @error('address')<span class="err">{{ $message }}</span>@enderror
+      </div>
+      <div class="field">
+        <label for="religion">Agama</label>
+        <select id="religion" name="religion">
+          <option value="" @selected(! old('religion', $user->religion))>— Pilih —</option>
+          @foreach (['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya'] as $agama)
+            <option value="{{ $agama }}" @selected(old('religion', $user->religion) === $agama)>{{ $agama }}</option>
+          @endforeach
+        </select>
+        @error('religion')<span class="err">{{ $message }}</span>@enderror
       </div>
       <button type="submit" class="btn-primary">Simpan data diri</button>
     </form>

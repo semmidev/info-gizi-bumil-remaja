@@ -121,9 +121,4 @@ class PageController extends Controller
     {
         return view('pages.layanan', ['data' => ['bidan' => $request->user()->bidan_phone ?? '']]);
     }
-
-    public function menarik(): View
-    {
-        return view('pages.menarik', ['data' => []]);
-    }
 }

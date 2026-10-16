@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Master Target')
-@section('heading', 'Master Target')
+@section('title', 'Manajemen Target')
+@section('heading', 'Manajemen Target')
 @section('subtitle', $items->count() . ' target harian')
 
 @section('content')

@@ -24,6 +24,7 @@ class User extends Authenticatable
         'full_name',
         'age',
         'address',
+        'religion',
         'pregnancy_month',
         'password',
         'role',
@@ -63,6 +64,13 @@ class User extends Authenticatable
     {
         return $this->role !== 'admin'
             && (! trim((string) $this->full_name) || ! $this->age || ! trim((string) $this->address));
+    }
+
+    public function logoPath(): string
+    {
+        return $this->religion && $this->religion !== 'Islam'
+            ? 'logo/logo-non-hijab.png'
+            : 'logo/logo-hijab.png';
     }
 
     public function quizAttempts(): HasMany

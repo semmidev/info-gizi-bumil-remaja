@@ -26,6 +26,7 @@
     <div class="akun-row"><span>Nama lengkap</span><b>{{ $user->full_name ?: '–' }}</b></div>
     <div class="akun-row"><span>Umur</span><b>{{ $user->age ? $user->age . ' tahun' : '–' }}</b></div>
     <div class="akun-row"><span>Alamat</span><b>{{ $user->address ?: '–' }}</b></div>
+    <div class="akun-row"><span>Agama</span><b>{{ $user->religion ?: '–' }}</b></div>
     <div class="akun-row"><span>Usia kehamilan</span><b>{{ $user->pregnancy_month ? $user->pregnancy_month . ' bulan' : '–' }}</b></div>
     <div class="akun-row"><span>Peran</span><b>{{ $user->role === 'admin' ? 'Admin' : 'Pengguna' }}</b></div>
     <div class="akun-row"><span>Nomor bidan</span><b>{{ $user->bidan_phone ?: '–' }}</b></div>

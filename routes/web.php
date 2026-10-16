@@ -34,7 +34,7 @@ Route::middleware(['auth', 'role:user,admin'])->group(function () {
     Route::get('/kuis', [PageController::class, 'kuis'])->name('kuis');
     Route::get('/lila', [PageController::class, 'lila'])->name('lila');
     Route::get('/layanan', [PageController::class, 'layanan'])->name('layanan');
-    Route::get('/menarik', [PageController::class, 'menarik'])->name('menarik');
+    Route::redirect('/menarik', '/layanan')->name('menarik');
 
     Route::prefix('api')->name('api.')->group(function () {
         Route::post('/activity', [ActivityController::class, 'store'])->name('activity.store');

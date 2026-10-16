@@ -39,6 +39,7 @@ class UserController extends Controller
             'full_name' => ['nullable', 'string', 'max:100'],
             'age' => ['nullable', 'integer', 'between:10,60'],
             'address' => ['nullable', 'string', 'max:255'],
+            'religion' => ['nullable', 'string', Rule::in(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya'])],
             'pregnancy_month' => ['nullable', 'integer', 'between:1,9'],
         ]);
 
@@ -88,6 +89,7 @@ class UserController extends Controller
             'full_name' => ['nullable', 'string', 'max:100'],
             'age' => ['nullable', 'integer', 'between:10,60'],
             'address' => ['nullable', 'string', 'max:255'],
+            'religion' => ['nullable', 'string', Rule::in(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya'])],
             'pregnancy_month' => ['nullable', 'integer', 'between:1,9'],
         ]);
 

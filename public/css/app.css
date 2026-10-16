@@ -36,6 +36,7 @@ body{
 h1,h2,h3{font-family:"Baloo 2","Nunito",system-ui,sans-serif; line-height:1.15; margin:0}
 .app{max-width:460px; margin:0 auto; min-height:100vh; background:var(--bg); position:relative; padding-bottom:96px; box-shadow:0 0 0 1px var(--line)}
 header.top{padding:20px 20px 14px; background:var(--sabbe); color:#fff; border-radius:0 0 28px 28px}
+.app:not(.admin) > header.top{position:sticky; top:0; z-index:20}
 :root[data-theme="dark"] header.top{color:#1a1013}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top{color:#1a1013}}
 .brand{display:flex; gap:12px; align-items:center}
@@ -171,8 +172,8 @@ details.acc[open] summary{color:var(--sabbe)}
 .ev b{font-size:.82rem}.ev-n{font-family:"Baloo 2",sans-serif;font-size:1.6rem;font-weight:800;line-height:1.1;color:var(--muted)}
 .ev small{font-size:.72rem;color:var(--muted);font-weight:700}
 .ev .g{color:var(--kelor)}.ev .c{color:var(--kunyit)}.ev .r{color:var(--bahaya)}
-.about{background:var(--danau-soft);border-radius:18px;padding:14px 16px;margin:0 0 14px}
-.about b{font-family:"Baloo 2",sans-serif;font-size:1.05rem;color:var(--danau)}
+.about{background:var(--kunyit-soft);border:1px solid var(--kunyit);border-radius:18px;padding:14px 16px;margin:0 0 14px}
+.about b{font-family:"Baloo 2",sans-serif;font-size:1.05rem;color:var(--kunyit)}
 .about p{margin:4px 0 8px;font-size:.92rem}
 .about-g{display:flex;flex-wrap:wrap;gap:6px}.about-g span{background:var(--surface);border-radius:99px;padding:4px 10px;font-size:.8rem;font-weight:700}
 .toc{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin-bottom:14px}
@@ -221,6 +222,10 @@ details.acc[open] summary{color:var(--sabbe)}
 :root[data-theme="dark"] .btn{color:#0f1a1d}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0f1a1d}}
 .btn.ghost{background:transparent; color:var(--danau); border:2px solid var(--danau)}
+/* Halaman user: tombol utama merah sabbe */
+.app:not(.admin) .btn{background:var(--sabbe)}
+.app:not(.admin) .btn.ghost{background:transparent; color:var(--sabbe); border-color:var(--sabbe)}
+.app:not(.admin) .btn.ghost:hover{background:var(--sabbe-soft)}
 .btn:focus-visible, button:focus-visible, input:focus-visible, label:focus-within{outline:3px solid var(--kunyit); outline-offset:2px}
 .hist{list-style:none; margin:10px 0 0; padding:0; font-size:.92rem}
 .hist li{display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--line)}
@@ -255,7 +260,7 @@ details.acc[open] summary{color:var(--sabbe)}
 .myth .f{display:none}
 .myth.open .m{display:none}.myth.open .f{display:block}
 .myth p{margin:0; font-weight:600}
-.myth .hint{font-size:.8rem; color:var(--muted); margin-top:6px; font-weight:600}
+.myth .hint{display:inline-block; font-size:.8rem; color:var(--sabbe); background:var(--sabbe-soft); font-weight:800; margin-top:8px; padding:4px 12px; border-radius:99px}
 .local{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
 .local div{background:var(--kunyit-soft); border-radius:16px; padding:12px}
 .local b{display:block; font-family:"Baloo 2"; font-size:1.05rem}
@@ -267,6 +272,8 @@ details.acc[open] summary{color:var(--sabbe)}
 .note{font-size:.8rem; color:var(--muted); text-align:center; margin:4px 12px 16px}
 /* nav */
 nav.tabs{position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:460px; background:var(--surface); border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(5,1fr); padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px)); z-index:10}
+nav.tabs:not(.nav-4) > a + a{position:relative}
+nav.tabs:not(.nav-4) > a + a::before{content:""; position:absolute; left:-1px; top:50%; transform:translateY(-50%); width:1px; height:22px; background:var(--line); border-radius:1px; pointer-events:none}
 nav.tabs a{font:inherit; background:none; border:0; color:var(--muted); display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px; font-size:.68rem; font-weight:700; padding:6px 2px; border-radius:12px; cursor:pointer; line-height:1.15; text-decoration:none}
 nav.tabs a svg{width:24px; height:24px}
 nav.tabs a.active{color:var(--sabbe); background:var(--sabbe-soft)}
@@ -276,6 +283,7 @@ nav.tabs a.active{color:var(--sabbe); background:var(--sabbe-soft)}
 .auth-app{max-width:460px; margin:0 auto; min-height:100vh; background:var(--bg); display:flex; flex-direction:column; padding:24px 18px calc(24px + env(safe-area-inset-bottom,0px)); box-shadow:0 0 0 1px var(--line)}
 .auth-logo{text-align:center; margin:24px 0 18px}
 .auth-logo svg{width:76px; height:76px}
+.auth-logo img{width:76px; height:76px; border-radius:50%; object-fit:contain; background:#fce9f1}
 .auth-logo h1{font-family:"Baloo 2",sans-serif; font-size:1.5rem; color:var(--sabbe); margin-top:8px}
 .auth-logo p{margin:4px 0 0; color:var(--muted); font-size:.92rem}
 .auth-card{background:var(--surface); border:1px solid var(--line); border-radius:24px; padding:20px}
@@ -311,6 +319,7 @@ nav.tabs a.active{color:var(--sabbe); background:var(--sabbe-soft)}
 .brand-btn:hover{background:rgba(255,255,255,.28)}
 .brand-btn:active{transform:scale(.96)}
 .brand-btn:focus-visible{outline:3px solid var(--kunyit); outline-offset:2px}
+.brand-btn img{width:44px; height:44px; border-radius:50%; object-fit:contain; background:#fce9f1; display:block}
 .brand-cap{display:block; text-align:center; font-size:.66rem; font-weight:800; letter-spacing:.02em; margin-top:3px; opacity:.92; pointer-events:none}
 .dropdown{position:absolute; top:calc(100% + 10px); left:0; min-width:210px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 34px rgba(36,49,59,.22); padding:6px; z-index:40}
 .dropdown[hidden]{display:none}
@@ -392,10 +401,10 @@ nav.tabs.nav-4{grid-template-columns:repeat(4,1fr)}
   body[data-menu="Admin"] .cards{grid-template-columns:repeat(3,1fr)}
 }
 @media (min-width:1024px){
-  body[data-menu="Admin"] .app.admin{max-width:1360px; display:grid; grid-template-columns:240px minmax(0,1fr); grid-template-areas:"side head" "side main"; padding-bottom:0; min-height:100vh; align-content:start}
+  body[data-menu="Admin"] .app.admin{max-width:none; margin:0; box-shadow:none; display:grid; grid-template-columns:240px minmax(0,1fr); grid-template-rows:auto 1fr; grid-template-areas:"side head" "side main"; padding-bottom:0; min-height:100vh; min-height:100dvh; align-content:start}
   body[data-menu="Admin"] .app.admin > header.top{grid-area:head; border-radius:0 0 0 28px}
   body[data-menu="Admin"] .app.admin > main{grid-area:main; padding:32px; min-width:0}
-  body[data-menu="Admin"] .app.admin > nav.tabs.nav-4{grid-area:side; position:sticky; top:0; left:auto; transform:none; width:auto; max-width:none; align-self:start; max-height:100vh; grid-template-columns:1fr; grid-template-rows:repeat(4,min-content); align-content:start; gap:4px; border-top:0; border-right:1px solid var(--line); padding:20px 10px; z-index:5}
+  body[data-menu="Admin"] .app.admin > nav.tabs.nav-4{grid-area:side; position:sticky; top:0; left:auto; transform:none; width:auto; max-width:none; align-self:stretch; height:100vh; height:100dvh; min-height:100vh; grid-template-columns:1fr; grid-template-rows:repeat(4,min-content); align-content:start; gap:4px; border-top:0; border-right:1px solid var(--line); padding:20px 10px; z-index:5}
   body[data-menu="Admin"] .app.admin > nav.tabs a{flex-direction:row; align-items:center; gap:12px; font-size:.92rem; padding:12px 14px; text-align:left}
   body[data-menu="Admin"] .app.admin > nav.tabs a svg{flex:none}
   body[data-menu="Admin"] .atable{min-width:0}
