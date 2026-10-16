@@ -447,7 +447,7 @@ nav.tabs.nav-4{grid-template-columns:repeat(4,1fr)}
 .btn.ghost:active{transform:scale(.97)}
 .opt:hover:not(:disabled){border-color:var(--sabbe)}
 .opt:active:not(:disabled){transform:scale(.99)}
-.seg button:hover{color:var(--sabbe)}
+.seg button:hover:not([aria-selected="true"]){color:var(--sabbe)}
 .seg button:active{transform:scale(.96)}
 .toc a:hover{filter:brightness(.96)}
 .toc a:active{transform:scale(.95)}
