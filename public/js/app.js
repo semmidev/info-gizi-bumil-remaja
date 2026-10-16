@@ -120,6 +120,16 @@
   segs.forEach(b => b.addEventListener('click', () => { openPart(b.dataset.p); logEv('buka_bagian', b.textContent.trim()); }));
   document.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => { openPart(b.dataset.goto); if (b.dataset.scroll) { const t = document.getElementById(b.dataset.scroll); if (t) t.scrollIntoView({block:'center'}); } }));
 
+  /* Kartu Info terbaru: tombol tutup di bawah slide */
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-kcard-close]');
+    if (!btn) return;
+    const card = btn.closest('details.kcard');
+    if (!card) return;
+    card.open = false;
+    card.scrollIntoView({block:'nearest'});
+  });
+
   /* Porsi harian */
   const PORSI = [
     {i:'🍚', n:'Makanan pokok', ex:'nasi, jagung, ubi, sagu', a:5, b:6, u:'¾ gelas nasi (100 g)', z:'Sumber tenaga'},

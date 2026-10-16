@@ -90,6 +90,7 @@
                 @empty
                   <p class="empty">Belum ada gambar.</p>
                 @endforelse
+                <button type="button" class="btn ghost small kcard-close" data-kcard-close>Tutup</button>
               </div>
             </details>
           @endforeach
@@ -98,7 +99,7 @@
     @endif
     <p class="lead">Ketuk setiap topik untuk membaca isinya.</p>
 
-    <details class="acc" open><summary><i>✅</i>Tips cegah KEK</summary><div class="acc-b">
+    <details class="acc"><summary><i>✅</i>Tips cegah KEK</summary><div class="acc-b">
       <ol class="steps">
         <li><div><b>Jangan lewatkan sarapan</b><small>Siapkan bahan sejak malam agar pagi lebih mudah.</small></div></li>
         <li><div><b>Ada lauk hewani setiap hari</b><small>Ikan dan telur murah dan mudah didapat.</small></div></li>
