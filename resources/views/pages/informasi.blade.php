@@ -305,7 +305,9 @@
           <button role="tab" aria-selected="true" data-tm="1">Trimester I</button>
           <button role="tab" aria-selected="false" data-tm="2">Trimester II–III</button>
         </div>
-        <div class="porsi" id="porsi"></div>
+        <img class="illus" id="porsi" src="{{ asset('content/trimester-1.jpeg') }}"
+          data-t1="{{ asset('content/trimester-1.jpeg') }}" data-t2="{{ asset('content/trimester-2.jpeg') }}"
+          alt="Porsi makan harian ibu hamil remaja trimester I">
         <p class="tip">Bagi ke 3 kali makan utama dan 2–3 kali selingan. Sumber: Kementerian Kesehatan RI (2023).</p>
       </div>
 

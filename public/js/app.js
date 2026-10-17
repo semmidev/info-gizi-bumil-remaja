@@ -131,34 +131,12 @@
   });
 
   /* Porsi harian */
-  const PORSI = [
-    {i:'🍚', n:'Makanan pokok', ex:'nasi, jagung, ubi, sagu', a:5, b:6, u:'¾ gelas nasi (100 g)', z:'Sumber tenaga'},
-    {i:'🐟', n:'Lauk hewani', ex:'ikan, telur, ayam, daging', a:4, b:4, u:'1 potong sedang ikan (50 g) atau 1 butir telur', z:'Protein dan zat besi'},
-    {i:'🫘', n:'Lauk nabati', ex:'tempe, tahu, kacang-kacangan', a:4, b:4, u:'1 potong sedang tempe (50 g)', z:'Protein dan serat'},
-    {i:'🥬', n:'Sayuran', ex:'kelor, bayam, kangkung, wortel', a:4, b:4, u:'1 mangkuk (100 g)', z:'Vitamin, mineral, serat'},
-    {i:'🍌', n:'Buah-buahan', ex:'pisang, pepaya, jeruk', a:4, b:4, u:'1 potong sedang (100 g)', z:'Vitamin, mineral, serat'},
-    {i:'🥄', n:'Minyak / lemak', ex:'termasuk santan, gorengan, tumisan', a:5, b:5, u:'1 sendok teh (5 g)', z:'Secukupnya', lim:true},
-    {i:'🍬', n:'Gula', ex:'termasuk kue manis, teh manis', a:2, b:2, u:'1 sendok makan (10 g)', z:'Dibatasi', lim:true}
-  ];
-  const porsiBox = document.getElementById('porsi');
-  if (porsiBox){
-    const drawPorsi = tm => {
-      porsiBox.innerHTML = PORSI.map(p => {
-        const n = tm === 1 ? p.a : p.b, up = tm === 2 && p.b > p.a;
-        let ico = '';
-        for (let k = 0; k < n; k++) ico += (up && k >= p.a) ? `<span class="new">${p.i}</span>` : p.i;
-        return `<div class="pr${p.lim?' lim':''}"><div class="pr-top"><b>${p.n}${up?'<span class="badge">+'+(p.b-p.a)+' porsi</span>':''}</b><span class="pr-n">${n} <small>porsi</small></span></div>
-          <div class="pr-ico" aria-hidden="true">${ico}</div>
-          <div class="pr-d">${p.ex}<br><em>1 porsi = ${p.u}</em> · ${p.z}</div></div>`;
-      }).join('');
-    };
-    const tmBtns = document.querySelectorAll('[data-tm]');
-    tmBtns.forEach(b => b.addEventListener('click', () => {
-      tmBtns.forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
-      drawPorsi(+b.dataset.tm);
-    }));
-    drawPorsi(1);
-  }
+  const tmBtns = document.querySelectorAll('[data-tm]');
+  tmBtns.forEach(b => b.addEventListener('click', () => {
+    tmBtns.forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+    const box = document.getElementById('porsi');
+    if (box) box.src = box.dataset['t' + b.dataset.tm];
+  }));
 
   /* Isi Piringku toggle */
   const prBtns = document.querySelectorAll('[data-pr]');
