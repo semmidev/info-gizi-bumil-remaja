@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>@yield('title', 'Masuk') · Layanan Infogizi Ibu Hamil Remaja</title>
-  <link rel="icon" type="image/png" href="{{ asset('logo/logo-hijab.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('logo/logo.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -18,7 +18,7 @@
 <body data-menu="@yield('menu', 'Aplikasi')" data-user="UMUM">
   <div class="auth-app">
     <div class="auth-logo">
-      <img src="{{ asset('logo/logo-hijab.png') }}" alt="Layanan Infogizi" width="76" height="76">
+      <img src="{{ asset('logo/logo.png') }}" alt="Layanan Infogizi" width="76" height="76">
       <h1>Layanan Infogizi Ibu Hamil Remaja</h1>
       <p>Cegak KEK, jaga ibu dan bayi</p>
     </div>

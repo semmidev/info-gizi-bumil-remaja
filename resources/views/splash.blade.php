@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Selamat Datang · Layanan Infogizi Ibu Hamil Remaja</title>
-  <link rel="icon" type="image/png" href="{{ asset('logo/logo-hijab.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('logo/logo.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
     <div class="splash-track" id="splash-track">
       <section class="splash-slide bg-pink">
         <div class="splash-inner">
-          <span class="splash-logo"><img src="{{ asset('logo/logo-hijab.png') }}" alt="Logo Layanan Infogizi"></span>
+          <span class="splash-logo"><img src="{{ asset('logo/logo.png') }}" alt="Logo Layanan Infogizi"></span>
           <h1>Layanan Infogizi Ibu Hamil Remaja</h1>
           <p>Cegak KEK, jaga ibu dan bayi.</p>
           <p class="muted">Media edukasi gizi untuk remaja yang terlanjur hamil agar tetap sehat sampai melahirkan.</p>
