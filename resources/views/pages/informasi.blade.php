@@ -7,7 +7,12 @@
   <section class="screen on" id="s-info" aria-labelledby="h-info">
     <h2 id="h-info">Informasi</h2>
     <div class="about">
-      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>Penting</b>
+      <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+          <path d="M12 9v4" />
+          <path d="M12 17h.01" />
+        </svg>Penting</b>
       <p>Media ini untuk remaja yang TERLANJUR hamil agar tetap sehat. Jika belum hamil, tunda kehamilan sampai usia
         matang ≥ 20 tahun untuk mencegah anemia, KEK, preeklamsia, BBLR, stunting, hingga risiko kematian ibu &amp; bayi.
       </p>
@@ -270,7 +275,8 @@
         <h3><span class="num">5</span>Suplementasi gizi</h3>
         <div class="supp">
           <div class="sp1">
-            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/tablet-tambah-darah.png') }}" alt=""></i><b>Tablet tambah darah (TTD)</b></div>
+            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/tablet-tambah-darah.png') }}"
+                  alt=""></i><b>Tablet tambah darah (TTD)</b></div>
             <p>Berisi zat besi dan asam folat untuk mencegah anemia dan KEK.</p>
             <ul>
               <li>1 tablet setiap hari, minimal 90 tablet selama hamil</li>
@@ -280,11 +286,13 @@
             </ul>
           </div>
           <div class="sp2">
-            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/asam-folat.png') }}" alt=""></i><b>Asam folat</b></div>
+            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/asam-folat.png') }}" alt=""></i><b>Asam
+                folat</b></div>
             <p>Penting sejak awal kehamilan untuk pembentukan otak dan saraf janin. Sudah terkandung dalam TTD.</p>
           </div>
           <div class="sp3">
-            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/kalsium.png') }}" alt=""></i><b>Kalsium</b></div>
+            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/kalsium.png') }}" alt=""></i><b>Kalsium</b>
+            </div>
             <p>Untuk tulang dan gigi ibu serta janin. Diminum sesuai anjuran tenaga kesehatan, dengan jarak waktu dari TTD
               karena kalsium menghambat penyerapan zat besi.</p>
           </div>
@@ -345,41 +353,12 @@
           <button role="tab" aria-selected="false" data-pr="pr-kek">Ibu hamil KEK</button>
         </div>
         <div class="prv on" id="pr-hamil">
-          <div class="piring">
-            <svg viewBox="0 0 220 220" role="img"
-              aria-label="Isi Piringku: setengah piring sayur dan buah, setengah piring makanan pokok dan lauk pauk">
-              <circle cx="110" cy="110" r="108" fill="var(--surface)" stroke="var(--line)" stroke-width="3" />
-              <path d="M110,110 L110,10 A100,100 0 0 1 196.6,160 Z" fill="#7DBE5E" />
-              <path d="M110,110 L196.6,160 A100,100 0 0 1 110,210 Z" fill="#F2A541" />
-              <path d="M110,110 L110,210 A100,100 0 0 1 23.4,60 Z" fill="#F4E3B5" />
-              <path d="M110,110 L23.4,60 A100,100 0 0 1 110,10 Z" fill="#E77F8C" />
-              <g stroke="var(--surface)" stroke-width="3">
-                <line x1="110" y1="110" x2="110" y2="10" />
-                <line x1="110" y1="110" x2="196.6" y2="160" />
-                <line x1="110" y1="110" x2="110" y2="210" />
-                <line x1="110" y1="110" x2="23.4" y2="60" />
-              </g>
-              <g font-family="Inter,sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#24313B">
-                <text x="160" y="72" font-size="24">🥬</text><text x="160" y="90">Sayur</text>
-                <text x="140" y="156" font-size="22">🍌</text><text x="140" y="172">Buah</text>
-                <text x="62" y="140" font-size="24">🍚</text><text x="62" y="158">Makanan</text><text x="62"
-                  y="170">pokok</text>
-                <text x="78" y="54" font-size="20">🐟</text><text x="78" y="70">Lauk</text>
-              </g>
-            </svg>
-            <ul class="piring-key">
-              <li><i style="background:#7DBE5E"></i><span><b>Sayur</b> paling banyak, sepertiga piring</span></li>
-              <li><i style="background:#F2A541"></i><span><b>Buah</b> seperenam piring</span></li>
-              <li><i style="background:#F4E3B5"></i><span><b>Nasi atau pengganti</b> sepertiga piring</span></li>
-              <li><i style="background:#E77F8C"></i><span><b>Lauk</b> ikan, telur, tempe, tahu</span></li>
-            </ul>
-          </div>
-          <p class="tip">Setiap kali makan: setengah piring sayur dan buah, setengah piring nasi dan lauk. Makan 3 kali
-            sehari ditambah 2–3 kali selingan.</p>
+          <img class="illus" src="{{ asset('content/isi-piring/porsi-piring-ibu-hami.jpeg') }}"
+            alt="Isi Piringku untuk ibu hamil: sayur paling banyak sepertiga piring, buah seperenam piring, nasi atau pengganti sepertiga piring, dan lauk seperti ikan, telur, tempe, tahu.">
         </div>
         <div class="prv" id="pr-kek">
-          <img class="illus" src="{{ asset('isi-piringku-kek-pmt.svg') }}"
-            alt="Isi Piringku untuk ibu hamil KEK ditambah PMT: setengah piring sayur dan buah, seperempat piring makanan pokok, dan seperempat piring lauk hewani dan nabati. Makan sedikit tapi sering, 3 kali makan utama dan 2–3 kali selingan. PMT pemulihan wajib dihabiskan sendiri dalam 1 hari dan diberikan untuk pemulihan ibu KEK selama 90 hari.">
+          <img class="illus" src="{{ asset('content/isi-piring/porsi-piring-ibu-hamil-kek.jpeg') }}"
+            alt="Isi Piringku untuk ibu hamil KEK: isi piring tetap seimbang, tambah lauk hewani setiap makan, makan sedikit tapi sering, habiskan PMT dari puskesmas, dan pilih makanan padat energi.">
         </div>
       </div>
 

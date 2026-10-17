@@ -141,12 +141,6 @@ table.nut{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem;
 .flow li:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-15px;width:11px;height:11px;border-right:3px solid var(--kunyit);border-bottom:3px solid var(--kunyit);border-radius:2px;transform:translateX(-50%) rotate(45deg)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.seg button[aria-selected="true"],.badge,.nut th,.num,.steps li::before,.flow li::before){color:#1a1013}}
 :root[data-theme="dark"] :is(.seg button[aria-selected="true"],.badge,.nut th,.num,.steps li::before,.flow li::before){color:#1a1013}
-.piring{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}
-.piring svg{width:100%;height:auto}
-.piring-key{list-style:none;margin:0;padding:0;font-size:.86rem}
-.piring-key li{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:start;margin-bottom:8px}
-.piring-key i{width:14px;height:14px;border-radius:4px;margin-top:4px}
-@media (max-width:380px){.piring{grid-template-columns:1fr}.piring svg{max-width:220px;margin:0 auto}}
 .seg-sm{margin-bottom:12px}
 @keyframes pop{from{transform:scale(.4)}to{transform:scale(1)}}
 .seg3{grid-template-columns:repeat(3,1fr)}
