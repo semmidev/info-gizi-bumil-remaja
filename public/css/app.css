@@ -102,8 +102,9 @@ h4.sub{font-family:"Inter",sans-serif;font-size:1rem;color:var(--danau);margin:1
 .age-seg b{display:block;font-family:"Inter";font-size:1.08rem;line-height:1.15}
 .a1{background:#FDEDF6}.a2{background:#F2EDFD}.a3{background:#ECF5EE;color:var(--muted)}
 .age-concl{display:block; width:100%; height:auto; margin-top:10px}
-@media (max-width:400px){
+@media (max-width:440px){
   .age-seg{flex-direction:column; align-items:center; text-align:center; gap:6px; padding:12px 6px}
+  .age-ico{width:40px; height:40px}
 }
 .reasons,.intv{display:grid;gap:8px}
 .reasons div,.intv div{display:grid;grid-template-columns:36px 1fr;column-gap:10px;background:var(--danau-soft);border-radius:16px;padding:10px 12px}
