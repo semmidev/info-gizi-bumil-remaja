@@ -125,7 +125,9 @@ table.nut{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem;
 .nut td:first-child{font-weight:700}
 .nut tr:nth-child(even) td{background:var(--sabbe-soft)}
 .probs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.pb{border-radius:16px;padding:12px}.pb.wide{grid-column:span 2}
+.pb{display:grid;grid-template-columns:44px 1fr;column-gap:10px;align-items:center;border-radius:16px;padding:10px 12px}.pb.wide{grid-column:span 2}
+.pb i{font-style:normal;grid-row:span 2;align-self:center}
+.pb i img{width:100%;height:auto;display:block}
 .pb b{display:block;font-family:"Inter";font-size:1.02rem}.pb small{font-size:.84rem}
 .flow{list-style:none;margin:0;padding:0;counter-reset:f}
 .flow li{counter-increment:f;position:relative;background:var(--kunyit-soft);border-radius:14px;padding:10px 12px 10px 46px;font-weight:700;font-size:.92rem;margin-bottom:22px}

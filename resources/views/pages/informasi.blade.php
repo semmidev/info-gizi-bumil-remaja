@@ -94,16 +94,11 @@
       <div class="panel" id="a4">
         <h3><span class="num">4</span>Permasalahan yang sering dialami</h3>
         <div class="probs">
-          <div class="pb" style="background:var(--sabbe-soft)"><b>Kesehatan ibu</b><small>Anemia, KEK, preeklamsia,
-              infeksi, persalinan lama</small></div>
-          <div class="pb" style="background:var(--danau-soft)"><b>Kesehatan bayi</b><small>Berat lahir rendah (BBLR) dan
-              lahir prematur</small></div>
-          <div class="pb" style="background:var(--kunyit-soft)"><b>Perasaan</b><small>Stres, cemas, dan bingung menjalani
-              peran baru</small></div>
-          <div class="pb" style="background:var(--kelor-soft)"><b>Sekolah dan ekonomi</b><small>Putus sekolah dan
-              bergantung pada keluarga atau pasangan</small></div>
-          <div class="pb wide" style="background:var(--surface);border:2px solid var(--line)"><b>Lingkungan
-              sosial</b><small>Stigma dan omongan orang sekitar yang membuat ibu enggan memeriksakan diri</small></div>
+          <div class="pb" style="background:#FDE8EF"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/kesehatan-ibu.png') }}" alt=""></i><b>Kesehatan ibu</b><small>Anemia, KEK, preeklamsia, infeksi, persalinan lama</small></div>
+          <div class="pb" style="background:#E4F5FF"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/kesehatan-bayi.png') }}" alt=""></i><b>Kesehatan bayi</b><small>Berat lahir rendah (BBLR) dan lahir prematur</small></div>
+          <div class="pb" style="background:#FDF6DA"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/perasaan.png') }}" alt=""></i><b>Perasaan</b><small>Stres, cemas, dan bingung menjalani peran baru</small></div>
+          <div class="pb" style="background:#EBF9EC"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/sekolah-dan-ekonomi.png') }}" alt=""></i><b>Sekolah dan ekonomi</b><small>Putus sekolah dan bergantung pada keluarga atau pasangan</small></div>
+          <div class="pb wide" style="background:#F0EDFE"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/lingkungan-sosial.png') }}" alt=""></i><b>Lingkungan sosial</b><small>Stigma dan omongan orang sekitar yang membuat ibu enggan memeriksakan diri</small></div>
         </div>
         <p class="tip">Salah satu masalah gizi yang paling sering adalah KEK. Lanjutkan ke bagian berikutnya.</p>
         <button class="btn" data-goto="p-kek" style="margin-top:6px">Lanjut: KEK pada Ibu Hamil</button>
