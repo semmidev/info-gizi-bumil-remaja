@@ -64,19 +64,25 @@
       <div class="panel" id="a3">
         <h3><span class="num">3</span>Kebutuhan gizi ibu hamil remaja</h3>
         <div class="duo">
-          <div class="c">Gizi untuk tubuh ibu yang masih tumbuh</div>
+          <div class="c" style="background:#E4F5FF">
+            <img src="{{ asset('icons/kebutuhan-gizi-hamil/gizi-untuk-tubuh-ibu.png') }}" alt="">
+            <span>Gizi untuk tubuh ibu yang masih tumbuh</span>
+          </div>
           <div class="plus">+</div>
-          <div class="c k">Gizi untuk janin yang sedang tumbuh</div>
+          <div class="c k" style="background:#8EA0BD">
+            <img src="{{ asset('icons/kebutuhan-gizi-hamil/gizi-untuk-janin.png') }}" alt="">
+            <span>Gizi untuk janin yang sedang tumbuh</span>
+          </div>
         </div>
         <p>Karena dua pertumbuhan terjadi bersamaan, kebutuhan gizi ibu hamil remaja meningkat. Inilah yang paling
           bertambah saat hamil:</p>
         <div class="nutri">
-          <div><i>⚡</i><b>Energi</b><span>+180 kkal (trimester I)<br>+300 kkal (trimester II–III)</span></div>
-          <div><i>🐟</i><b>Protein</b><span>+1 g (trimester I), +10 g (trimester II)<br>+30 g (trimester III)</span></div>
-          <div><i>🩸</i><b>Zat besi</b><span>+9 mg<br>(trimester II–III)</span></div>
-          <div><i>🥬</i><b>Asam folat</b><span>+200 mcg<br>sejak awal hamil</span></div>
-          <div><i>🥛</i><b>Kalsium</b><span>+200 mg<br>sepanjang kehamilan</span></div>
-          <div><i>🍊</i><b>Vitamin A dan C</b><span>+300 RE dan +10 mg</span></div>
+          <div style="background:#FAF5D6"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/energi.png') }}" alt=""></i><b>Energi</b><span>+180 kkal (trimester I)<br>+300 kkal (trimester II–III)</span></div>
+          <div style="background:#EAF6FD"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/protein.png') }}" alt=""></i><b>Protein</b><span>+1 g (trimester I), +10 g (trimester II)<br>+30 g (trimester III)</span></div>
+          <div style="background:#FDEEF5"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/zat-besi.png') }}" alt=""></i><b>Zat besi</b><span>+9 mg<br>(trimester II–III)</span></div>
+          <div style="background:#E9F6EC"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/asam-folat.png') }}" alt=""></i><b>Asam folat</b><span>+200 mcg<br>sejak awal hamil</span></div>
+          <div style="background:#EFEAFE"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/kalsium.png') }}" alt=""></i><b>Kalsium</b><span>+200 mg<br>sepanjang kehamilan</span></div>
+          <div style="background:#FDE2CD"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/vitamin-a-c.png') }}" alt=""></i><b>Vitamin A dan C</b><span>+300 RE dan +10 mg</span></div>
         </div>
         <p class="tip">Tambahan +300 kkal kira-kira sama dengan sepiring kecil nasi dan sepotong ikan, bukan makan dua
           kali lipat. Sumber: AKG 2019.</p>
