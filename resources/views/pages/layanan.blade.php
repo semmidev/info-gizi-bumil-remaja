@@ -5,7 +5,7 @@
 
 @section('content')
   <section class="screen on" id="s-layanan" aria-labelledby="h-layanan">
-    <h2 id="h-layanan">Layanan</h2>
+    <h2 id="h-layanan">Layanan Info</h2>
     <p class="lead">Di mana periksa, apa yang didapat, kapan harus ke faskes.</p>
 
     <div class="panel">

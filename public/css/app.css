@@ -500,3 +500,30 @@ details.acc[open] .acc-b{animation:q-in var(--dur-med) var(--ease)}
 .stat,.atable td,.list-item{transition:background var(--dur-fast) var(--ease)}
 .card-link:hover{box-shadow:0 6px 18px rgba(184,51,106,.14)}
 .filter-bar input:focus,.filter-bar select:focus{outline:3px solid var(--kunyit);outline-offset:1px;border-color:var(--sabbe)}
+
+/* Splash screen (sebelum login) */
+.splash{max-width:460px; margin:0 auto; min-height:100vh; background:var(--bg); display:flex; flex-direction:column; position:relative; overflow:hidden; box-shadow:0 0 0 1px var(--line)}
+.splash-skip{position:absolute; top:calc(14px + env(safe-area-inset-top,0px)); right:14px; z-index:5; font:inherit; font-weight:800; font-size:.82rem; color:var(--muted); background:color-mix(in srgb,var(--surface) 82%,transparent); border:1px solid var(--line); padding:8px 16px; border-radius:999px; cursor:pointer; backdrop-filter:blur(6px)}
+.splash-skip:hover{background:var(--surface); color:var(--sabbe)}
+.splash-skip:focus-visible{outline:3px solid var(--kunyit); outline-offset:2px}
+.splash-track{flex:1; display:flex; transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.splash-slide{min-width:100%; flex:0 0 100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px; padding:76px 26px 10px}
+.splash-slide.bg-pink{background:linear-gradient(170deg,#F9E1EA,var(--bg) 72%)}
+.splash-slide.bg-warn{background:linear-gradient(170deg,#FEF9E3,var(--bg) 72%)}
+.splash-slide.bg-blue{background:linear-gradient(170deg,#E3F1FB,var(--bg) 72%)}
+.splash-logo img{width:104px; height:104px; border-radius:50%; object-fit:contain; background:#fce9f1; display:block; box-shadow:0 10px 26px rgba(36,49,59,.14)}
+.splash-slide h1{font-size:1.5rem; color:var(--sabbe)}
+.splash-slide h2{font-size:1.4rem; color:var(--sabbe)}
+.splash-slide p{margin:0; color:var(--ink); font-weight:600; font-size:.98rem}
+.splash-slide .muted{color:var(--muted); font-size:.84rem}
+.splash-tag{display:inline-block; font-size:.76rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--sabbe); background:var(--sabbe-soft); padding:5px 12px; border-radius:999px}
+.splash-feats{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; width:100%; max-width:340px; text-align:left}
+.splash-feats li{display:flex; gap:12px; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px}
+.splash-feats svg{width:22px; height:22px; color:var(--sabbe); flex:none; margin-top:2px}
+.splash-feats b{display:block; color:var(--sabbe); font-size:.95rem}
+.splash-feats small{color:var(--muted); font-weight:700; font-size:.8rem}
+.splash-foot{padding:16px 22px calc(22px + env(safe-area-inset-bottom,0px)); display:flex; align-items:center; justify-content:space-between; gap:16px}
+.splash-dots{display:flex; gap:8px}
+.splash-dots i{width:8px; height:8px; border-radius:999px; background:var(--line); transition:width .25s var(--ease), background .25s var(--ease)}
+.splash-dots i.on{width:24px; background:var(--sabbe)}
+.splash-foot .btn-primary{width:auto; padding:14px 34px}

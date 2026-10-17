@@ -16,6 +16,23 @@ class AuthTest extends TestCase
         $this->get('/informasi')->assertRedirect('/login');
     }
 
+    public function test_root_shows_splash_for_guest(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('TERLANJUR hamil')
+            ->assertSee('Lewati');
+    }
+
+    public function test_root_sends_logged_in_user_to_their_home(): void
+    {
+        $user = User::create(['username' => 'lia_20', 'password' => 'rahasia123', 'role' => 'user']);
+        $this->actingAs($user)->get('/')->assertRedirect(route('informasi'));
+
+        $admin = User::create(['username' => 'admin_1', 'password' => 'rahasia123', 'role' => 'admin']);
+        $this->actingAs($admin)->get('/')->assertRedirect(route('admin.dashboard'));
+    }
+
     public function test_user_registers_and_is_logged_in_immediately(): void
     {
         $response = $this->post('/register', [

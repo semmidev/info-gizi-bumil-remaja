@@ -17,7 +17,13 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/informasi');
+Route::get('/', function () {
+    if ($user = auth()->user()) {
+        return redirect()->route($user->role === 'admin' ? 'admin.dashboard' : 'informasi');
+    }
+
+    return view('splash');
+})->name('splash');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
