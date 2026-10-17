@@ -324,7 +324,7 @@
                 <line x1="110" y1="110" x2="110" y2="210" />
                 <line x1="110" y1="110" x2="23.4" y2="60" />
               </g>
-              <g font-family="Nunito,sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#24313B">
+              <g font-family="Inter,sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#24313B">
                 <text x="160" y="72" font-size="24">🥬</text><text x="160" y="90">Sayur</text>
                 <text x="140" y="156" font-size="22">🍌</text><text x="140" y="172">Buah</text>
                 <text x="62" y="140" font-size="24">🍚</text><text x="62" y="158">Makanan</text><text x="62"
