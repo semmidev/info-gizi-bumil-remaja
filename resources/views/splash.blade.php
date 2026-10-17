@@ -96,6 +96,18 @@
 
       next.addEventListener('click', function () { i === total - 1 ? leave() : go(i + 1); });
       skip.addEventListener('click', leave);
+
+      var sx = 0, sy = 0, sw = false;
+      var splash = document.querySelector('.splash');
+      splash.addEventListener('pointerdown', function (e) { sw = true; sx = e.clientX; sy = e.clientY; });
+      splash.addEventListener('pointerup', function (e) {
+        if (!sw) return; sw = false;
+        var dx = e.clientX - sx, dy = e.clientY - sy;
+        if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy)) return;
+        go(dx < 0 ? i + 1 : i - 1);
+      });
+      splash.addEventListener('pointercancel', function () { sw = false; });
+
       go(0);
     })();
   </script>

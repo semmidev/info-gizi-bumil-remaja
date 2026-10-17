@@ -510,7 +510,7 @@ details.acc[open] .acc-b{animation:q-in var(--dur-med) var(--ease)}
 .splash-skip:hover{background:var(--surface); color:var(--sabbe)}
 .splash-skip:focus-visible{outline:3px solid var(--kunyit); outline-offset:2px}
 .splash-track{flex:1; min-height:0; display:flex; transition:transform .4s cubic-bezier(.4,0,.2,1)}
-.splash-slide{min-width:100%; flex:0 0 100%; overflow-y:auto; overflow-x:hidden; padding:64px 22px 8px; -webkit-overflow-scrolling:touch}
+.splash-slide{min-width:100%; flex:0 0 100%; overflow-y:auto; overflow-x:hidden; padding:64px 22px 8px; -webkit-overflow-scrolling:touch; touch-action:pan-y}
 .splash-inner{min-height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px}
 .splash-slide.bg-pink{background:linear-gradient(170deg,#F9E1EA,var(--bg) 72%)}
 .splash-slide.bg-warn{background:linear-gradient(170deg,#FEF9E3,var(--bg) 72%)}
