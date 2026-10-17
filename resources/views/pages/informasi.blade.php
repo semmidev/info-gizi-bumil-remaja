@@ -46,15 +46,15 @@
       <div class="panel" id="a2">
         <h3><span class="num">2</span>Mengapa kehamilan remaja bisa terjadi?</h3>
         <div class="reasons">
-          <div><i>💍</i><b>Menikah di usia muda</b><small>Masih ada kebiasaan menikah di usia anak karena tradisi atau
+          <div style="background:#E4F5FD"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/menikah-diusia-muda.png') }}" alt=""></i><b>Menikah di usia muda</b><small>Masih ada kebiasaan menikah di usia anak karena tradisi atau
               tekanan ekonomi.</small></div>
-          <div><i>📚</i><b>Kurang informasi kesehatan reproduksi</b><small>Belum memahami masa subur dan cara merencanakan
+          <div style="background:#FFF7E3"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/kurang-informasi-kesehatan.png') }}" alt=""></i><b>Kurang informasi kesehatan reproduksi</b><small>Belum memahami masa subur dan cara merencanakan
               kehamilan.</small></div>
-          <div><i>🏠</i><b>Ekonomi dan pendidikan keluarga</b><small>Keterbatasan biaya dan sekolah membatasi akses
+          <div style="background:#FFF7E1"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/ekonomi-dan-pendidikan-keluarga.png') }}" alt=""></i><b>Ekonomi dan pendidikan keluarga</b><small>Keterbatasan biaya dan sekolah membatasi akses
               informasi dan layanan.</small></div>
-          <div><i>🗣️</i><b>Jarang dibicarakan di keluarga</b><small>Remaja mencari informasi dari teman atau internet
+          <div style="background:#F0EDFE"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/jarang-dibicarakan-keluarga.png') }}" alt=""></i><b>Jarang dibicarakan di keluarga</b><small>Remaja mencari informasi dari teman atau internet
               yang belum tentu benar.</small></div>
-          <div><i>🏥</i><b>Layanan ramah remaja terbatas</b><small>Malu atau takut dinilai membuat remaja enggan bertanya
+          <div style="background:#FEE8F2"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/layanan-ramah-remaja-terbatas.png') }}" alt=""></i><b>Layanan ramah remaja terbatas</b><small>Malu atau takut dinilai membuat remaja enggan bertanya
               ke tenaga kesehatan.</small></div>
         </div>
         <p class="tip">Apa pun alasannya, yang terpenting sekarang adalah menjaga kesehatan ibu dan bayi. Ibu tidak
