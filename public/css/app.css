@@ -64,7 +64,7 @@ main{padding:18px 16px 8px}
 .icons{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
 .icons div{background:var(--kunyit-soft); border-radius:16px; padding:10px 6px; text-align:center; font-size:.84rem; font-weight:700}
 .icons div i{display:block; font-style:normal; font-size:1.7rem; line-height:1.2}
-.icons div i svg{width:26px; height:26px; margin:0 auto; color:var(--bahaya)}
+.icons div i img{height:42px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto}
 .chips{display:flex; flex-wrap:wrap; gap:8px}
 .chips span{background:var(--danau-soft); color:var(--ink); padding:6px 12px; border-radius:999px; font-size:.86rem; font-weight:600}
 .split{display:grid; grid-template-columns:1fr 1fr; gap:10px}
