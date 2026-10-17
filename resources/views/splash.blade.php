@@ -18,27 +18,32 @@
 
     <div class="splash-track" id="splash-track">
       <section class="splash-slide bg-pink">
-        <span class="splash-logo"><img src="{{ asset('logo/logo-hijab.png') }}" alt="Logo Layanan Infogizi"></span>
-        <h1>Layanan Infogizi Ibu Hamil Remaja</h1>
-        <p>Cegak KEK, jaga ibu dan bayi.</p>
-        <p class="muted">Media edukasi gizi untuk remaja yang terlanjur hamil agar tetap sehat sampai melahirkan.</p>
+        <div class="splash-inner">
+          <span class="splash-logo"><img src="{{ asset('logo/logo-hijab.png') }}" alt="Logo Layanan Infogizi"></span>
+          <h1>Layanan Infogizi Ibu Hamil Remaja</h1>
+          <p>Cegak KEK, jaga ibu dan bayi.</p>
+          <p class="muted">Media edukasi gizi untuk remaja yang terlanjur hamil agar tetap sehat sampai melahirkan.</p>
+        </div>
       </section>
 
       <section class="splash-slide bg-warn">
-        <span class="splash-tag">Penting dibaca</span>
-        <h2>Remaja yang terlanjur hamil</h2>
-        <div class="about" style="max-width:360px; text-align:left; margin:0">
-          <b>⚠️ Penting</b>
-          <p>Media ini untuk remaja yang TERLANJUR hamil agar tetap sehat. Jika belum hamil, tunda kehamilan sampai usia
-            matang ≥ 20 tahun untuk mencegah anemia, KEK, preeklamsia, BBLR, stunting, hingga risiko kematian ibu &amp;
-            bayi.</p>
+        <div class="splash-inner">
+          <span class="splash-tag">Penting dibaca</span>
+          <h2>Remaja yang terlanjur hamil</h2>
+          <div class="about" style="max-width:360px; text-align:left; margin:0">
+            <b>⚠️ Penting</b>
+            <p>Media ini untuk remaja yang TERLANJUR hamil agar tetap sehat. Jika belum hamil, tunda kehamilan sampai usia
+              matang ≥ 20 tahun untuk mencegah anemia, KEK, preeklamsia, BBLR, stunting, hingga risiko kematian ibu &amp;
+              bayi.</p>
+          </div>
         </div>
       </section>
 
       <section class="splash-slide bg-blue">
-        <span class="splash-tag">Yang bisa kamu lakukan</span>
-        <h2>Kenali, pantau, dan rawat</h2>
-        <ul class="splash-feats">
+        <div class="splash-inner">
+          <span class="splash-tag">Yang bisa kamu lakukan</span>
+          <h2>Kenali, pantau, dan rawat</h2>
+          <ul class="splash-feats">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
             <span><b>Informasi</b><small>Kenali kehamilan remaja dan risiko KEK</small></span>
@@ -59,7 +64,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
             <span><b>Kuis</b><small>Uji pengetahuan, sikap, dan tindakan</small></span>
           </li>
-        </ul>
+          </ul>
+        </div>
       </section>
     </div>
 

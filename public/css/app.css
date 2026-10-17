@@ -509,8 +509,9 @@ details.acc[open] .acc-b{animation:q-in var(--dur-med) var(--ease)}
 .splash-skip{position:absolute; top:calc(14px + env(safe-area-inset-top,0px)); right:14px; z-index:5; font:inherit; font-weight:800; font-size:.82rem; color:var(--muted); background:color-mix(in srgb,var(--surface) 82%,transparent); border:1px solid var(--line); padding:8px 16px; border-radius:999px; cursor:pointer; backdrop-filter:blur(6px)}
 .splash-skip:hover{background:var(--surface); color:var(--sabbe)}
 .splash-skip:focus-visible{outline:3px solid var(--kunyit); outline-offset:2px}
-.splash-track{flex:1; display:flex; transition:transform .4s cubic-bezier(.4,0,.2,1)}
-.splash-slide{min-width:100%; flex:0 0 100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px; padding:76px 26px 10px}
+.splash-track{flex:1; min-height:0; display:flex; transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.splash-slide{min-width:100%; flex:0 0 100%; overflow-y:auto; overflow-x:hidden; padding:64px 22px 8px; -webkit-overflow-scrolling:touch}
+.splash-inner{min-height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px}
 .splash-slide.bg-pink{background:linear-gradient(170deg,#F9E1EA,var(--bg) 72%)}
 .splash-slide.bg-warn{background:linear-gradient(170deg,#FEF9E3,var(--bg) 72%)}
 .splash-slide.bg-blue{background:linear-gradient(170deg,#E3F1FB,var(--bg) 72%)}
@@ -525,8 +526,25 @@ details.acc[open] .acc-b{animation:q-in var(--dur-med) var(--ease)}
 .splash-feats svg{width:22px; height:22px; color:var(--sabbe); flex:none; margin-top:2px}
 .splash-feats b{display:block; color:var(--sabbe); font-size:.95rem}
 .splash-feats small{color:var(--muted); font-weight:700; font-size:.8rem}
-.splash-foot{padding:16px 22px calc(22px + env(safe-area-inset-bottom,0px)); display:flex; align-items:center; justify-content:space-between; gap:16px}
+.splash-foot{flex:none; padding:16px 22px calc(22px + env(safe-area-inset-bottom,0px)); display:flex; align-items:center; justify-content:space-between; gap:16px}
 .splash-dots{display:flex; gap:8px}
 .splash-dots i{width:8px; height:8px; border-radius:999px; background:var(--line); transition:width .25s var(--ease), background .25s var(--ease)}
 .splash-dots i.on{width:24px; background:var(--sabbe)}
 .splash-foot .btn-primary{width:auto; padding:14px 34px}
+@media (max-height:720px){
+  .splash-slide{padding-top:58px}
+  .splash-logo img{width:88px; height:88px}
+  .splash-slide h1{font-size:1.35rem}
+  .splash-slide h2{font-size:1.25rem}
+  .splash-inner{gap:12px}
+  .splash-feats{gap:8px}
+  .splash-feats li{padding:10px 12px}
+  .splash-feats small{font-size:.77rem}
+}
+@media (max-height:600px){
+  .splash-slide{padding-top:52px}
+  .splash-logo img{width:70px; height:70px}
+  .splash-slide h1,.splash-slide h2{font-size:1.15rem}
+  .splash-slide p{font-size:.9rem}
+  .splash-feats small{display:none}
+}
