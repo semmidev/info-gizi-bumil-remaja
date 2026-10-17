@@ -505,7 +505,7 @@ details.acc[open] .acc-b{animation:q-in var(--dur-med) var(--ease)}
 .filter-bar input:focus,.filter-bar select:focus{outline:3px solid var(--kunyit);outline-offset:1px;border-color:var(--sabbe)}
 
 /* Splash screen (sebelum login) */
-.splash{max-width:460px; margin:0 auto; min-height:100vh; background:var(--bg); display:flex; flex-direction:column; position:relative; overflow:hidden; box-shadow:0 0 0 1px var(--line)}
+.splash{max-width:460px; margin:0 auto; height:100vh; height:100dvh; background:var(--bg); display:flex; flex-direction:column; position:relative; overflow:hidden; box-shadow:0 0 0 1px var(--line)}
 .splash-skip{position:absolute; top:calc(14px + env(safe-area-inset-top,0px)); right:14px; z-index:5; font:inherit; font-weight:800; font-size:.82rem; color:var(--muted); background:color-mix(in srgb,var(--surface) 82%,transparent); border:1px solid var(--line); padding:8px 16px; border-radius:999px; cursor:pointer; backdrop-filter:blur(6px)}
 .splash-skip:hover{background:var(--surface); color:var(--sabbe)}
 .splash-skip:focus-visible{outline:3px solid var(--kunyit); outline-offset:2px}
