@@ -95,12 +95,13 @@ main{padding:18px 16px 8px}
 .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--sabbe);color:#fff;font-size:.95rem;margin-right:8px;vertical-align:2px}
 h4.sub{font-family:"Inter",sans-serif;font-size:1rem;color:var(--danau);margin:14px 0 8px}
 .age{margin:8px 0 12px}
-.age-bar{display:grid;grid-template-columns:5fr 5fr 4fr;border-radius:14px;overflow:hidden;text-align:center;font-size:.76rem;font-weight:700}
-.age-seg{padding:10px 4px}.age-seg b{display:block;font-family:"Inter";font-size:1.3rem;line-height:1.1}
-.a1{background:var(--sabbe-soft)}.a2{background:color-mix(in srgb,var(--sabbe) 28%,var(--surface))}.a3{background:var(--line);color:var(--muted)}
-.age-brace{width:71.4%;border:2px solid var(--sabbe);border-top:0;height:12px;border-radius:0 0 10px 10px}
-.age-lbl{width:71.4%;text-align:center;font-size:.8rem;font-weight:800;color:var(--sabbe);margin:6px 0 4px!important}
-.age-brace span{position:absolute;top:14px;left:0;right:0;text-align:center;font-size:.8rem;font-weight:800;color:var(--sabbe)}
+.age-bar{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,5fr) minmax(0,4fr);border-radius:14px;overflow:hidden;text-align:center;font-size:.76rem;font-weight:700}
+.age-seg{padding:13px 7px; display:flex; align-items:center; gap:7px; text-align:left; min-width:0}
+.age-seg span{min-width:0; line-height:1.2}
+.age-ico{width:44px; height:44px; object-fit:contain; flex:none}
+.age-seg b{display:block;font-family:"Inter";font-size:1.08rem;line-height:1.15}
+.a1{background:#FDEDF6}.a2{background:#F2EDFD}.a3{background:#ECF5EE;color:var(--muted)}
+.age-concl{display:block; width:100%; height:auto; margin-top:10px}
 .reasons,.intv{display:grid;gap:8px}
 .reasons div,.intv div{display:grid;grid-template-columns:36px 1fr;column-gap:10px;background:var(--danau-soft);border-radius:16px;padding:10px 12px}
 .intv div{background:var(--kelor-soft)}

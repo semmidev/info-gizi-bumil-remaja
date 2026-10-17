@@ -31,12 +31,11 @@
         <h3><span class="num">1</span>Siapa ibu hamil remaja?</h3>
         <div class="age">
           <div class="age-bar">
-            <div class="age-seg a1"><b>10–14</b>remaja awal</div>
-            <div class="age-seg a2"><b>15–19</b>remaja akhir</div>
-            <div class="age-seg a3"><b>20+</b>dewasa</div>
+            <div class="age-seg a1"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/10-14-tahun.png') }}" alt=""><span><b>10–14</b>remaja awal</span></div>
+            <div class="age-seg a2"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/15-19-tahun.png') }}" alt=""><span><b>15–19</b>remaja akhir</span></div>
+            <div class="age-seg a3"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/20-tahun.png') }}" alt=""><span><b>20+</b>dewasa</span></div>
           </div>
-          <div class="age-brace"></div>
-          <p class="age-lbl">Ibu hamil remaja: hamil di bawah usia 20 tahun</p>
+          <img class="age-concl" src="{{ asset('icons/ibu-hami-remaja/kesimpulan.png') }}" alt="Ibu hamil remaja: hamil di bawah usia 20 tahun">
         </div>
         <p>Menurut WHO, remaja adalah mereka yang berusia 10–19 tahun. Kehamilan yang terjadi pada usia ini disebut
           kehamilan remaja.</p>
