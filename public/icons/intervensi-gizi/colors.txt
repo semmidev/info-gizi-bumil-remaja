@@ -1,0 +1,12 @@
+background card colors:
+
+#E4F6E6
+#FDF4D5
+#F1EDFE
+#E1F3FD
+
+background text sub-title:
+#56B677
+#FCCC5C
+#9C89DB
+#4A9FEF

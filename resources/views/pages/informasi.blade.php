@@ -166,14 +166,14 @@
         <h3><span class="num">3</span>Penyebab dan dampak pada bayi</h3>
         <h4 class="sub">Bagaimana KEK ibu sampai ke bayi</h4>
         <ol class="flow">
-          <li>Ibu kurang makan dalam waktu lama</li>
-          <li>Tubuh ibu memakai cadangan lemak dan otot</li>
-          <li>Plasenta (ari-ari) tidak berfungsi optimal</li>
-          <li>Gizi dan oksigen ke janin berkurang</li>
+          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/ibu-kurang-makan.png') }}" alt="">Ibu kurang makan dalam waktu lama</li>
+          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/tubuh-ibu-pakai-cadangan.png') }}" alt="">Tubuh ibu memakai cadangan lemak dan otot</li>
+          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/plasenta.png') }}" alt="">Plasenta (ari-ari) tidak berfungsi optimal</li>
+          <li style="background:#E65F78;color:#fff"><img src="{{ asset('icons/dampak-pada-bayi/gizi-dan-oksigen.png') }}" alt="">Gizi dan oksigen ke janin berkurang</li>
         </ol>
         <h4 class="sub">Dampak pada bayi</h4>
         <div class="split">
-          <div class="baby">
+          <div class="baby" style="background:#E1F7EB">
             <h4>Saat lahir</h4>
             <ul>
               <li>Berat lahir rendah (&lt;2.500 g)</li>
@@ -181,14 +181,16 @@
               <li>Sulit bernapas (asfiksia)</li>
               <li>Pertumbuhan janin terhambat</li>
             </ul>
+            <img src="{{ asset('icons/dampak-pada-bayi/saat-lahir.png') }}" alt="">
           </div>
-          <div class="mom">
+          <div class="mom" style="background:#FFECF0">
             <h4>Jangka panjang</h4>
             <ul>
               <li>Berisiko stunting</li>
               <li>Perkembangan otak kurang optimal</li>
               <li>Mudah sakit</li>
             </ul>
+            <img src="{{ asset('icons/dampak-pada-bayi/jangka-panjang.png') }}" alt="">
           </div>
         </div>
       </div>
