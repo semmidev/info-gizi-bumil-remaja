@@ -175,10 +175,6 @@ table.nut{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem;
 .sp-h b{font-family:"Inter",sans-serif;font-size:1rem;color:#fff;border-radius:999px;padding:6px 16px;display:inline-block}
 .sp1 .sp-h b{background:#c7366f}.sp2 .sp-h b{background:#2f9762}.sp3 .sp-h b{background:#3d92ed}
 .supp p{margin:0 0 6px;font-size:.92rem}.supp ul{margin:0;padding-left:18px;font-size:.88rem}
-.src{display:grid;gap:8px}
-.src>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
-.src i{font-style:normal;font-size:1.6rem}.src b{font-family:"Inter",sans-serif;font-size:1rem;margin-right:6px}.src small{color:var(--muted);font-weight:700;font-size:.8rem}
-.src span{display:block;font-size:.88rem}
 .prv{display:none}.prv.on{display:block}
 #pr-kek svg{width:100%;max-width:380px;display:block;margin:0 auto 6px}
 details.acc{background:var(--surface);border:1px solid var(--line);border-radius:20px;margin-bottom:10px;overflow:hidden}

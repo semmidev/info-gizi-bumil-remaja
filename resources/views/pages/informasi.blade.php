@@ -294,34 +294,8 @@
 
       <div class="panel" id="b6">
         <h3><span class="num">6</span>Sumber gizi utama ibu hamil remaja</h3>
-        <div class="src">
-          <div><i>🍚</i>
-            <div><b>Karbohidrat</b><small>Sumber tenaga</small><span>Nasi, jagung, ubi, sagu, roti</span></div>
-          </div>
-          <div><i>🐟</i>
-            <div><b>Protein</b><small>Membangun tubuh ibu dan janin</small><span>Ikan, telur, ayam, daging, tempe, tahu,
-                kacang hijau</span></div>
-          </div>
-          <div><i>🩸</i>
-            <div><b>Zat besi</b><small>Membentuk darah, mencegah anemia</small><span>Hati ayam, daging, ikan, daun kelor,
-                bayam</span></div>
-          </div>
-          <div><i>🥬</i>
-            <div><b>Asam folat</b><small>Pembentukan otak dan saraf janin</small><span>Sayuran hijau, kacang-kacangan,
-                hati</span></div>
-          </div>
-          <div><i>🥛</i>
-            <div><b>Kalsium</b><small>Tulang dan gigi ibu serta janin</small><span>Susu, ikan teri, tahu, tempe, sayuran
-                hijau</span></div>
-          </div>
-          <div><i>🍊</i>
-            <div><b>Vitamin C</b><small>Membantu penyerapan zat besi</small><span>Jeruk, jambu biji, pepaya, tomat</span>
-            </div>
-          </div>
-        </div>
-        <h4 class="sub">Pangan lokal yang mudah didapat</h4>
-        <div class="chips"><span>Ikan air tawar dari danau dan sungai</span><span>Telur</span><span>Daun
-            kelor</span><span>Tempe dan tahu</span><span>Kacang hijau</span><span>Pisang dan pepaya</span></div>
+        <img class="illus" src="{{ asset('content/sumber-gizi-bu-hamil.jpeg') }}"
+          alt="Sumber gizi utama ibu hamil remaja: karbohidrat (nasi, jagung, ubi, sagu, roti), protein, zat besi, asam folat, kalsium, vitamin C, serta pangan lokal yang mudah didapat seperti ikan air tawar, telur, daun kelor, tempe dan tahu, kacang hijau, pisang dan pepaya.">
       </div>
 
       <div class="panel" id="b7">
