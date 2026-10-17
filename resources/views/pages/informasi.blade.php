@@ -31,11 +31,15 @@
         <h3><span class="num">1</span>Siapa ibu hamil remaja?</h3>
         <div class="age">
           <div class="age-bar">
-            <div class="age-seg a1"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/10-14-tahun.png') }}" alt=""><span><b>10–14</b>remaja awal</span></div>
-            <div class="age-seg a2"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/15-19-tahun.png') }}" alt=""><span><b>15–19</b>remaja akhir</span></div>
-            <div class="age-seg a3"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/20-tahun.png') }}" alt=""><span><b>20+</b>dewasa</span></div>
+            <div class="age-seg a1"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/10-14-tahun.png') }}"
+                alt=""><span><b>10–14</b>remaja awal</span></div>
+            <div class="age-seg a2"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/15-19-tahun.png') }}"
+                alt=""><span><b>15–19</b>remaja akhir</span></div>
+            <div class="age-seg a3"><img class="age-ico" src="{{ asset('icons/ibu-hami-remaja/20-tahun.png') }}"
+                alt=""><span><b>20+</b>dewasa</span></div>
           </div>
-          <img class="age-concl" src="{{ asset('icons/ibu-hami-remaja/kesimpulan.png') }}" alt="Ibu hamil remaja: hamil di bawah usia 20 tahun">
+          <img class="age-concl" src="{{ asset('icons/ibu-hami-remaja/kesimpulan.png') }}"
+            alt="Ibu hamil remaja: hamil di bawah usia 20 tahun">
         </div>
         <p>Menurut WHO, remaja adalah mereka yang berusia 10–19 tahun. Kehamilan yang terjadi pada usia ini disebut
           kehamilan remaja.</p>
@@ -46,15 +50,27 @@
       <div class="panel" id="a2">
         <h3><span class="num">2</span>Mengapa kehamilan remaja bisa terjadi?</h3>
         <div class="reasons">
-          <div style="background:#E4F5FD"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/menikah-diusia-muda.png') }}" alt=""></i><b>Menikah di usia muda</b><small>Masih ada kebiasaan menikah di usia anak karena tradisi atau
+          <div style="background:#E4F5FD"><i><img
+                src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/menikah-diusia-muda.png') }}"
+                alt=""></i><b>Menikah di usia muda</b><small>Masih ada kebiasaan menikah di usia anak karena tradisi atau
               tekanan ekonomi.</small></div>
-          <div style="background:#FFF7E3"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/kurang-informasi-kesehatan.png') }}" alt=""></i><b>Kurang informasi kesehatan reproduksi</b><small>Belum memahami masa subur dan cara merencanakan
+          <div style="background:#FFF7E3"><i><img
+                src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/kurang-informasi-kesehatan.png') }}"
+                alt=""></i><b>Kurang informasi kesehatan reproduksi</b><small>Belum memahami masa subur dan cara
+              merencanakan
               kehamilan.</small></div>
-          <div style="background:#FFF7E1"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/ekonomi-dan-pendidikan-keluarga.png') }}" alt=""></i><b>Ekonomi dan pendidikan keluarga</b><small>Keterbatasan biaya dan sekolah membatasi akses
+          <div style="background:#FFF7E1"><i><img
+                src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/ekonomi-dan-pendidikan-keluarga.png') }}"
+                alt=""></i><b>Ekonomi dan pendidikan keluarga</b><small>Keterbatasan biaya dan sekolah membatasi akses
               informasi dan layanan.</small></div>
-          <div style="background:#F0EDFE"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/jarang-dibicarakan-keluarga.png') }}" alt=""></i><b>Jarang dibicarakan di keluarga</b><small>Remaja mencari informasi dari teman atau internet
+          <div style="background:#F0EDFE"><i><img
+                src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/jarang-dibicarakan-keluarga.png') }}"
+                alt=""></i><b>Jarang dibicarakan di keluarga</b><small>Remaja mencari informasi dari teman atau internet
               yang belum tentu benar.</small></div>
-          <div style="background:#FEE8F2"><i><img src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/layanan-ramah-remaja-terbatas.png') }}" alt=""></i><b>Layanan ramah remaja terbatas</b><small>Malu atau takut dinilai membuat remaja enggan bertanya
+          <div style="background:#FEE8F2"><i><img
+                src="{{ asset('icons/mengapa-kehamilan-remaja-bisa-terjadi/layanan-ramah-remaja-terbatas.png') }}"
+                alt=""></i><b>Layanan ramah remaja terbatas</b><small>Malu atau takut dinilai membuat remaja enggan
+              bertanya
               ke tenaga kesehatan.</small></div>
         </div>
         <p class="tip">Apa pun alasannya, yang terpenting sekarang adalah menjaga kesehatan ibu dan bayi. Ibu tidak
@@ -77,12 +93,19 @@
         <p>Karena dua pertumbuhan terjadi bersamaan, kebutuhan gizi ibu hamil remaja meningkat. Inilah yang paling
           bertambah saat hamil:</p>
         <div class="nutri">
-          <div style="background:#FAF5D6"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/energi.png') }}" alt=""></i><b>Energi</b><span>+180 kkal (trimester I)<br>+300 kkal (trimester II–III)</span></div>
-          <div style="background:#EAF6FD"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/protein.png') }}" alt=""></i><b>Protein</b><span>+1 g (trimester I), +10 g (trimester II)<br>+30 g (trimester III)</span></div>
-          <div style="background:#FDEEF5"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/zat-besi.png') }}" alt=""></i><b>Zat besi</b><span>+9 mg<br>(trimester II–III)</span></div>
-          <div style="background:#E9F6EC"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/asam-folat.png') }}" alt=""></i><b>Asam folat</b><span>+200 mcg<br>sejak awal hamil</span></div>
-          <div style="background:#EFEAFE"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/kalsium.png') }}" alt=""></i><b>Kalsium</b><span>+200 mg<br>sepanjang kehamilan</span></div>
-          <div style="background:#FDE2CD"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/vitamin-a-c.png') }}" alt=""></i><b>Vitamin A dan C</b><span>+300 RE dan +10 mg</span></div>
+          <div style="background:#FAF5D6"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/energi.png') }}"
+                alt=""></i><b>Energi</b><span>+180 kkal (trimester I)<br>+300 kkal (trimester II–III)</span></div>
+          <div style="background:#EAF6FD"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/protein.png') }}"
+                alt=""></i><b>Protein</b><span>+1 g (trimester I), +10 g (trimester II)<br>+30 g (trimester III)</span>
+          </div>
+          <div style="background:#FDEEF5"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/zat-besi.png') }}"
+                alt=""></i><b>Zat besi</b><span>+9 mg<br>(trimester II–III)</span></div>
+          <div style="background:#E9F6EC"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/asam-folat.png') }}"
+                alt=""></i><b>Asam folat</b><span>+200 mcg<br>sejak awal hamil</span></div>
+          <div style="background:#EFEAFE"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/kalsium.png') }}"
+                alt=""></i><b>Kalsium</b><span>+200 mg<br>sepanjang kehamilan</span></div>
+          <div style="background:#FDE2CD"><i><img src="{{ asset('icons/kebutuhan-gizi-hamil/vitamin-a-c.png') }}"
+                alt=""></i><b>Vitamin A dan C</b><span>+300 RE dan +10 mg</span></div>
         </div>
         <p class="tip">Tambahan +300 kkal kira-kira sama dengan sepiring kecil nasi dan sepotong ikan, bukan makan dua
           kali lipat. Sumber: AKG 2019.</p>
@@ -94,11 +117,21 @@
       <div class="panel" id="a4">
         <h3><span class="num">4</span>Permasalahan yang sering dialami</h3>
         <div class="probs">
-          <div class="pb" style="background:#FDE8EF"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/kesehatan-ibu.png') }}" alt=""></i><b>Kesehatan ibu</b><small>Anemia, KEK, preeklamsia, infeksi, persalinan lama</small></div>
-          <div class="pb" style="background:#E4F5FF"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/kesehatan-bayi.png') }}" alt=""></i><b>Kesehatan bayi</b><small>Berat lahir rendah (BBLR) dan lahir prematur</small></div>
-          <div class="pb" style="background:#FDF6DA"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/perasaan.png') }}" alt=""></i><b>Perasaan</b><small>Stres, cemas, dan bingung menjalani peran baru</small></div>
-          <div class="pb" style="background:#EBF9EC"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/sekolah-dan-ekonomi.png') }}" alt=""></i><b>Sekolah dan ekonomi</b><small>Putus sekolah dan bergantung pada keluarga atau pasangan</small></div>
-          <div class="pb wide" style="background:#F0EDFE"><i><img src="{{ asset('icons/permasalahan-yang-sering-dialami/lingkungan-sosial.png') }}" alt=""></i><b>Lingkungan sosial</b><small>Stigma dan omongan orang sekitar yang membuat ibu enggan memeriksakan diri</small></div>
+          <div class="pb" style="background:#FDE8EF"><i><img
+                src="{{ asset('icons/permasalahan-yang-sering-dialami/kesehatan-ibu.png') }}" alt=""></i><b>Kesehatan
+              ibu</b><small>Anemia, KEK, preeklamsia, infeksi, persalinan lama</small></div>
+          <div class="pb" style="background:#E4F5FF"><i><img
+                src="{{ asset('icons/permasalahan-yang-sering-dialami/kesehatan-bayi.png') }}" alt=""></i><b>Kesehatan
+              bayi</b><small>Berat lahir rendah (BBLR) dan lahir prematur</small></div>
+          <div class="pb" style="background:#FDF6DA"><i><img
+                src="{{ asset('icons/permasalahan-yang-sering-dialami/perasaan.png') }}"
+                alt=""></i><b>Perasaan</b><small>Stres, cemas, dan bingung menjalani peran baru</small></div>
+          <div class="pb" style="background:#EBF9EC"><i><img
+                src="{{ asset('icons/permasalahan-yang-sering-dialami/sekolah-dan-ekonomi.png') }}" alt=""></i><b>Sekolah
+              dan ekonomi</b><small>Putus sekolah dan bergantung pada keluarga atau pasangan</small></div>
+          <div class="pb wide" style="background:#F0EDFE"><i><img
+                src="{{ asset('icons/permasalahan-yang-sering-dialami/lingkungan-sosial.png') }}" alt=""></i><b>Lingkungan
+              sosial</b><small>Stigma dan omongan orang sekitar yang membuat ibu enggan memeriksakan diri</small></div>
         </div>
         <p class="tip">Salah satu masalah gizi yang paling sering adalah KEK. Lanjutkan ke bagian berikutnya.</p>
         <button class="btn" data-goto="p-kek" style="margin-top:6px">Lanjut: KEK pada Ibu Hamil</button>
@@ -134,12 +167,18 @@
           alt="Indikator baru KEK: LILA kurang dari 23,5 cm dan IMT kurang dari 18,5 kg/m². Rumus IMT = berat badan dibagi tinggi badan (meter) kuadrat.">
         <p style="margin-top:12px;font-weight:700">Tanda yang perlu diwaspadai:</p>
         <div class="icons">
-          <div style="background:#EBF5FE"><i><img src="{{ asset('icons/tanda-diwaspadai/lila-icon.png') }}" alt=""></i>LILA &lt;23,5 cm</div>
-          <div style="background:#FEF0F0"><i><img src="{{ asset('icons/tanda-diwaspadai/mudah-lelah-icon.png') }}" alt=""></i>Mudah lelah</div>
-          <div style="background:#FEF9E3"><i><img src="{{ asset('icons/tanda-diwaspadai/wajah-pucat-icon.png') }}" alt=""></i>Wajah pucat</div>
-          <div style="background:#ECFAED"><i><img src="{{ asset('icons/tanda-diwaspadai/sering-pusing-icon.png') }}" alt=""></i>Sering pusing</div>
-          <div style="background:#EDECFA"><i><img src="{{ asset('icons/tanda-diwaspadai/nafsu-makan-turun-icon.png') }}" alt=""></i>Nafsu makan turun</div>
-          <div style="background:#E8F5FD"><i><img src="{{ asset('icons/tanda-diwaspadai/berat-badan-kurang-icon.png') }}" alt=""></i>Berat badan naiknya kurang</div>
+          <div style="background:#EBF5FE"><i><img src="{{ asset('icons/tanda-diwaspadai/lila-icon.png') }}"
+                alt=""></i>LILA &lt;23,5 cm</div>
+          <div style="background:#FEF0F0"><i><img src="{{ asset('icons/tanda-diwaspadai/mudah-lelah-icon.png') }}"
+                alt=""></i>Mudah lelah</div>
+          <div style="background:#FEF9E3"><i><img src="{{ asset('icons/tanda-diwaspadai/wajah-pucat-icon.png') }}"
+                alt=""></i>Wajah pucat</div>
+          <div style="background:#ECFAED"><i><img src="{{ asset('icons/tanda-diwaspadai/sering-pusing-icon.png') }}"
+                alt=""></i>Sering pusing</div>
+          <div style="background:#EDECFA"><i><img src="{{ asset('icons/tanda-diwaspadai/nafsu-makan-turun-icon.png') }}"
+                alt=""></i>Nafsu makan turun</div>
+          <div style="background:#E8F5FD"><i><img src="{{ asset('icons/tanda-diwaspadai/berat-badan-kurang-icon.png') }}"
+                alt=""></i>Berat badan naiknya kurang</div>
         </div>
       </div>
 
@@ -153,12 +192,18 @@
         </div>
         <h4 class="sub">Dampak pada ibu</h4>
         <div class="icons">
-          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/anemia.png') }}" alt=""></i>Anemia</div>
-          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/persalinan-lama.png') }}" alt=""></i>Persalinan lama</div>
-          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/pendarahan.png') }}" alt=""></i>Perdarahan setelah melahirkan</div>
-          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/mudah-infeksi.png') }}" alt=""></i>Mudah infeksi</div>
-          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/kompilasi-persalinan.png') }}" alt=""></i>Komplikasi persalinan</div>
-          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/tubuh-lemah.png') }}" alt=""></i>Tubuh lemah</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/anemia.png') }}"
+                alt=""></i>Anemia</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/persalinan-lama.png') }}"
+                alt=""></i>Persalinan lama</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/pendarahan.png') }}"
+                alt=""></i>Perdarahan setelah melahirkan</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/mudah-infeksi.png') }}"
+                alt=""></i>Mudah infeksi</div>
+          <div style="background:var(--sabbe-soft)"><i><img
+                src="{{ asset('icons/dampak-pada-ibu/kompilasi-persalinan.png') }}" alt=""></i>Komplikasi persalinan</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/tubuh-lemah.png') }}"
+                alt=""></i>Tubuh lemah</div>
         </div>
       </div>
 
@@ -166,10 +211,14 @@
         <h3><span class="num">3</span>Penyebab dan dampak pada bayi</h3>
         <h4 class="sub">Bagaimana KEK ibu sampai ke bayi</h4>
         <ol class="flow">
-          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/ibu-kurang-makan.png') }}" alt="">Ibu kurang makan dalam waktu lama</li>
-          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/tubuh-ibu-pakai-cadangan.png') }}" alt="">Tubuh ibu memakai cadangan lemak dan otot</li>
-          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/plasenta.png') }}" alt="">Plasenta (ari-ari) tidak berfungsi optimal</li>
-          <li style="background:#E65F78;color:#fff"><img src="{{ asset('icons/dampak-pada-bayi/gizi-dan-oksigen.png') }}" alt="">Gizi dan oksigen ke janin berkurang</li>
+          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/ibu-kurang-makan.png') }}" alt="">Ibu
+            kurang makan dalam waktu lama</li>
+          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/tubuh-ibu-pakai-cadangan.png') }}"
+              alt="">Tubuh ibu memakai cadangan lemak dan otot</li>
+          <li style="background:#FEF4D9"><img src="{{ asset('icons/dampak-pada-bayi/plasenta.png') }}" alt="">Plasenta
+            (ari-ari) tidak berfungsi optimal</li>
+          <li style="background:#FBE2E2;"><img src="{{ asset('icons/dampak-pada-bayi/gizi-dan-oksigen.png') }}"
+              alt="">Gizi dan oksigen ke janin berkurang</li>
         </ol>
         <h4 class="sub">Dampak pada bayi</h4>
         <div class="split">
@@ -199,13 +248,21 @@
         <h3><span class="num">4</span>Intervensi gizi pada ibu hamil KEK</h3>
         <p>Bila LILA ibu di bawah 23,5 cm, tenaga kesehatan akan memberikan:</p>
         <div class="intv">
-          <div><i>🍱</i><b>Makanan tambahan (PMT)</b><small>Berbahan pangan lokal dari puskesmas, dimakan sebagai
+          <div style="background:#E4F6E6"><i><img src="{{ asset('icons/intervensi-gizi/makanan-tambahan.png') }}"
+                alt=""></i><b style="color:#56B677">Makanan tambahan (PMT)</b><small>Berbahan pangan lokal dari puskesmas,
+              dimakan sebagai
               tambahan, bukan pengganti makan utama.</small></div>
-          <div><i>💊</i><b>Suplementasi gizi</b><small>Tablet tambah darah setiap hari dan suplemen lain sesuai anjuran
+          <div style="background:#FDF4D5"><i><img src="{{ asset('icons/intervensi-gizi/suplementasi-gizi.png') }}"
+                alt=""></i><b style="color:#FCCC5C">Suplementasi gizi</b><small>Tablet tambah darah setiap hari dan
+              suplemen lain sesuai anjuran
               (lihat poin 5).</small></div>
-          <div><i>🗣️</i><b>Konseling gizi</b><small>Bidan atau ahli gizi membantu menyusun porsi dan menu sesuai kondisi
+          <div style="background:#F1EDFE"><i><img src="{{ asset('icons/intervensi-gizi/konseling-gizi.png') }}"
+                alt=""></i><b style="color:#9C89DB">Konseling gizi</b><small>Bidan atau ahli gizi membantu menyusun porsi
+              dan menu sesuai kondisi
               ibu.</small></div>
-          <div><i>📈</i><b>Pemantauan rutin</b><small>LILA dan berat badan diukur setiap periksa kehamilan.</small></div>
+          <div style="background:#E1F3FD"><i><img src="{{ asset('icons/intervensi-gizi/pemantauan-rutin.png') }}"
+                alt=""></i><b style="color:#4A9FEF">Pemantauan rutin</b><small>LILA dan berat badan diukur setiap periksa
+              kehamilan.</small></div>
         </div>
       </div>
 

@@ -110,13 +110,16 @@ h4.sub{font-family:"Inter",sans-serif;font-size:1rem;color:var(--danau);margin:1
   .age-ico{width:40px; height:40px}
   .duo .c{padding:8px; gap:8px; font-size:.8rem}
   .duo .c img{width:48px; height:48px}
+  .flow li img{width:38px; height:38px}
+  .split > div img{width:56px; height:56px}
 }
 .reasons,.intv{display:grid;gap:8px}
 .reasons div,.intv div{display:grid;grid-template-columns:36px 1fr;column-gap:10px;background:var(--danau-soft);border-radius:16px;padding:10px 12px}
-.intv div{background:var(--kelor-soft)}
+.intv div{background:var(--kelor-soft);grid-template-columns:52px 1fr}
 .reasons div{grid-template-columns:58px 1fr}
 .reasons i,.intv i{font-style:normal;font-size:1.5rem;grid-row:span 2;align-self:center}
 .reasons i img{width:100%; height:auto; display:block}
+.intv i img{width:100%; height:auto; display:block}
 .reasons small,.intv small{color:var(--muted);font-size:.85rem}
 .tbl-wrap{overflow-x:auto;margin:8px 0}
 table.nut{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem;min-width:320px}
