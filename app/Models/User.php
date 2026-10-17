@@ -68,9 +68,7 @@ class User extends Authenticatable
 
     public function logoPath(): string
     {
-        return $this->religion && $this->religion !== 'Islam'
-            ? 'logo/logo-non-hijab.png'
-            : 'logo/logo-hijab.png';
+        return 'logo/logo.png';
     }
 
     public function quizAttempts(): HasMany

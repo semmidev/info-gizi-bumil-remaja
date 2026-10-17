@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>@yield('title', 'Admin') · Layanan Infogizi</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="icon" type="image/png" href="{{ asset(auth()->user()?->logoPath() ?? 'logo/logo-hijab.png') }}">
+<link rel="icon" type="image/png" href="{{ asset(auth()->user()?->logoPath() ?? 'logo/logo.png') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <div class="brand">
       <div class="brand-menu">
         <button type="button" class="brand-btn" id="brand-btn" aria-haspopup="true" aria-expanded="false" aria-label="Menu akun" title="Menu">
-          <img src="{{ asset(auth()->user()?->logoPath() ?? 'logo/logo-hijab.png') }}" alt="Logo" width="36" height="36">
+          <img src="{{ asset(auth()->user()?->logoPath() ?? 'logo/logo.png') }}" alt="Logo" width="36" height="36">
         </button>
         <span class="brand-cap">Menu</span>
         <div class="dropdown" id="brand-dropdown" hidden>
