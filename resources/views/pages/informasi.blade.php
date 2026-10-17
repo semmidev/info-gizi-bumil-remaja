@@ -270,7 +270,7 @@
         <h3><span class="num">5</span>Suplementasi gizi</h3>
         <div class="supp">
           <div class="sp1">
-            <div class="sp-h"><i>💊</i><b>Tablet tambah darah (TTD)</b></div>
+            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/tablet-tambah-darah.png') }}" alt=""></i><b>Tablet tambah darah (TTD)</b></div>
             <p>Berisi zat besi dan asam folat untuk mencegah anemia dan KEK.</p>
             <ul>
               <li>1 tablet setiap hari, minimal 90 tablet selama hamil</li>
@@ -280,11 +280,11 @@
             </ul>
           </div>
           <div class="sp2">
-            <div class="sp-h"><i>🥬</i><b>Asam folat</b></div>
+            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/asam-folat.png') }}" alt=""></i><b>Asam folat</b></div>
             <p>Penting sejak awal kehamilan untuk pembentukan otak dan saraf janin. Sudah terkandung dalam TTD.</p>
           </div>
           <div class="sp3">
-            <div class="sp-h"><i>🥛</i><b>Kalsium</b></div>
+            <div class="sp-h"><i><img src="{{ asset('icons/suplementasi-gizi/kalsium.png') }}" alt=""></i><b>Kalsium</b></div>
             <p>Untuk tulang dan gigi ibu serta janin. Diminum sesuai anjuran tenaga kesehatan, dengan jarak waktu dari TTD
               karena kalsium menghambat penyerapan zat besi.</p>
           </div>

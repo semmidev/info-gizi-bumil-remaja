@@ -170,8 +170,10 @@ table.nut{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem;
 .nutri i img{width:100%; height:auto; display:block}
 .nutri b{font-family:"Inter",sans-serif;font-size:1rem}.nutri span{font-size:.8rem;font-weight:700;color:var(--muted)}
 .supp{display:grid;gap:10px}
-.supp>div{border-radius:16px;padding:12px 14px}.sp1{background:var(--bahaya-soft)}.sp2{background:var(--kelor-soft)}.sp3{background:var(--danau-soft)}
-.sp-h{display:flex;gap:8px;align-items:center;margin-bottom:4px}.sp-h i{font-style:normal;font-size:1.4rem}.sp-h b{font-family:"Inter",sans-serif;font-size:1.05rem}
+.supp>div{border-radius:16px;padding:12px 14px}.sp1{background:#fae3eb}.sp2{background:#e5f3e4}.sp3{background:#e0f2fe}
+.sp-h{display:flex;gap:10px;align-items:center;margin-bottom:8px}.sp-h i{font-style:normal;flex:none}.sp-h i img{width:60px;height:60px;object-fit:contain;display:block}
+.sp-h b{font-family:"Inter",sans-serif;font-size:1rem;color:#fff;border-radius:999px;padding:6px 16px;display:inline-block}
+.sp1 .sp-h b{background:#c7366f}.sp2 .sp-h b{background:#2f9762}.sp3 .sp-h b{background:#3d92ed}
 .supp p{margin:0 0 6px;font-size:.92rem}.supp ul{margin:0;padding-left:18px;font-size:.88rem}
 .src{display:grid;gap:8px}
 .src>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px}

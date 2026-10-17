@@ -1,0 +1,10 @@
+background cards:
+
+#fae3eb
+#e5f3e4
+#e0f2fe
+
+background sub-title text:
+#c7366f
+#2f9762
+#3d92ed
