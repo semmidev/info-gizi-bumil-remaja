@@ -153,12 +153,12 @@
         </div>
         <h4 class="sub">Dampak pada ibu</h4>
         <div class="icons">
-          <div style="background:var(--sabbe-soft)"><i>🩸</i>Anemia</div>
-          <div style="background:var(--sabbe-soft)"><i>⏳</i>Persalinan lama</div>
-          <div style="background:var(--sabbe-soft)"><i>🚨</i>Perdarahan setelah melahirkan</div>
-          <div style="background:var(--sabbe-soft)"><i>🦠</i>Mudah infeksi</div>
-          <div style="background:var(--sabbe-soft)"><i>⚠️</i>Komplikasi persalinan</div>
-          <div style="background:var(--sabbe-soft)"><i>🪫</i>Tubuh lemah</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/anemia.png') }}" alt=""></i>Anemia</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/persalinan-lama.png') }}" alt=""></i>Persalinan lama</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/pendarahan.png') }}" alt=""></i>Perdarahan setelah melahirkan</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/mudah-infeksi.png') }}" alt=""></i>Mudah infeksi</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/kompilasi-persalinan.png') }}" alt=""></i>Komplikasi persalinan</div>
+          <div style="background:var(--sabbe-soft)"><i><img src="{{ asset('icons/dampak-pada-ibu/tubuh-lemah.png') }}" alt=""></i>Tubuh lemah</div>
         </div>
       </div>
 
