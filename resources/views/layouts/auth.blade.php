@@ -11,7 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
 <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion-on')}catch(e){}</script>
 </head>
 
@@ -33,7 +33,7 @@
     <p class="auth-foot">Media edukasi ini tidak menggantikan pemeriksaan oleh bidan atau dokter.</p>
   </div>
   <script src="{{ asset('js/pass.js') }}"></script>
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}?v={{ filemtime(public_path('js/app.js')) }}"></script>
   <script defer src="{{ asset('js/vendor/motion.min.js') }}"></script>
   <script defer src="{{ asset('js/motion-ui.js') }}"></script>
 </body>
