@@ -20,27 +20,8 @@
 
     <div class="panel" id="cara-ukur">
       <h3>Cara mengukur</h3>
-      <svg viewBox="0 0 320 130" width="100%" role="img" aria-label="Ilustrasi lengan kiri dengan pita LILA di titik tengah antara bahu dan siku">
-        <rect x="20" y="40" width="250" height="52" rx="26" fill="var(--sabbe-soft)" stroke="var(--sabbe)" stroke-width="2"/>
-        <circle cx="34" cy="66" r="22" fill="var(--sabbe-soft)" stroke="var(--sabbe)" stroke-width="2"/>
-        <circle cx="270" cy="66" r="14" fill="var(--sabbe-soft)" stroke="var(--sabbe)" stroke-width="2"/>
-        <text x="34" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)" font-family="Inter,sans-serif">Bahu</text>
-        <text x="270" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)" font-family="Inter,sans-serif">Siku</text>
-        <line x1="34" y1="22" x2="270" y2="22" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
-        <circle cx="152" cy="22" r="5" fill="var(--kunyit)"/>
-        <text x="152" y="14" text-anchor="middle" font-size="12" font-weight="800" fill="var(--kunyit)" font-family="Inter,sans-serif">titik tengah</text>
-        <rect x="142" y="36" width="20" height="60" rx="4" fill="var(--danau)" opacity=".85"/>
-        <text x="152" y="112" text-anchor="middle" font-size="12" font-weight="800" fill="var(--danau)" font-family="Inter,sans-serif">pita LILA</text>
-      </svg>
-      <ol class="steps">
-        <li><div><b>Tentukan bahu dan siku</b><small>Gunakan lengan kiri (lengan kanan bila kidal).</small></div></li>
-        <li><div><b>Letakkan pita di antara bahu dan siku</b><small>Lengan dibiarkan lemas, baju tidak menekan.</small></div></li>
-        <li><div><b>Tandai titik tengahnya</b></div></li>
-        <li><div><b>Lingkarkan pita di titik tengah</b></div></li>
-        <li><div><b>Jangan terlalu ketat</b></div></li>
-        <li><div><b>Jangan terlalu longgar</b></div></li>
-        <li><div><b>Baca angka di pita dengan teliti</b><small>Pita harus rata, tidak kusut atau terlipat.</small></div></li>
-      </ol>
+      <img class="illus" src="{{ asset('content/cara-mengukur-lila/cara-mengukur-lila.jpeg') }}"
+        alt="Cara mengukur LILA: tentukan bahu dan siku, letakkan pita di antara bahu dan siku, tandai titik tengahnya, lingkarkan pita di titik tengah, jangan terlalu ketat atau longgar, lalu baca angka di pita dengan teliti.">
     </div>
 
     <div class="panel" id="ukur-lila">

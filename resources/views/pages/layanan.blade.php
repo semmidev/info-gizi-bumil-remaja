@@ -9,54 +9,27 @@
     <p class="lead">Di mana periksa, apa yang didapat, kapan harus ke faskes.</p>
 
     <div class="panel">
-      <h3>Tempat periksa kehamilan</h3>
-      <div class="intv">
-        <div><i>🏘️</i><b>Posyandu</b><small>Timbang berat badan, ukur LILA, dapat TTD, dan penyuluhan gizi.</small></div>
-        <div><i>👩‍⚕️</i><b>Bidan desa atau pustu</b><small>Pemeriksaan kehamilan rutin dan konsultasi.</small></div>
-        <div><i>🏥</i><b>Puskesmas</b><small>Pemeriksaan lengkap, cek Hb, konseling gizi, PMT, dan pemeriksaan
-            dokter.</small></div>
-      </div>
-      <p class="tip">Jadwal pemeriksaan ada di menu <a href="{{ route('menarik') }}">Info Menarik</a>.</p>
+      <!-- <h3>Tempat periksa kehamilan</h3> -->
+      <img class="illus" src="{{ asset('content/tempat-periksa-kehamilan.jpeg') }}"
+        alt="Tempat periksa kehamilan: Posyandu untuk timbang berat badan, ukur LILA, dapat TTD, dan penyuluhan gizi; bidan desa atau pustu untuk pemeriksaan kehamilan rutin dan konsultasi; puskesmas untuk pemeriksaan lengkap, cek Hb, konseling gizi, PMT, dan pemeriksaan dokter. Jadwal pemeriksaan ada di menu Info Menarik.">
     </div>
 
     <div class="panel">
-      <h3>Tablet tambah darah (TTD)</h3>
-      <p>Minum 1 tablet setiap hari, minimal 90 tablet selama hamil. TTD gratis di posyandu dan puskesmas.</p>
-      <div class="split" style="margin-top:10px">
-        <div class="baby" style="background:var(--kelor-soft)">
-          <h4>Minum dengan</h4>
-          <ul>
-            <li>Air putih</li>
-            <li>Jus jeruk atau buah</li>
-          </ul>
-        </div>
-        <div class="mom" style="background:var(--bahaya-soft)">
-          <h4>Hindari bersama</h4>
-          <ul>
-            <li>Teh dan kopi</li>
-            <li>Susu</li>
-          </ul>
-        </div>
-      </div>
-      <p class="tip">Diminum malam sebelum tidur bisa mengurangi rasa mual.</p>
+      <!-- <h3>Tablet tambah darah (TTD)</h3> -->
+      <img class="illus" src="{{ asset('content/tablet-tambah-darah.jpeg') }}"
+        alt="Tablet tambah darah (TTD): minum 1 tablet setiap hari, minimal 90 tablet selama hamil, gratis di posyandu dan puskesmas. Minum dengan air putih atau jus jeruk/buah. Hindari diminum bersama teh, kopi, atau susu. Diminum malam sebelum tidur bisa mengurangi rasa mual.">
     </div>
 
     <div class="panel">
-      <h3>Makanan tambahan (PMT)</h3>
-      <p>Ibu hamil dengan LILA di bawah 23,5 cm berhak mendapat PMT berbahan pangan lokal dari puskesmas. Tanyakan ke
-        bidan desa saat pemeriksaan.</p>
+      <!-- <h3>Makanan tambahan (PMT)</h3> -->
+      <img class="illus" src="{{ asset('content/makanan-tambahan.jpeg') }}"
+        alt="Makanan tambahan (PMT): ibu hamil dengan LILA di bawah 23,5 cm berhak mendapat PMT berbahan pangan lokal dari puskesmas. Tanyakan ke bidan desa saat pemeriksaan. PMT membantu memenuhi kebutuhan gizi ibu hamil dan janin.">
     </div>
 
     <div class="panel danger">
-      <h3>Segera ke bidan atau puskesmas bila</h3>
-      <ul>
-        <li>Keluar darah dari jalan lahir</li>
-        <li>Sakit kepala hebat, pandangan kabur, kaki/tangan/wajah bengkak</li>
-        <li>Demam tinggi</li>
-        <li>Gerakan janin berkurang atau tidak terasa</li>
-        <li>Keluar air ketuban sebelum waktunya</li>
-        <li>Muntah terus-menerus dan tidak bisa makan</li>
-      </ul>
+      <!-- <h3>Segera ke bidan atau puskesmas bila</h3> -->
+      <img class="illus" src="{{ asset('content/segera-ke-bidan.jpeg') }}"
+        alt="Segera ke bidan atau puskesmas bila: keluar darah dari jalan lahir; sakit kepala hebat, pandangan kabur, kaki/tangan/wajah bengkak; demam tinggi; gerakan janin berkurang atau tidak terasa; keluar air ketuban sebelum waktunya; muntah terus-menerus dan tidak bisa makan.">
     </div>
 
     <div class="panel">
