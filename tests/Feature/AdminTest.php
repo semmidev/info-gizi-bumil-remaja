@@ -236,6 +236,22 @@ class AdminTest extends TestCase
             ->assertSee(route('admin.data.quiz', ['q' => $user->username]), false);
     }
 
+    public function test_admin_can_edit_activity_log_time_and_duration(): void
+    {
+        $log = ActivityLog::create(['user_id' => $this->regular()->id, 'event' => 'kunjungan']);
+
+        $this->actingAs($this->admin())
+            ->put(route('admin.data.activity.update', $log), [
+                'waktu' => '2026-10-18T07:30',
+                'durasi' => 120,
+            ])
+            ->assertRedirect();
+
+        $log->refresh();
+        $this->assertSame('07:30', $log->created_at->format('H:i'));
+        $this->assertSame(120, $log->duration_seconds);
+    }
+
     public function test_admin_can_view_quiz_answers_detail(): void
     {
         $admin = $this->admin();

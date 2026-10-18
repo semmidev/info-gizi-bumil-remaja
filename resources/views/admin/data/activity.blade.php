@@ -30,10 +30,16 @@
               <td>{{ $row->description ?: '–' }}</td>
               <td>{{ $row->duration_seconds ? $row->duration_seconds . 's' : '–' }}</td>
               <td>
-                <form method="POST" action="{{ route('admin.data.activity.destroy', $row) }}" data-confirm="Hapus log aktivitas ini?">
-                  @csrf @method('DELETE')
-                  <button class="btn danger small" type="submit">Hapus</button>
-                </form>
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
+                  <button type="button" class="btn small" data-log-edit
+                    data-action="{{ route('admin.data.activity.update', $row) }}"
+                    data-waktu="{{ $row->created_at->format('Y-m-d\TH:i') }}"
+                    data-durasi="{{ $row->duration_seconds }}">Edit</button>
+                  <form method="POST" action="{{ route('admin.data.activity.destroy', $row) }}" data-confirm="Hapus log aktivitas ini?">
+                    @csrf @method('DELETE')
+                    <button class="btn danger small" type="submit">Hapus</button>
+                  </form>
+                </div>
               </td>
             </tr>
           @empty
@@ -43,5 +49,21 @@
       </table>
     </div>
     @include('admin.partials.pagination', ['paginator' => $rows])
+  </div>
+
+  <div class="ovl" id="log-edit-ovl" hidden>
+    <form class="dlg dlg-w" role="dialog" aria-modal="true" aria-labelledby="log-edit-h" method="POST" id="log-edit-form">
+      @csrf
+      @method('PUT')
+      <h3 id="log-edit-h">Edit aktivitas</h3>
+      <label for="log-edit-waktu">Waktu</label>
+      <input type="datetime-local" id="log-edit-waktu" name="waktu" required>
+      <label for="log-edit-durasi">Durasi (detik)</label>
+      <input type="number" id="log-edit-durasi" name="durasi" min="0" max="86400" placeholder="Kosongkan bila tanpa durasi">
+      <div class="dlg-b">
+        <button type="submit" class="btn">Simpan</button>
+        <button type="button" class="btn ghost small" data-log-edit-close>Batal</button>
+      </div>
+    </form>
   </div>
 @endsection

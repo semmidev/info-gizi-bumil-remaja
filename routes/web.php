@@ -109,6 +109,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/data/kuis/{attempt}', [DataController::class, 'quizShow'])->name('data.quiz.show');
     Route::delete('/data/kuis/{attempt}', [DataController::class, 'destroyQuiz'])->name('data.quiz.destroy');
     Route::get('/data/aktivitas', [DataController::class, 'activity'])->name('data.activity');
+    Route::put('/data/aktivitas/{log}', [DataController::class, 'updateActivity'])->name('data.activity.update');
     Route::delete('/data/aktivitas/{log}', [DataController::class, 'destroyActivity'])->name('data.activity.destroy');
     Route::get('/data/target', [DataController::class, 'target'])->name('data.target');
     Route::delete('/data/target/{log}', [DataController::class, 'destroyTarget'])->name('data.target.destroy');

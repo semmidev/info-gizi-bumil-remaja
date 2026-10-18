@@ -127,4 +127,27 @@
     e.preventDefault();
     confirmDialog(form.dataset.confirm, function () { form.dataset.confirmed = '1'; form.submit(); }, form.dataset.confirmTitle, form.dataset.confirmOk);
   });
+
+  /* Modal edit log aktivitas */
+  var logEditOvl = document.getElementById('log-edit-ovl');
+  if (logEditOvl) {
+    var logEditForm = document.getElementById('log-edit-form');
+    var logEditWaktu = document.getElementById('log-edit-waktu');
+    var logEditDurasi = document.getElementById('log-edit-durasi');
+    var closeLogEdit = function () { logEditOvl.hidden = true; };
+    document.querySelectorAll('[data-log-edit]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        logEditForm.setAttribute('action', btn.dataset.action);
+        logEditWaktu.value = btn.dataset.waktu;
+        logEditDurasi.value = btn.dataset.durasi || '';
+        logEditOvl.hidden = false;
+        logEditWaktu.focus();
+      });
+    });
+    document.querySelectorAll('[data-log-edit-close]').forEach(function (btn) {
+      btn.addEventListener('click', closeLogEdit);
+    });
+    logEditOvl.addEventListener('click', function (e) { if (e.target === logEditOvl) closeLogEdit(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !logEditOvl.hidden) closeLogEdit(); });
+  }
 })();

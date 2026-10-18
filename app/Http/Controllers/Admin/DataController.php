@@ -8,6 +8,7 @@ use App\Models\DailyTargetLog;
 use App\Models\ImtMeasurement;
 use App\Models\LilaMeasurement;
 use App\Models\QuizAttempt;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -113,6 +114,20 @@ class DataController extends Controller
         $log->delete();
 
         return back()->with('sukses', 'Aktivitas dihapus.');
+    }
+
+    public function updateActivity(Request $request, ActivityLog $log): RedirectResponse
+    {
+        $request->validate([
+            'waktu' => ['required', 'date'],
+            'durasi' => ['nullable', 'integer', 'min:0', 'max:86400'],
+        ]);
+
+        $log->duration_seconds = $request->input('durasi');
+        $log->created_at = Carbon::parse($request->input('waktu'), config('app.timezone'));
+        $log->save();
+
+        return back()->with('sukses', 'Aktivitas diperbarui.');
     }
 
     public function target(Request $request): View
