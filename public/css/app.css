@@ -2310,10 +2310,13 @@ nav.tabs.nav-4 {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    object-position: top;
     display: block;
 }
 .kcard[open] .kcard-cover img {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: unset;
+    height: auto;
+    object-position: initial;
 }
 .kcard-ph {
     display: grid;
@@ -2372,6 +2375,8 @@ nav.tabs.nav-4 {
 }
 .kslide {
     width: 100%;
+    height: auto;
+    object-fit: contain;
     border-radius: 14px;
     display: block;
     margin-top: 10px;
