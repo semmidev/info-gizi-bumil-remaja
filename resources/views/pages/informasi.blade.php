@@ -306,29 +306,9 @@
 
       <div class="panel" id="b8">
         <h3><span class="num">8</span>Mencegah KEK pada ibu hamil</h3>
-        <ol class="steps">
-          <li>
-            <div><b>Makan gizi seimbang setiap hari</b><small>Ikuti Isi Piringku dan porsi harian sesuai
-                trimester.</small></div>
-          </li>
-          <li>
-            <div><b>Minum tablet tambah darah setiap hari</b><small>Minimal 90 tablet selama hamil.</small></div>
-          </li>
-          <li>
-            <div><b>Periksa kehamilan minimal 6 kali</b><small>Di posyandu, bidan desa, atau puskesmas.</small></div>
-          </li>
-          <li>
-            <div><b>Ukur LILA dan timbang berat badan</b><small>Pantau sendiri lewat menu Pengukuran LILA.</small></div>
-          </li>
-          <li>
-            <div><b>Hindari pantangan makan yang tidak perlu</b><small>Tanyakan ke bidan bila ragu dengan suatu
-                makanan.</small></div>
-          </li>
-          <li>
-            <div><b>Libatkan keluarga</b><small>Minta dukungan suami dan orang tua untuk makan teratur dan periksa
-                rutin.</small></div>
-          </li>
-        </ol>
+        <img class="kslide" src="{{ asset('content/mencega-kek-pada-ibu-hamil.jpeg') }}"
+          alt="Cara mencegah KEK pada ibu hamil: makan gizi seimbang setiap hari, minum tablet tambah darah setiap hari, periksa kehamilan minimal 6 kali, ukur LILA dan timbang berat badan, hindari pantangan makan yang tidak perlu, dan libatkan keluarga"
+          loading="lazy">
       </div>
 
       <div class="panel" id="b9">
@@ -340,10 +320,14 @@
         <div class="prv on" id="pr-hamil">
           <img class="illus" src="{{ asset('content/isi-piring/porsi-piring-ibu-hami.jpeg') }}"
             alt="Isi Piringku untuk ibu hamil: sayur paling banyak sepertiga piring, buah seperenam piring, nasi atau pengganti sepertiga piring, dan lauk seperti ikan, telur, tempe, tahu.">
+          <p class="tip">Setiap kali makan: setengah piring sayur dan buah, setengah piring nasi dan lauk. Makan 3 kali
+            sehari ditambah 2–3 kali selingan.</p>
         </div>
         <div class="prv" id="pr-kek">
           <img class="illus" src="{{ asset('content/isi-piring/porsi-piring-ibu-hamil-kek.jpeg') }}"
             alt="Isi Piringku untuk ibu hamil KEK: isi piring tetap seimbang, tambah lauk hewani setiap makan, makan sedikit tapi sering, habiskan PMT dari puskesmas, dan pilih makanan padat energi.">
+          <p class="note-kek">Gambar ini adalah anjuran penatalaksanaan gizi bagi ibu hamil KEK, bukan Isi Piringku resmi.
+            Jumlah porsi yang tepat ditentukan bersama bidan atau ahli gizi.</p>
         </div>
       </div>
 
