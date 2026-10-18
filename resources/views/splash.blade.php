@@ -21,21 +21,18 @@
         <div class="splash-inner">
           <span class="splash-logo"><img src="{{ asset('logo/logo.png') }}" alt="Logo Layanan Infogizi"></span>
           <h1>Layanan Infogizi Ibu Hamil Remaja</h1>
-          <p>Cegak KEK, jaga ibu dan bayi.</p>
-          <p class="muted">Media edukasi gizi untuk remaja yang terlanjur hamil agar tetap sehat sampai melahirkan.</p>
+          <p class="muted">Selamat datang di Layanan Info Gizi Ibu Hamil Remaja. Aplikasi ini menyediakan informasi dan
+            edukasi mengenai gizi kehamilan, pencegahan Kekurangan Energi Kronik (KEK), serta cara menjaga kesehatan ibu
+            dan bayi.</p>
         </div>
       </section>
 
       <section class="splash-slide bg-warn">
         <div class="splash-inner">
-          <span class="splash-tag">Penting dibaca</span>
-          <h2>Remaja yang terlanjur hamil</h2>
-          <div class="about" style="max-width:360px; text-align:left; margin:0">
-            <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>Penting</b>
-            <p>Media ini untuk remaja yang TERLANJUR hamil agar tetap sehat. Jika belum hamil, tunda kehamilan sampai usia
-              matang ≥ 20 tahun untuk mencegah anemia, KEK, preeklamsia, BBLR, stunting, hingga risiko kematian ibu &amp;
-              bayi.</p>
-          </div>
+          <span class="splash-tag">Perlu kamu tahu</span>
+          <p class="muted" style="margin:12px 0 0">Melalui aplikasi ini, kamu dapat
+            mempelajari tanda-tanda risiko KEK, kebutuhan gizi selama kehamilan, pilihan makanan bergizi, serta
+            pentingnya pemeriksaan kehamilan secara rutin.</p>
         </div>
       </section>
 
@@ -43,27 +40,59 @@
         <div class="splash-inner">
           <span class="splash-tag">Yang bisa kamu lakukan</span>
           <h2>Kenali, pantau, dan rawat</h2>
+          <p class="muted" style="margin:0 0 10px">Cegah KEK sejak dini. Ibu sehat, bayi tumbuh optimal.</p>
           <ul class="splash-feats">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-            <span><b>Informasi</b><small>Kenali kehamilan remaja dan risiko KEK</small></span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
-            <span><b>Pengukuran LILA &amp; IMT</b><small>Pantau status gizi dari waktu ke waktu</small></span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M14 9h-4"/><path d="M18 11h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2"/><path d="M18 21V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16"/></svg>
-            <span><b>Layanan Info</b><small>Tempat periksa dan nomor bidan desa</small></span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-            <span><b>Info Menarik</b><small>Tips, menu gizi, mitos dan fakta</small></span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-            <span><b>Kuis</b><small>Uji pengetahuan, sikap, dan tindakan</small></span>
-          </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+              </svg>
+              <span><b>Informasi</b><small>Kenali kehamilan remaja dan risiko KEK</small></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
+                <path d="m14.5 12.5 2-2" />
+                <path d="m11.5 9.5 2-2" />
+                <path d="m8.5 6.5 2-2" />
+                <path d="m17.5 15.5 2-2" />
+              </svg>
+              <span><b>Pengukuran LILA &amp; IMT</b><small>Pantau status gizi dari waktu ke waktu</small></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 7v4" />
+                <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+                <path d="M14 9h-4" />
+                <path d="M18 11h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2" />
+                <path d="M18 21V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16" />
+              </svg>
+              <span><b>Layanan Info</b><small>Tempat periksa dan nomor bidan desa</small></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                <path d="M9 18h6" />
+                <path d="M10 22h4" />
+              </svg>
+              <span><b>Info Menarik</b><small>Tips, menu gizi, mitos dan fakta</small></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <path d="M12 17h.01" />
+              </svg>
+              <span><b>Kuis</b><small>Uji pengetahuan, sikap, dan tindakan</small></span>
+            </li>
           </ul>
         </div>
       </section>
