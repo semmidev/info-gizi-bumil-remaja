@@ -251,24 +251,9 @@
 
       <div class="panel" id="b4">
         <h3><span class="num">4</span>Intervensi gizi pada ibu hamil KEK</h3>
-        <p>Bila LILA ibu di bawah 23,5 cm, tenaga kesehatan akan memberikan:</p>
-        <div class="intv">
-          <div style="background:#E4F6E6"><i><img src="{{ asset('icons/intervensi-gizi/makanan-tambahan.png') }}"
-                alt=""></i><b style="color:#56B677">Makanan tambahan (PMT)</b><small>Berbahan pangan lokal dari puskesmas,
-              dimakan sebagai
-              tambahan, bukan pengganti makan utama.</small></div>
-          <div style="background:#FDF4D5"><i><img src="{{ asset('icons/intervensi-gizi/suplementasi-gizi.png') }}"
-                alt=""></i><b style="color:#FCCC5C">Suplementasi gizi</b><small>Tablet tambah darah setiap hari dan
-              suplemen lain sesuai anjuran
-              (lihat poin 5).</small></div>
-          <div style="background:#F1EDFE"><i><img src="{{ asset('icons/intervensi-gizi/konseling-gizi.png') }}"
-                alt=""></i><b style="color:#9C89DB">Konseling gizi</b><small>Bidan atau ahli gizi membantu menyusun porsi
-              dan menu sesuai kondisi
-              ibu.</small></div>
-          <div style="background:#E1F3FD"><i><img src="{{ asset('icons/intervensi-gizi/pemantauan-rutin.png') }}"
-                alt=""></i><b style="color:#4A9FEF">Pemantauan rutin</b><small>LILA dan berat badan diukur setiap periksa
-              kehamilan.</small></div>
-        </div>
+        <img class="kslide" src="{{ asset('content/intervensi-gizi.jpeg') }}"
+          alt="Bila LILA ibu di bawah 23,5 cm, tenaga kesehatan akan memberikan: makanan tambahan (PMT), suplementasi gizi, konseling gizi, dan pemantauan rutin"
+          loading="lazy">
       </div>
 
       <div class="panel" id="b5">
